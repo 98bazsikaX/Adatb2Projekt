@@ -1,0 +1,1 @@
+print("Elso kod a projektben :D")
