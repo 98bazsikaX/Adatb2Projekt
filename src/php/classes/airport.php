@@ -20,7 +20,7 @@ class airport extends entity{
     }
 
     public function test(){
-        echo "<p>". entity::$code. $city . entity::$name. "</p>";
+        echo "<p>". entity::$code . $this->city . entity::$name. "</p>";
     }
 
 
