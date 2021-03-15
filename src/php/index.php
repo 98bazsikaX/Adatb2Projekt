@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SSS Tours</title>
+    <link rel="stylesheet" href="../stylesheets/global.css">
 </head>
 <body>
-    <?php
-        echo "It works!";
-    ?>
+    <header>
+        Üdvözöljük a Szlavikovics - Sárossy - Szombati utazási iroda weboldalán.
+    </header>
+
+    <footer>
+        Created by: annyitcsézekmintegyprofidecsakkala1vagyok
+    </footer>
 </body>
 </html>

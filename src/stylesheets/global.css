@@ -1,0 +1,11 @@
+/*
+Importalt: 'Monoton','Poiret'
+*/
+@import url('https://fonts.googleapis.com/css2?family=Monoton&family=Poiret+One&display=swap');
+
+body{
+
+    background-color: rgb(36, 44, 51);
+    color: rgb(228, 222, 208);
+    font-family: 'Poiret';
+}
