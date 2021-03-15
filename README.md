@@ -29,33 +29,33 @@ A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, 
 #### 3.1.1. Fizikai AFD
 
 ##### 3.1.1.1. 1. szint
-![1. szintű fizikai adatfolyam diagram]()
+[1. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/lvl1.ccd)
 
 ##### 3.1.1.2. 2. szint
-![2. szintű fizikai adatfolyam diagram]()
+[2. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/lvl2.ccd)
 
 #### 3.1.2. Logikai AFD
 
 ##### 3.1.2.1. 1. szint
-![1. szintű logikai adatfolyam diagram]()
+[1. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/lvl1.ccd)
 
 ##### 3.1.2.2. 2. szint
-![2. szintű logikai adatfolyam diagram]()
+[2. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/lvl2.ccd)
 
 ### 3.2. Egyedmodell
-![Egyedmodell]()
+[Egyedmodell]()
 
 ### 3.3. Egyed-kapcsolat diagram
-![Egyed-kapcsolat diagram]()
+[Egyed-kapcsolat diagram](./doc/dia/entity_relationship.ccd)
 
 ## 4. EK diagram leképezése
-Felhasználó(<u>e-mail</u>, jelszó, telefonszám, vezetéknév, utónév)
-Légitársaság(<u>kód</u>, név, ország)
-Repülő(<u>azonosító</u>, <u>*Légitársaság.kód*</u>, típus, férőhely)
-Repülőtér(<u>kód</u>, név, ország, város)
-Járat(<u>járatszám</u>, *Repülő.azonosító*, *Légitársaság.kód*, jegyár, indulás_idő, *indulás_repülőtér*, érkezés_idő, *érkezés_repülőtér*)
-Vásárlás(<u>*Felhasználó.e-mail*</u>, <u>mikor</u>, *Járat.járatszám*, darabszám)
-Keresés(<u>*Felhasználó.e-mail*</u>, <u>mikor</u>, indulás_ország, indulás_város, érkezés_ország, érkezés_város, mettől, meddig)
+Felhasználó(<ins>e-mail</ins>, jelszó, telefonszám, vezetéknév, utónév)
+Légitársaság(<ins>kód</ins>, név, ország)
+Repülő(<ins>azonosító</ins>, <ins>*Légitársaság.kód*</ins>, típus, férőhely)
+Repülőtér(<ins>kód</ins>, név, ország, város)
+Járat(<ins>járatszám</ins>, *Repülő.azonosító*, *Légitársaság.kód*, jegyár, indulás_idő, *indulás_repülőtér*, érkezés_idő, *érkezés_repülőtér*)
+Vásárlás(<ins>*Felhasználó.e-mail*</ins>, <ins>mikor</ins>, *Járat.járatszám*, darabszám)
+Keresés(<ins>*Felhasználó.e-mail*</ins>, <ins>mikor</ins>, *indulás_ország*, *indulás_város*, *érkezés_ország*, *érkezés_város*, mettől, meddig)
 
 ### 4.1. 1. normálforma
 A relációséma 1NF-ben van: többértékű attribútumok nem voltak, az összetett attribútumok pedig helyettesítve lettek részattribútumaikkal.
@@ -66,7 +66,8 @@ A relációséma 2NF-ben van: 4 sémában egyetlen attribútumból áll a kulcs,
 ### 4.3. 3. normálforma
 A relációséma 3NF-ben van: a sémák mindegyikében a másodlagos attribútumok közvetlenül függnek a kulcsoktól.
 
-## 5. Tábla leírás
+## 5. Relációsémák
+[EK diagramból képzett relációsémák](./doc/relation_schema.xlsx)
 
 ### 5.1. Felhasználó
 
@@ -143,7 +144,7 @@ meddig         | DATE        | A járat indulási idejének vége (napra pontosa
 ...
 
 ## 7. Szerep-funkció mátrix
-...
+[Szerep-funkció mátrix](./doc/role_function_matrix.xlsx)
 
 ## 8. Képernyőtervek
 ...
