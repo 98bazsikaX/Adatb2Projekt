@@ -3,7 +3,7 @@
 /*
 *
 * Ebben a fileban lesznek megtalalhatoak az abstract classok
-* Peldalul, a repulotereknek es a jaratoknak lehet egy kozos ose
+* Peldalul, a repulotereknek es a legitarsasagoknak lehet egy kozos ose
 *
 */ 
 

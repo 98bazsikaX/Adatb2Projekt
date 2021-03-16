@@ -13,7 +13,7 @@
     </header>
 
     <footer>
-        Created by: annyitcsézekmintegyprofidecsakkala1vagyok
+        All rights reserved
     </footer>
 </body>
 </html>
