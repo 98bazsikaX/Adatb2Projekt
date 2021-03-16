@@ -24,15 +24,10 @@
 
                     console.log(xhttp.responseText);
                 }
-            }
-            
+            }            
 
             xhttp.open('GET','API/api_test.php?test=true');
             xhttp.send();
-             
-
-            
-
             /*
             POST megvalositas
             Forras: https://stackoverflow.com/questions/9713058/send-post-data-using-xmlhttprequest

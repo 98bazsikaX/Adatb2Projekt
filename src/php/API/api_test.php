@@ -1,6 +1,7 @@
 <?php
 /*
-GET method pelda
+API test
+frontend megvalositas: ../index.php
 */ 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     if(isset($_POST['testpost'])){
@@ -16,12 +17,5 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
         echo "GET is not set\n";
     }
 }
-
-
-/*
-API test
-frontend megvalositas: ../index.php
-*/
-
 
 ?>
