@@ -11,16 +11,36 @@
             /*
             forras https://www.w3schools.com/xml/xml_http.asp
             backend megvalositasa: /API/api_test.php
+            GET megvalositas:
             */
+           var url = 'API/api_test.php';
+           var get_msg = '?test=true';
+           var post_msg = 'testpost=true';
             console.log("Function called");
             var xhttp= new XMLHttpRequest();
+            
             xhttp.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status==200){
+
                     console.log(xhttp.responseText);
                 }
             }
+            
+
             xhttp.open('GET','API/api_test.php?test=true');
             xhttp.send();
+             
+
+            
+
+            /*
+            POST megvalositas
+            Forras: https://stackoverflow.com/questions/9713058/send-post-data-using-xmlhttprequest
+            */
+            xhttp.open('POST',url,true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.send(post_msg); 
+            
         }
     
     </script>
