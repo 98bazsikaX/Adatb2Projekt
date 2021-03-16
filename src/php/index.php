@@ -44,7 +44,7 @@
     <header>
         Üdvözöljük a Szlavikovics - Sárossy - Szombati utazási iroda weboldalán.
     </header>
-    <button type="button" onclick="test_api()">TEST API</button>
+  <!--   <button type="button" onclick="test_api()">TEST API</button> Valamiert nem megy a gomb wtf, test_api() funkcio meghivhato chrome consolebol -->
     <footer>
         All rights reserved
     </footer>
