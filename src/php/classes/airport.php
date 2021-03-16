@@ -7,7 +7,7 @@ class airport extends entity{
 
 
     function __construct($code,$name,$country,$city){
-        entity::__construct($code,$name,$country);
+        parent::__construct($code,$name,$country);
         $this->city = $city;
     }
 
@@ -20,7 +20,7 @@ class airport extends entity{
     }
 
     public function test(){
-        echo "<p>". entity::$code . $this->city . entity::$name. "</p>";
+        echo "<p>". parent::$code . $this->city . parent::$name. "</p>";
     }
 
 

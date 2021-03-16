@@ -8,7 +8,7 @@ class airlines extends entity{
 
     function __construct($code,$name,$country,$colour="#FFFFFF")
     {
-        entity::__construct($code,$name,$country);
+        parent::__construct($code,$name,$country);
         $this->colour = $colour;
     }
 
