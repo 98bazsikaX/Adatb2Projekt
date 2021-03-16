@@ -27,7 +27,15 @@ abstract class entity
         
     }
 
-    abstract public function test();
+    public function jsonEncode(){
+        $retval = array(
+            'code' => $this->code,
+            'name'=> $this->name,
+            'country'=>$this->country            
+        );
+        return $retval;
+    }
+    
 
 }
 

@@ -20,8 +20,10 @@ class airlines extends entity{
         return $retval;
     }
 
-    public function test(){
-        echo "<p>mukodok</p>";
+    public function jsonEncode(){
+        $retval = parent::jsonEncode();
+        $retval['colour']=$this->colour;
+        return json_encode($retval);
     }
 }
 

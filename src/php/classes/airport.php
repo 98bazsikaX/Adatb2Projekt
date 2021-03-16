@@ -19,8 +19,10 @@ class airport extends entity{
         return null;
     }
 
-    public function test(){
-        echo "<p>". parent::$code . $this->city . parent::$name. "</p>";
+    public function jsonEncode(){
+        $retval = parent::jsonEncode();
+        $retval['city']=$this->city;
+        return json_encode($retval);
     }
 
 

@@ -8,25 +8,31 @@
     <link rel="stylesheet" href="../stylesheets/global.css">
     <script type="text/javascript">
         function test_api(){
+
             /*
             forras https://www.w3schools.com/xml/xml_http.asp
             backend megvalositasa: /API/api_test.php
             GET megvalositas:
             */
-           var url = 'API/api_test.php';
-           var get_msg = '?test=true';
-           var post_msg = 'testpost=true';
+            var url = 'API/api_test.php';
+            var get_msg = '?test=true';
+            var post_msg = 'testpost=true';
             console.log("Function called");
             var xhttp= new XMLHttpRequest();
             
             xhttp.onreadystatechange = function(){
-                if(this.readyState == 4 && this.status==200){
-
+                if(xhttp.readyState == 4 && xhttp.status==200){
+                    try{
+                        var x = JSON.parse(xhttp.responseText);
+                        console.log(x);
+                    }catch(e){
+                        //continue;
+                    }
                     console.log(xhttp.responseText);
                 }
             }            
 
-            xhttp.open('GET','API/api_test.php?test=true');
+            xhttp.open('GET',url+get_msg);
             xhttp.send();
             /*
             POST megvalositas
@@ -34,8 +40,8 @@
             */
             xhttp.open('POST',url,true);
             xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhttp.send(post_msg); 
-            
+            xhttp.send(post_msg);
+
         }
     
     </script>
