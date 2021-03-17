@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SSS Tours</title>
     <link rel="stylesheet" href="../stylesheets/global.css">
+    <script type="text/javascript" src="../javascript/JSONapi.js"></script>
     <script type="text/javascript">
         function test_api(){
 
@@ -43,6 +44,11 @@
             xhttp.send(post_msg);
 
         }
+
+        var asd = new JSONapi("API/api_test.php",{
+            test:"asd"
+        });
+        console.log("   +INDEX.PHP+    "+asd.result);
     
     </script>
 </head>
