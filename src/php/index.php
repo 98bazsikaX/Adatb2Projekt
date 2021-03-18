@@ -45,7 +45,7 @@
 
         }
 
-        var asd = new JSONapi("API/api_test.php",{
+        var asd = new JSONapi("api_test.php",{
             test:"asd"
         });
         console.log("   +INDEX.PHP+    "+asd.result);
