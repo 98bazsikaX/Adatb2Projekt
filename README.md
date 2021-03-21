@@ -140,14 +140,11 @@ erkezes_varos  | VARCHAR(35) | A keresett város, ahova a járat leszáll
 mettol         | DATE        | A járat indulási idejének kezdete (napra pontosan)
 meddig         | DATE        | A járat indulási idejének vége (napra pontosan)
 
-## 6. Egyed-esemény mátrix
-...
-
-## 7. Szerep-funkció mátrix
+## 6. Szerep-funkció mátrix
 [Szerep-funkció mátrix](./doc/role_function_matrix.xlsx)
 
-## 8. Képernyőtervek
+## 7. Képernyőtervek
 ...
 
-## 9. Menütervek
+## 8. Menütervek
 ...
