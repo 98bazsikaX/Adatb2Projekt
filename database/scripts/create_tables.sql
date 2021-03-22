@@ -22,7 +22,7 @@ CREATE TABLE airplanes
     airline_code CHAR(3),
     airplane_type VARCHAR(20) NOT NULL,
     capacity NUMBER(3) NOT NULL,
-    CONSTRAINT airplanes_pk PRIMARY KEY (id, airline_code)
+    CONSTRAINT airplanes_pk PRIMARY KEY (id, airline_code),
     CONSTRAINT fk_airpl_airl
         FOREIGN KEY (airline_code)
         REFERENCES airlines(code)
@@ -53,7 +53,7 @@ CREATE TABLE flights
         REFERENCES airplanes(id, airline_code),
     CONSTRAINT fk_flig_airpo_takoff
         FOREIGN KEY (takeoff_airport_code)
-        REFERENCES airports(code)
+        REFERENCES airports(code),
     CONSTRAINT fk_flig_airpo_landing
         FOREIGN KEY (landing_airport_code)
         REFERENCES airports(code)
@@ -65,10 +65,10 @@ CREATE TABLE purchases
     purchase_date DATE,
     flight_id NUMBER(6) NOT NULL,
     quantity NUMBER(2) NOT NULL,
-    CONSTRAINT purchases_pk PRIMARY KEY (email, purchase_date)
+    CONSTRAINT purchases_pk PRIMARY KEY (user_email, purchase_date),
     CONSTRAINT fk_purc_user
         FOREIGN KEY (user_email)
-        REFERENCES users(email)
+        REFERENCES users(email),
     CONSTRAINT fk_purc_flig
         FOREIGN KEY (flight_id)
         REFERENCES flights(id)
@@ -84,7 +84,7 @@ CREATE TABLE searches
     landing_city VARCHAR(35) NOT NULL,
     from_date DATE NOT NULL,
     to_date DATE NOT NULL,
-    CONSTRAINT searches_pk PRIMARY KEY (user_email, search_date)
+    CONSTRAINT searches_pk PRIMARY KEY (user_email, search_date),
     CONSTRAINT fk_sear_user
         FOREIGN KEY (user_email)
         REFERENCES users(email)
