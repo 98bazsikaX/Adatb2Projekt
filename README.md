@@ -29,24 +29,24 @@ A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, 
 #### 3.1.1. Fizikai AFD
 
 ##### 3.1.1.1. 1. szint
-[1. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/lvl1.ccd)
+[1. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl1.png)
 
 ##### 3.1.1.2. 2. szint
-[2. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/lvl2.ccd)
+[2. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl2.png)
 
 #### 3.1.2. Logikai AFD
 
 ##### 3.1.2.1. 1. szint
-[1. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/lvl1.ccd)
+[1. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl1.png)
 
 ##### 3.1.2.2. 2. szint
-[2. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/lvl2.ccd)
+[2. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl2.png)
 
 ### 3.2. Egyedmodell
 [Egyedmodell]()
 
 ### 3.3. Egyed-kapcsolat diagram
-[Egyed-kapcsolat diagram](./doc/dia/entity_relationship.ccd)
+[Egyed-kapcsolat diagram](./doc/dia/entity_relationship.png)
 
 ## 4. EK diagram leképezése
 Felhasználó(<ins>e-mail</ins>, jelszó, telefonszám, vezetéknév, utónév)
