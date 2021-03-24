@@ -2,18 +2,21 @@ CREATE TABLE roles
 (
     id NUMBER(1),
     role_name VARCHAR(20) NOT NULL,
-    CONSTRAINT roles_pk PRIMARY KEY (id)
+    CONSTRAINT role_pk
+        PRIMARY KEY (id)
 );
 
 CREATE TABLE users
 (
     email VARCHAR(64),
-    role_id NUMBER(1) NOT NULL,
     pwd VARCHAR(255) NOT NULL,
     phone_num VARCHAR(18) NOT NULL,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    CONSTRAINT users_pk PRIMARY KEY (email),
+    role_id NUMBER(1) NOT NULL,
+    last_login DATE DEFAULT sysdate NOT NULL,
+    CONSTRAINT user_pk
+        PRIMARY KEY (email),
     CONSTRAINT fk_user_role
         FOREIGN KEY (role_id)
         REFERENCES roles(id)
@@ -24,16 +27,23 @@ CREATE TABLE airlines
     code CHAR(4),
     airline_name VARCHAR(50) NOT NULL,
     country VARCHAR(35) NOT NULL,
-    CONSTRAINT airlines_pk PRIMARY KEY (code)
+    CONSTRAINT airl_pk
+        PRIMARY KEY (code)
 );
+
+CREATE SEQUENCE airplanes_seq START WITH 1;
 
 CREATE TABLE airplanes
 (
-    id NUMBER(4),
-    airline_code CHAR(3),
+    id NUMBER(6) DEFAULT airplanes_seq.nextval NOT NULL,
+    airplane_id NUMBER(4) NOT NULL,
+    airline_code CHAR(3) NOT NULL,
     airplane_type VARCHAR(20) NOT NULL,
     capacity NUMBER(3) NOT NULL,
-    CONSTRAINT airplanes_pk PRIMARY KEY (id, airline_code),
+    CONSTRAINT airpl_pk
+        PRIMARY KEY (id),
+    CONSTRAINT airpl_unique
+        UNIQUE (airplane_id, airline_code),
     CONSTRAINT fk_airpl_airl
         FOREIGN KEY (airline_code)
         REFERENCES airlines(code)
@@ -45,24 +55,28 @@ CREATE TABLE airports
     airport_name VARCHAR(64) NOT NULL,
     country VARCHAR(35) NOT NULL,
     city VARCHAR(35) NOT NULL,
-    CONSTRAINT airports_pk PRIMARY KEY (code)
+    CONSTRAINT airpo_pk
+        PRIMARY KEY (code)
 );
+
+CREATE SEQUENCE flights_seq START WITH 1;
 
 CREATE TABLE flights
 (
-    id NUMBER(6),
-    airplane_id NUMBER(4) NOT NULL,
+    id NUMBER(6) DEFAULT flights_seq.nextval NOT NULL,
+    airplane_id NUMBER(6) NOT NULL,
     airplane_airline_code CHAR(3) NOT NULL,
     price NUMBER(6) NOT NULL,
     takeoff_date DATE NOT NULL,
     takeoff_airport_code CHAR(4) NOT NULL,
     landing_date DATE NOT NULL,
     landing_airport_code CHAR(4) NOT NULL,
-    CONSTRAINT flights_pk PRIMARY KEY (id),
+    CONSTRAINT flig_pk
+        PRIMARY KEY (id),
     CONSTRAINT fk_flig_airpl
-        FOREIGN KEY (airplane_id, airplane_airline_code)
-        REFERENCES airplanes(id, airline_code),
-    CONSTRAINT fk_flig_airpo_takoff
+        FOREIGN KEY (airplane_id)
+        REFERENCES airplanes(id),
+    CONSTRAINT fk_flig_airpo_takeoff
         FOREIGN KEY (takeoff_airport_code)
         REFERENCES airports(code),
     CONSTRAINT fk_flig_airpo_landing
@@ -70,32 +84,85 @@ CREATE TABLE flights
         REFERENCES airports(code)
 );
 
+CREATE TABLE discount_types
+(
+    discount_name VARCHAR(20),
+    CONSTRAINT disc_type_pk
+        PRIMARY KEY (discount_name)
+);
+
+CREATE SEQUENCE discounts_seq START WITH 1;
+
+CREATE TABLE discounts
+(
+    id NUMBER(6) DEFAULT discounts_seq.nextval NOT NULL,
+    flight_id NUMBER(6) NOT NULL,
+    discount_type_name VARCHAR(20) NOT NULL,
+    amount NUMBER(6) NOT NULL,
+    valid_from DATE DEFAULT sysdate NOT NULL,
+    valid_to DATE, -- TODO: add trigger
+    CONSTRAINT disc_pk
+        PRIMARY KEY (id),
+    CONSTRAINT disc_unique
+        UNIQUE (flight_id, valid_from),
+    CONSTRAINT fk_disc_flig
+        FOREIGN KEY (flight_id)
+        REFERENCES flights(id),
+    CONSTRAINT fk_disc_disc_type
+        FOREIGN KEY (discount_type_name)
+        REFERENCES discount_types(discount_name)
+);
+
+CREATE TABLE purchase_states
+(
+    id NUMBER(1),
+    state_name VARCHAR(20) NOT NULL,
+    CONSTRAINT purc_states_pk
+        PRIMARY KEY (id)
+);
+
+CREATE SEQUENCE purchases_seq START WITH 1;
+
 CREATE TABLE purchases
 (
-    user_email VARCHAR(64),
-    purchase_date DATE,
+    id NUMBER(6) DEFAULT purchases_seq.nextval NOT NULL,
+    user_email VARCHAR(64) NOT NULL,
     flight_id NUMBER(6) NOT NULL,
     quantity NUMBER(2) NOT NULL,
-    CONSTRAINT purchases_pk PRIMARY KEY (user_email, purchase_date),
+    purchase_date DATE DEFAULT sysdate NOT NULL,
+    purchase_state NUMBER(1) NOT NULL,
+    CONSTRAINT purc_pk
+        PRIMARY KEY (id),
+    CONSTRAINT purc_unique
+        UNIQUE (user_email, purchase_date),
     CONSTRAINT fk_purc_user
         FOREIGN KEY (user_email)
         REFERENCES users(email),
     CONSTRAINT fk_purc_flig
         FOREIGN KEY (flight_id)
-        REFERENCES flights(id)
+        REFERENCES flights(id),
+    CONSTRAINT fk_purc_purc_states
+        FOREIGN KEY (purchase_state)
+        REFERENCES purchase_states(id)
 );
+
+CREATE SEQUENCE searches_seq START WITH 1;
 
 CREATE TABLE searches
 (
-    user_email VARCHAR(64),
-    search_date DATE,
+    id NUMBER(6) DEFAULT searches_seq.nextval NOT NULL,
+    user_email VARCHAR(64) NOT NULL,
     takeoff_country VARCHAR(35) NOT NULL,
     takeoff_city VARCHAR(35) NOT NULL,
     landing_country VARCHAR(35) NOT NULL,
     landing_city VARCHAR(35) NOT NULL,
     from_date DATE NOT NULL,
     to_date DATE NOT NULL,
-    CONSTRAINT searches_pk PRIMARY KEY (user_email, search_date),
+    search_date DATE DEFAULT sysdate NOT NULL,
+    CONSTRAINT sear_pk
+        PRIMARY KEY (id),
+    CONSTRAINT sear_unique
+        UNIQUE (user_email, search_date),
     CONSTRAINT fk_sear_user
         FOREIGN KEY (user_email)
         REFERENCES users(email)

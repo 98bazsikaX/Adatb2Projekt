@@ -6,7 +6,7 @@ Projektünk egy repülőjegy foglaló webalkalmazás tervezése és implementác
 ## 2. Projekt bemutatása
 
 ### 2.1. Specifikáció
-A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, jegyvásárláshoz azonban regisztrálni kell, majd bejelentkezni. A felhasználó ki tudja választani, mely járatra szeretne jegye(ke)t venni, megadja az adatait, majd kifizeti a jegyeket. Ezt követően, amennyiben minden rendben ment, a felhasználó e-mailben kapja meg a jegye(ke)t. Amennyiben az adott járat mégsem megfelelő valakinek, úgy lehetősege van visszamondani, esetleg járatot cserélni.
+A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, jegyvásárláshoz azonban regisztrálni kell, majd bejelentkezni. A felhasználó ki tudja választani, mely járatra szeretne jegye(ke)t venni, megadja az adatait, majd kifizeti a jegyeket (kedvezmények automatikus érvényesítése után). Ezt követően, amennyiben minden rendben ment, a felhasználó e-mailben kapja meg a jegye(ke)t. Amennyiben az adott járat mégsem megfelelő valakinek, úgy lehetősege van visszamondani, esetleg járatot cserélni.
 
 ### 2.2. Funkcionális követelmények
 - Böngészés
@@ -42,27 +42,27 @@ A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, 
 ##### 3.1.2.2. 2. szint
 [2. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl2.png)
 
-### 3.2. Egyedmodell
-[Egyedmodell]()
-
-### 3.3. Egyed-kapcsolat diagram
+### 3.2. Egyed-kapcsolat diagram
 [Egyed-kapcsolat diagram](./doc/dia/entity_relationship.png)
 
 ## 4. EK diagram leképezése
 Jogosultság(<ins>azonosító</ins>, név)
-Felhasználó(<ins>e-mail</ins>, *Jogosultság.azonosító*, jelszó, telefonszám, vezetéknév, utónév)
+Felhasználó(<ins>e-mail</ins>, jelszó, telefonszám, vezetéknév, utónév, *Jogosultság.azonosító*, utolsó_belépés)
 Légitársaság(<ins>kód</ins>, név, ország)
-Repülő(<ins>azonosító</ins>, <ins>*Légitársaság.kód*</ins>, típus, férőhely)
+Repülő(<ins>azonosító</ins>, repülő_azonosító, *Légitársaság.kód*, típus, férőhely)
 Repülőtér(<ins>kód</ins>, név, ország, város)
-Járat(<ins>járatszám</ins>, *Repülő.azonosító*, *Légitársaság.kód*, jegyár, indulás_idő, *indulás_repülőtér*, érkezés_idő, *érkezés_repülőtér*)
-Vásárlás(<ins>*Felhasználó.e-mail*</ins>, <ins>mikor</ins>, *Járat.járatszám*, darabszám)
-Keresés(<ins>*Felhasználó.e-mail*</ins>, <ins>mikor</ins>, *indulás_ország*, *indulás_város*, *érkezés_ország*, *érkezés_város*, mettől, meddig)
+Járat(<ins>járatszám</ins>, *Repülő.azonosító*, jegyár, indulás_idő, *indulás_repülőtér*, érkezés_idő, *érkezés_repülőtér*)
+Kedvezmény_típusok(<ins>név</ins>)
+Kedvezmény(<ins>azonosító</ins>, *Járat.járatszám*, *típus*, mérték, mettől, meddig)
+Vásárlási állapot(<ins>azonosító</ins>, állapot)
+Vásárlás(<ins>azonosító</ins>, *Felhasználó.e-mail*, *Járat.járatszám*, darabszám, mikor, *állapot*)
+Keresés(<ins>azonosító</ins>, *Felhasználó.e-mail*, *indulás_ország*, *indulás_város*, *érkezés_ország*, *érkezés_város*, mettől, meddig, <ins>mikor</ins>)
 
 ### 4.1. 1. normálforma
 A relációséma 1NF-ben van: többértékű attribútumok nem voltak, az összetett attribútumok pedig helyettesítve lettek részattribútumaikkal.
 
 ### 4.2. 2. normálforma
-A relációséma 2NF-ben van: 4 sémában egyetlen attribútumból áll a kulcs, a maradék 3 sémában pedig minden másodlagos attribútum teljesen függ a kulcsoktól.
+A relációséma 2NF-ben van: ahol a kulcs kompozit volt, ott egyedi azonosító lett bevezetve, így a sémák mindegyikében egyetlen attribútumból áll a kulcs.
 
 ### 4.3. 3. normálforma
 A relációséma 3NF-ben van: a sémák mindegyikében a másodlagos attribútumok közvetlenül függnek a kulcsoktól.
