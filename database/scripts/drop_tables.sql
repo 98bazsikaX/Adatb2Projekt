@@ -5,3 +5,4 @@ DROP TABLE airports;
 DROP TABLE airplanes;
 DROP TABLE airlines;
 DROP TABLE users;
+DROP TABLE roles;

@@ -1,11 +1,22 @@
+CREATE TABLE roles
+(
+    id NUMBER(1),
+    role_name VARCHAR(20) NOT NULL,
+    CONSTRAINT roles_pk PRIMARY KEY (id)
+);
+
 CREATE TABLE users
 (
     email VARCHAR(64),
+    role_id NUMBER(1) NOT NULL,
     pwd VARCHAR(255) NOT NULL,
     phone_num VARCHAR(18) NOT NULL,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    CONSTRAINT users_pk PRIMARY KEY (email)
+    CONSTRAINT users_pk PRIMARY KEY (email),
+    CONSTRAINT fk_user_role
+        FOREIGN KEY (role_id)
+        REFERENCES roles(id)
 );
 
 CREATE TABLE airlines

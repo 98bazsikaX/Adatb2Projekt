@@ -49,7 +49,8 @@ A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, 
 [Egyed-kapcsolat diagram](./doc/dia/entity_relationship.png)
 
 ## 4. EK diagram leképezése
-Felhasználó(<ins>e-mail</ins>, jelszó, telefonszám, vezetéknév, utónév)
+Jogosultság(<ins>azonosító</ins>, név)
+Felhasználó(<ins>e-mail</ins>, *Jogosultság.azonosító*, jelszó, telefonszám, vezetéknév, utónév)
 Légitársaság(<ins>kód</ins>, név, ország)
 Repülő(<ins>azonosító</ins>, <ins>*Légitársaság.kód*</ins>, típus, férőhely)
 Repülőtér(<ins>kód</ins>, név, ország, város)
