@@ -13,6 +13,11 @@ CREATE TABLE users
     phone_num VARCHAR(18) NOT NULL,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
+    birth_date DATE NOT NULL,
+    country VARCHAR(30) NOT NULL,
+    post_code VARCHAR(10) NOT NULL,
+    city VARCHAR(40) NOT NULL,
+    home_address VARCHAR(40) NOT NULL,
     role_id NUMBER(1) NOT NULL,
     last_login DATE DEFAULT sysdate NOT NULL,
     CONSTRAINT user_pk
@@ -144,6 +149,24 @@ CREATE TABLE purchases
     CONSTRAINT fk_purc_purc_states
         FOREIGN KEY (purchase_state)
         REFERENCES purchase_states(id)
+);
+
+CREATE SEQUENCE tickets_seq START WITH 1;
+
+CREATE TABLE tickets
+(
+    id NUMBER(6) DEFAULT tickets_seq.nextval NOT NULL,
+    purchase_id NUMBER(6) NOT NULL,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    birth_date DATE NOT NULL,
+    CONSTRAINT tick_pk
+        PRIMARY KEY (id),
+    CONSTRAINT tick_unique
+        UNIQUE (purchase_id, firstS_name, last_name, birth_date),
+    CONSTRAINT fk_tick_purc
+        FOREIGN KEY (purchase_id)
+        REFERENCES purchases(id)
 );
 
 CREATE SEQUENCE searches_seq START WITH 1;

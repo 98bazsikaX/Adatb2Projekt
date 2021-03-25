@@ -47,22 +47,23 @@ A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, 
 
 ## 4. EK diagram leképezése
 Jogosultság(<ins>azonosító</ins>, név)
-Felhasználó(<ins>e-mail</ins>, jelszó, telefonszám, vezetéknév, utónév, *Jogosultság.azonosító*, utolsó_belépés)
+Felhasználó(<ins>e-mail</ins>, jelszó, telefonszám, vezetéknév, utónév, születési_dátum, ország, irányítószám, város, cím, *Jogosultság.azonosító*, utolsó_belépés)
 Légitársaság(<ins>kód</ins>, név, ország)
 Repülő(<ins>azonosító</ins>, repülő_azonosító, *Légitársaság.kód*, típus, férőhely)
 Repülőtér(<ins>kód</ins>, név, ország, város)
 Járat(<ins>járatszám</ins>, *Repülő.azonosító*, jegyár, indulás_idő, *indulás_repülőtér*, érkezés_idő, *érkezés_repülőtér*)
 Kedvezmény_típusok(<ins>név</ins>)
 Kedvezmény(<ins>azonosító</ins>, *Járat.járatszám*, *típus*, mérték, mettől, meddig)
-Vásárlási állapot(<ins>azonosító</ins>, állapot)
+Vásárlási_állapot(<ins>azonosító</ins>, állapot)
 Vásárlás(<ins>azonosító</ins>, *Felhasználó.e-mail*, *Járat.járatszám*, darabszám, mikor, *állapot*)
+Jegy(<ins>azonosító</ins>, *Vásárlás.azonosító*, vezetéknév, utónév, születési_dátum)
 Keresés(<ins>azonosító</ins>, *Felhasználó.e-mail*, *indulás_ország*, *indulás_város*, *érkezés_ország*, *érkezés_város*, mettől, meddig, <ins>mikor</ins>)
 
 ### 4.1. 1. normálforma
 A relációséma 1NF-ben van: többértékű attribútumok nem voltak, az összetett attribútumok pedig helyettesítve lettek részattribútumaikkal.
 
 ### 4.2. 2. normálforma
-A relációséma 2NF-ben van: ahol a kulcs kompozit volt, ott egyedi azonosító lett bevezetve, így a sémák mindegyikében egyetlen attribútumból áll a kulcs.
+A relációséma 2NF-ben van: ahol a kulcs kompozit lett volna, ott egyedi azonosító lett bevezetve, így a sémák mindegyikében egyetlen attribútumból áll a kulcs.
 
 ### 4.3. 3. normálforma
 A relációséma 3NF-ben van: a sémák mindegyikében a másodlagos attribútumok közvetlenül függnek a kulcsoktól.
