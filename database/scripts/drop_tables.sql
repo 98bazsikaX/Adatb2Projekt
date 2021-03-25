@@ -1,4 +1,5 @@
 DROP TABLE searches;
+DROP TABLE tickets;
 DROP TABLE purchases;
 DROP TABLE purchase_states;
 DROP TABLE discounts;
@@ -11,6 +12,7 @@ DROP TABLE users;
 DROP TABLE roles;
 
 DROP SEQUENCE searches_seq;
+DROP SEQUENCE tickets_seq;
 DROP SEQUENCE purchases_seq;
 DROP SEQUENCE discounts_seq;
 DROP SEQUENCE flights_seq;

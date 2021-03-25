@@ -163,7 +163,7 @@ CREATE TABLE tickets
     CONSTRAINT tick_pk
         PRIMARY KEY (id),
     CONSTRAINT tick_unique
-        UNIQUE (purchase_id, firstS_name, last_name, birth_date),
+        UNIQUE (purchase_id, first_name, last_name, birth_date),
     CONSTRAINT fk_tick_purc
         FOREIGN KEY (purchase_id)
         REFERENCES purchases(id)
