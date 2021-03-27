@@ -92,6 +92,7 @@ CREATE TABLE flights
 CREATE TABLE discount_types
 (
     discount_name VARCHAR(20),
+    multiplier NUMBER(1, 2) NOT NULL,
     CONSTRAINT disc_type_pk
         PRIMARY KEY (discount_name)
 );
