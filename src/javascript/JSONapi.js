@@ -1,3 +1,5 @@
+//const { resolve } = require("path");
+
 class JSONapi{
     /*
     még nem mükszik de pusholom :(
@@ -16,11 +18,13 @@ class JSONapi{
         }
         this._post_msg = this._post_msg.slice(0,-1);
 
-
-        var x = null; //a kovetkezo blokk scopejaban a this az xhttp classra mutat, nem erre, ezert kell ez
         this._xhttp.onreadystatechange = function(){
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.response); //Asyncre megfogom oldani xd
+                Promise.resolve(this.responseText)
+            }else{
+                Promise.reject("Not working");
+
             }
         }
         
@@ -32,10 +36,9 @@ class JSONapi{
     }
 
     get result(){
-        return this._result;
+        var asd = await this
     }
 
-    
     set result(something){/* Azert hogy biztos ne lehessen belenyulni a resultba*/}
 
 }
