@@ -6,7 +6,7 @@ Projektünk egy repülőjegy foglaló webalkalmazás tervezése és implementác
 ## 2. Projekt bemutatása
 
 ### 2.1. Specifikáció
-A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, jegyvásárláshoz azonban regisztrálni kell, majd bejelentkezni. A felhasználó ki tudja választani, mely járatra szeretne jegye(ke)t venni, megadja az adatait, majd kifizeti a jegyeket (kedvezmények automatikus érvényesítése után). Ezt követően, amennyiben minden rendben ment, a felhasználó e-mailben kapja meg a jegye(ke)t. Amennyiben az adott járat mégsem megfelelő valakinek, úgy lehetősege van visszamondani, esetleg járatot cserélni.
+A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, jegyvásárláshoz azonban regisztrálni kell, majd bejelentkezni. A felhasználó ki tudja választani, mely járatra szeretne jegye(ke)t venni, megadja az adatokat (saját és más utasok), majd kifizeti a jegye(ke)t (kedvezmények automatikus érvényesítése után). Ezt követően, amennyiben minden rendben ment, a felhasználó e-mailben kapja meg a jegye(ke)t. Amennyiben az adott járat mégsem megfelelő valakinek, úgy lehetősege van visszamondani, esetleg járatot cserélni.
 
 ### 2.2. Funkcionális követelmények
 - Böngészés
@@ -34,6 +34,9 @@ A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, 
 ##### 3.1.1.2. 2. szint
 [2. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl2.png)
 
+##### 3.1.1.3. 3. szint
+[3. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl3.png)
+
 #### 3.1.2. Logikai AFD
 
 ##### 3.1.2.1. 1. szint
@@ -41,6 +44,9 @@ A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, 
 
 ##### 3.1.2.2. 2. szint
 [2. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl2.png)
+
+##### 3.1.2.3. 3. szint
+[3. szintű fizikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl3.png)
 
 ### 3.2. Egyed-kapcsolat diagram
 [Egyed-kapcsolat diagram](./doc/dia/entity_relationship.png)
@@ -58,6 +64,8 @@ Vásárlási_állapot(<ins>azonosító</ins>, állapot)
 Vásárlás(<ins>azonosító</ins>, *Felhasználó.e-mail*, *Járat.járatszám*, darabszám, mikor, *állapot*)
 Jegy(<ins>azonosító</ins>, *Vásárlás.azonosító*, vezetéknév, utónév, születési_dátum)
 Keresés(<ins>azonosító</ins>, *Felhasználó.e-mail*, *indulás_ország*, *indulás_város*, *érkezés_ország*, *érkezés_város*, mettől, meddig, <ins>mikor</ins>)
+Ország(<ins>azonosító</ins>, név)
+Város(<ins>azonosító</ins>, *Ország.azonosító*, irányítószám, név)
 
 ### 4.1. 1. normálforma
 A relációséma 1NF-ben van: többértékű attribútumok nem voltak, az összetett attribútumok pedig helyettesítve lettek részattribútumaikkal.
@@ -71,17 +79,30 @@ A relációséma 3NF-ben van: a sémák mindegyikében a másodlagos attribútum
 ## 5. Relációsémák
 [EK diagramból képzett relációsémák](./doc/relation_schema.xlsx)
 
-### 5.1. Felhasználó
+### 5.1. Jogosultság
 
-Felhasználó | &nbsp;       | &nbsp;
------------ | ------------ | --------------------------
-email       | VARCHAR(64)  | A felhasználó e-mail címe
-jelszo      | VARCHAR(255) | A felhasználó jelszava
-telszam     | VARCHAR(18)  | A felhasználó telefonszáma
-v_nev       | VARCHAR(30)  | A felhasználó vezetékneve
-u_nev       | VARCHAR(30)  | A felhasználó utóneve
+Jogosultság | &nbsp;      | &nbsp;
+----------- | ----------- | -------------------------
+azonosito   | NUMBER(1)   | A jogosultság azonosítója
+nev         | VARCHAR(20) | A jogosultság elnevezése
 
-### 5.2. Légitársaság
+### 5.2. Felhasználó
+
+Felhasználó           | &nbsp;       | &nbsp;
+--------------------- | ------------ | ------------------------------
+email                 | VARCHAR(64)  | A felhasználó e-mail címe
+jelszo                | VARCHAR(255) | A felhasználó jelszava
+telszam               | VARCHAR(18)  | A felhasználó telefonszáma
+v_nev                 | VARCHAR(30)  | A felhasználó vezetékneve
+u_nev                 | VARCHAR(30)  | A felhasználó utóneve
+szul_datum            | DATE         | A felhasználó születési dátuma
+orszag                | VARCHAR(30)  | A felhasználó lakcíme (ország)
+irsz                  | VARCHAR(10)  | A felhasználó lakcíme (irsz)
+varos                 | VARCHAR(40)  | A felhasználó lakcíme (varos)
+cim                   | VARCHAR(40)  | A felhasználó lakcíme (cim)
+jogosultsag_azonosito | NUMBER(1)    | A felhasználó jogosultsága
+
+### 5.3. Légitársaság
 
 Légitársaság | &nbsp;      | &nbsp;
 ------------ | ----------- | --------------------------
@@ -89,16 +110,17 @@ kod          | CHAR(3)     | A légitársaság ICAO kódja
 nev          | VARCHAR(50) | A légitársaság teljes neve
 orszag       | VARCHAR(35) | A légitársaság székhelye
 
-### 5.3. Repülő
+### 5.4. Repülő
 
 Repülő           | &nbsp;      | &nbsp;
 ---------------- | ----------- | ---------------------------------------------------
-azonosito        | NUMBER(4)   | A repülőgép azonosítója a légitársaságon belül
+azonosito        | NUMBER(6)   | A repülőgép egyedi azonosítója
+repulo_azonosito | NUMBER(4)   | A repülőgép azonosítója a légitársaságon belül
 legitarsasag_kod | CHAR(3)     | A légitársaság kódja, amelyhez a repülőgép tartozik
 tipus            | VARCHAR(20) | A repülőgép típusa
 ferohely         | NUMBER(3)   | A repülőgép maximális utasszáma
 
-### 5.4. Repülőtér
+### 5.5. Repülőtér
 
 Repülőtér | &nbsp;      | &nbsp;
 --------- | ----------- | ---------------------------------
@@ -107,29 +129,62 @@ nev       | VARCHAR(64) | A repülőtér neve
 orszag    | VARCHAR(35) | A repülőtérnek otthont adó ország
 varos     | VARCHAR(35) | A repülőtérnek otthont adó város
 
-### 5.5. Járat
+### 5.6. Járat
 
 Járat            | &nbsp;    | &nbsp;
 ---------------- | --------- | ------------------------------------------------
 jaratszam        | NUMBER(6) | A járat egyedi azonosítója
 repulo_azonosito | NUMBER(4) | A járathoz tartozó repülő azonosítója
-legitarsasag_kod | CHAR(3)   | A járathoz tartozó repülő légitársaságának kódja
 jegyar           | NUMBER(6) | Egyetlen jegy ára Ft-ban
 indulas          | DATE      | A járat indulásának pontos időpontja
 indulas_kod      | CHAR(4)   | A repülőtér kódja, amelyről a repülőgép felszáll
 erkezes          | DATE      | A járat érkezésének pontos időpontja
 erkezes_kod      | CHAR(4)   | A repülőtér kódja, amelyre a repülőgép leszáll
 
-### 5.6. Vásárlás
+### 5.7. Kedvezmény típus
 
-Vásárlás    | &nbsp;      | &nbsp;
------------ | ----------- | -----------------------------------------------
-email       | VARCHAR(64) | A jegye(ke)t vásárló felhasználó e-mail címe
-idopont     | DATE        | A jegyvásárlás pontos időpontja
-jaratszam   | NUMBER(6)   | A járat azonosítója, amelyre a jegy(ek) szólnak
-darabszam   | NUMBER(2)   | A vásárolt jegyek száma
+Kedvezmény típus | &nbsp;      | &nbsp;
+---------------- | ----------- | ---------------------------
+nev              | VARCHAR(20) | A kedvezmény típusának neve
 
-### 5.7. Keresés
+### 5.8. Kedvezmény
+
+Kedvezmény | &nbsp;       | &nbsp;
+---------- | ------------ | -----------------------------------------------
+azonosito  | NUMBER(6)    | A kedvezmény egyedi azonosítója
+jaratszam  | NUMBER(6)    | A járat azonosítója, amelyre a jegy(ek) szólnak
+tipus      | VARCHAR(20)  | A kedvezmény típusa
+mertek     | NUMBER(6, 3) | A kedvezmény mértéke
+mettol     | DATE         | A kedvezmény kezdete
+meddig     | DATE         | A kedvezmény vége
+
+### 5.9. Vásárlás állapot
+
+Vásárlás állapot | &nbsp;      | &nbsp;
+---------------- | ----------- | -------------------------------
+azonosito        | NUMBER(1)   | A vásárlási állapot azonosítója
+nev              | VARCHAR(20) | A vásárlási állapot neve
+
+### 5.10. Vásárlás
+
+Vásárlás  | &nbsp;      | &nbsp;
+--------- | ----------- | -----------------------------------------------
+email     | VARCHAR(64) | A jegye(ke)t vásárló felhasználó e-mail címe
+idopont   | DATE        | A jegyvásárlás pontos időpontja
+jaratszam | NUMBER(6)   | A járat azonosítója, amelyre a jegy(ek) szólnak
+darabszam | NUMBER(2)   | A vásárolt jegyek száma
+
+### 5.11. Jegy
+
+Jegy               | &nbsp;      | &nbsp;
+------------------ | ----------- | --------------------------------------
+azonosito          | NUMBER(6)   | A jegy egyedi azonosítója
+vasarlas_azonosito | NUMBER(6)   | A jegyhez "tartozó vásárlás"
+v_nev              | VARCHAR(30) | A jegy tulajdonosának vezetékneve
+u_nev              | VARCHAR(30) | A jegy tulajdonosának utóneve
+szul_datum         | DATE        | A jegy tulajdonosának születési dátuma
+
+### 5.12. Keresés
 
 Keresés        | &nbsp;      | &nbsp;
 -------------- | ----------- | --------------------------------------------------
@@ -141,6 +196,22 @@ erkezes_orszag | VARCHAR(35) | A keresett ország, ahova a járat leszáll
 erkezes_varos  | VARCHAR(35) | A keresett város, ahova a járat leszáll
 mettol         | DATE        | A járat indulási idejének kezdete (napra pontosan)
 meddig         | DATE        | A járat indulási idejének vége (napra pontosan)
+
+### 5.13. Ország
+
+Ország    | &nbsp;      | &nbsp;
+--------- | ----------- | ---------------------
+azonosito | NUMBER(3)   | Az ország azonosítója
+nev       | VARCHAR(30) | Az ország neve
+
+### 5.14. Város
+
+Város            | &nbsp;      | &nbsp;
+---------------- | ----------- | --------------------------------------------------
+azonosito        | NUMBER(6)   | Az város azonosítója
+orszag_azonosito | NUMBER(3)   | Az ország azonosítója, amelyhez a város "tartozik"
+irsz             | VARCHAR(10) | A város irányítószáma
+nev              | VARCHAR(40) | Az ország neve
 
 ## 6. Szerep-funkció mátrix
 [Szerep-funkció mátrix](./doc/role_function_matrix.xlsx)
