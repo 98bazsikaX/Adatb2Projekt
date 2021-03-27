@@ -14,7 +14,7 @@ CREATE TABLE users
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     birth_date DATE NOT NULL,
-    country VARCHAR(30) NOT NULL,
+    country VARCHAR(35) NOT NULL,
     post_code VARCHAR(10) NOT NULL,
     city VARCHAR(40) NOT NULL,
     home_address VARCHAR(40) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE users
 
 CREATE TABLE airlines
 (
-    code CHAR(4),
+    code CHAR(3),
     airline_name VARCHAR(50) NOT NULL,
     airline_name_abbr VARCHAR(20),
     country VARCHAR(35) NOT NULL,
@@ -71,7 +71,6 @@ CREATE TABLE flights
 (
     id NUMBER(6) DEFAULT flights_seq.nextval NOT NULL,
     airplane_id NUMBER(6) NOT NULL,
-    airplane_airline_code CHAR(3) NOT NULL,
     price NUMBER(6) NOT NULL,
     takeoff_date DATE NOT NULL,
     takeoff_airport_code CHAR(4) NOT NULL,
@@ -93,7 +92,7 @@ CREATE TABLE flights
 CREATE TABLE discount_types
 (
     discount_name VARCHAR(20),
-    multiplier NUMBER(1, 2) NOT NULL,
+    multiplier NUMBER(3, 2) NOT NULL,
     CONSTRAINT disc_type_pk
         PRIMARY KEY (discount_name)
 );
@@ -105,7 +104,7 @@ CREATE TABLE discounts
     id NUMBER(6) DEFAULT discounts_seq.nextval NOT NULL,
     flight_id NUMBER(6) NOT NULL,
     discount_type_name VARCHAR(20) NOT NULL,
-    amount NUMBER(6) NOT NULL,
+    amount NUMBER(6, 1) NOT NULL,
     valid_from DATE DEFAULT sysdate NOT NULL,
     valid_to DATE, -- TODO: add trigger
     CONSTRAINT disc_pk
@@ -198,22 +197,24 @@ CREATE SEQUENCE countries_seq START WITH 1;
 CREATE TABLE countries
 (
     id NUMBER(3) DEFAULT countries_seq.nextval NOT NULL,
-    country_name VARCHAR(30) NOT NULL,
+    country_name VARCHAR(35) NOT NULL,
     CONSTRAINT coun_pk
         PRIMARY KEY (id)
 );
 
 CREATE SEQUENCE cities_seq START WITH 1;
 
-CREATE TABLE cities
+CREATE TABLE cities -- TODO: add trigger
 (
     id NUMBER(6) DEFAULT cities_seq.nextval NOT NULL,
     country_id NUMBER(3) NOT NULL,
     city_post_code VARCHAR(10) NOT NULL,
     city_name VARCHAR(40) NOT NULL,
     CONSTRAINT citi_pk
-        PRIMARY KEY (id)
+        PRIMARY KEY (id),
     CONSTRAINT fk_citi_coun
         FOREIGN KEY (country_id)
-        REFERENCES countries(id)
+        REFERENCES countries(id),
+    CONSTRAINT citi_unique
+        UNIQUE (country_id, city_post_code, city_name)
 );

@@ -96,7 +96,7 @@ telszam               | VARCHAR(18)  | A felhasználó telefonszáma
 v_nev                 | VARCHAR(30)  | A felhasználó vezetékneve
 u_nev                 | VARCHAR(30)  | A felhasználó utóneve
 szul_datum            | DATE         | A felhasználó születési dátuma
-orszag                | VARCHAR(30)  | A felhasználó lakcíme (ország)
+orszag                | VARCHAR(35)  | A felhasználó lakcíme (ország)
 irsz                  | VARCHAR(10)  | A felhasználó lakcíme (irsz)
 varos                 | VARCHAR(40)  | A felhasználó lakcíme (varos)
 cim                   | VARCHAR(40)  | A felhasználó lakcíme (cim)
@@ -147,7 +147,7 @@ erkezes_kod      | CHAR(4)   | A repülőtér kódja, amelyre a repülőgép les
 Kedvezmény típus | &nbsp;       | &nbsp;
 ---------------- | ------------ | ---------------------------
 nev              | VARCHAR(20)  | A kedvezmény típusának neve
-szorzo           | NUMBER(1, 2) | A kedvezmény szorzója
+szorzo           | NUMBER(3, 2) | A kedvezmény szorzója
 
 ### 5.8. Kedvezmény
 
@@ -156,7 +156,7 @@ Kedvezmény | &nbsp;       | &nbsp;
 azonosito  | NUMBER(6)    | A kedvezmény egyedi azonosítója
 jaratszam  | NUMBER(6)    | A járat azonosítója, amelyre a jegy(ek) szólnak
 tipus      | VARCHAR(20)  | A kedvezmény típusa
-mertek     | NUMBER(6, 3) | A kedvezmény mértéke
+mertek     | NUMBER(6, 1) | A kedvezmény mértéke
 mettol     | DATE         | A kedvezmény kezdete
 meddig     | DATE         | A kedvezmény vége
 
@@ -204,7 +204,7 @@ meddig         | DATE        | A járat indulási idejének vége (napra pontosa
 Ország    | &nbsp;      | &nbsp;
 --------- | ----------- | ---------------------
 azonosito | NUMBER(3)   | Az ország azonosítója
-nev       | VARCHAR(30) | Az ország neve
+nev       | VARCHAR(35) | Az ország neve
 
 ### 5.14. Város
 
