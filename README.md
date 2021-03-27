@@ -54,7 +54,7 @@ A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, 
 ## 4. EK diagram leképezése
 Jogosultság(<ins>azonosító</ins>, név)
 Felhasználó(<ins>e-mail</ins>, jelszó, telefonszám, vezetéknév, utónév, születési_dátum, ország, irányítószám, város, cím, *Jogosultság.azonosító*, utolsó_belépés)
-Légitársaság(<ins>kód</ins>, név, ország)
+Légitársaság(<ins>kód</ins>, név, rövidítés, ország)
 Repülő(<ins>azonosító</ins>, repülő_azonosító, *Légitársaság.kód*, típus, férőhely)
 Repülőtér(<ins>kód</ins>, név, ország, város)
 Járat(<ins>járatszám</ins>, *Repülő.azonosító*, jegyár, indulás_idő, *indulás_repülőtér*, érkezés_idő, *érkezés_repülőtér*)
@@ -105,9 +105,10 @@ jogosultsag_azonosito | NUMBER(1)    | A felhasználó jogosultsága
 ### 5.3. Légitársaság
 
 Légitársaság | &nbsp;      | &nbsp;
------------- | ----------- | --------------------------
+------------ | ----------- | ---------------------------------
 kod          | CHAR(3)     | A légitársaság ICAO kódja
 nev          | VARCHAR(50) | A légitársaság teljes neve
+rovidites    | VARCHAR(20) | A légitársaság nevének rövidítése
 orszag       | VARCHAR(35) | A légitársaság székhelye
 
 ### 5.4. Repülő
@@ -143,9 +144,10 @@ erkezes_kod      | CHAR(4)   | A repülőtér kódja, amelyre a repülőgép les
 
 ### 5.7. Kedvezmény típus
 
-Kedvezmény típus | &nbsp;      | &nbsp;
----------------- | ----------- | ---------------------------
-nev              | VARCHAR(20) | A kedvezmény típusának neve
+Kedvezmény típus | &nbsp;       | &nbsp;
+---------------- | ------------ | ---------------------------
+nev              | VARCHAR(20)  | A kedvezmény típusának neve
+szorzo           | NUMBER(1, 2) | A kedvezmény szorzója
 
 ### 5.8. Kedvezmény
 

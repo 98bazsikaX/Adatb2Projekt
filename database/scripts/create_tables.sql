@@ -31,6 +31,7 @@ CREATE TABLE airlines
 (
     code CHAR(4),
     airline_name VARCHAR(50) NOT NULL,
+    airline_name_abbr VARCHAR(20),
     country VARCHAR(35) NOT NULL,
     CONSTRAINT airl_pk
         PRIMARY KEY (code)
