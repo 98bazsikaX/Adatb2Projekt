@@ -1,0 +1,4 @@
+DROP TRIGGER airlines_insert_into_countries;
+DROP TRIGGER airports_insert_into_countries;
+DROP TRIGGER users_insert_into_countries;
+DROP TRIGGER insert_into_cities;
