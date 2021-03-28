@@ -1,1 +1,0 @@
-DROP TRIGGER insert_on_discounts;
