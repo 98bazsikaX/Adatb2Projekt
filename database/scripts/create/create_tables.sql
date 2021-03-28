@@ -19,12 +19,29 @@ CREATE TABLE users
     city VARCHAR(40) NOT NULL,
     home_address VARCHAR(40) NOT NULL,
     role_id NUMBER(1) NOT NULL,
-    last_login DATE DEFAULT sysdate NOT NULL,
+    registration_date DATE DEFAULT sysdate NOT NULL,
     CONSTRAINT user_pk
         PRIMARY KEY (email),
     CONSTRAINT fk_user_role
         FOREIGN KEY (role_id)
         REFERENCES roles(id)
+);
+
+CREATE SEQUENCE logs_seq START WITH 1;
+
+CREATE TABLE logs
+(
+    id NUMBER(6) DEFAULT logs_seq.nextval NOT NULL,
+    user_email VARCHAR(64) NOT NULL,
+    login_date DATE DEFAULT sysdate NOT NULL,
+    logout_date DATE,
+    CONSTRAINT logs_pk
+        PRIMARY KEY (ID),
+    CONSTRAINT logs_unique
+        UNIQUE (user_email, login_date, logout_date),
+    CONSTRAINT fk_logs_user
+        FOREIGN KEY (user_email)
+        REFERENCES users(email)
 );
 
 CREATE TABLE airlines
@@ -106,7 +123,7 @@ CREATE TABLE discounts
     discount_type_name VARCHAR(20) NOT NULL,
     amount NUMBER(6, 1) NOT NULL,
     valid_from DATE DEFAULT sysdate NOT NULL,
-    valid_to DATE, -- TODO: add trigger
+    valid_to DATE,
     CONSTRAINT disc_pk
         PRIMARY KEY (id),
     CONSTRAINT disc_unique

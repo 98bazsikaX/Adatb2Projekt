@@ -8,6 +8,7 @@ DROP TABLE flights;
 DROP TABLE airports;
 DROP TABLE airplanes;
 DROP TABLE airlines;
+DROP TABLE logs;
 DROP TABLE users;
 DROP TABLE roles;
 
@@ -17,3 +18,4 @@ DROP SEQUENCE purchases_seq;
 DROP SEQUENCE discounts_seq;
 DROP SEQUENCE flights_seq;
 DROP SEQUENCE airplanes_seq;
+DROP SEQUENCE logs_seq;
