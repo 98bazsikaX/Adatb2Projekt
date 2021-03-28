@@ -64,7 +64,7 @@ Kedvezmény(<ins>azonosító</ins>, *Járat.járatszám*, *típus*, mérték, me
 Vásárlási_állapot(<ins>azonosító</ins>, állapot)
 Vásárlás(<ins>azonosító</ins>, *Felhasználó.e-mail*, *Járat.járatszám*, darabszám, mikor, *állapot*)
 Jegy(<ins>azonosító</ins>, *Vásárlás.azonosító*, vezetéknév, utónév, születési_dátum)
-Keresés(<ins>azonosító</ins>, *Felhasználó.e-mail*, *indulás_ország*, *indulás_város*, *érkezés_ország*, *érkezés_város*, mettől, meddig, <ins>mikor</ins>)
+Keresés(<ins>azonosító</ins>, *Felhasználó.e-mail*, *indulás_ország*, *indulás_város*, *érkezés_ország*, *érkezés_város*, mettől, meddig, ártól, árig, <ins>mikor</ins>)
 
 ### 4.1. 1. normálforma
 A relációséma 1NF-ben van: többértékű attribútumok nem voltak, az összetett attribútumok pedig helyettesítve lettek részattribútumaikkal.
@@ -146,9 +146,9 @@ Járat            | &nbsp;    | &nbsp;
 jaratszam        | NUMBER(6) | A járat egyedi azonosítója
 repulo_azonosito | NUMBER(4) | A járathoz tartozó repülő azonosítója
 jegyar           | NUMBER(6) | Egyetlen jegy ára Ft-ban
-indulas          | DATE      | A járat indulásának pontos időpontja
+indulas          | DATE      | A járat indulásának időpontja
 indulas_kod      | CHAR(4)   | A repülőtér kódja, amelyről a repülőgép felszáll
-erkezes          | DATE      | A járat érkezésének pontos időpontja
+erkezes          | DATE      | A járat érkezésének időpontja
 erkezes_kod      | CHAR(4)   | A repülőtér kódja, amelyre a repülőgép leszáll
 
 ### 5.8. Kedvezmény típus
@@ -184,7 +184,7 @@ azonosito | NUMBER(6)   | A vásárlás egyedi azonosítója
 email     | VARCHAR(64) | A jegye(ke)t vásárló felhasználó e-mail címe
 jaratszam | NUMBER(6)   | A járat azonosítója, amelyre a jegy(ek) szólnak
 darabszam | NUMBER(2)   | A vásárolt jegyek száma
-idopont   | DATE        | A jegyvásárlás pontos időpontja
+idopont   | DATE        | A jegyvásárlás időpontja
 allapot   | NUMBER(1)   | A vásárlás állapota
 
 ### 5.12. Jegy
@@ -210,6 +210,9 @@ erkezes_orszag | VARCHAR(35) | A keresett ország, ahova a járat leszáll
 erkezes_varos  | VARCHAR(35) | A keresett város, ahova a járat leszáll
 mettol         | DATE        | A járat indulási idejének kezdete (napra pontosan)
 meddig         | DATE        | A járat indulási idejének vége (napra pontosan)
+artol          | NUMBER(6)   | A járat jegyárának minimuma
+arig           | NUMBER(6)   | A járat jegyárának maximuma
+idopont        | DATE        | A keresés időpontja
 
 ## 6. Szerep-funkció mátrix
 [Szerep-funkció mátrix](./doc/role_function_matrix.xlsx)

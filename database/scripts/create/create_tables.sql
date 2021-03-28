@@ -199,6 +199,8 @@ CREATE TABLE searches
     landing_city VARCHAR(35) NOT NULL,
     from_date DATE NOT NULL,
     to_date DATE NOT NULL,
+    from_price NUMBER(6) NOT NULL,
+    to_price NUMBER(6) NOT NULL,
     search_date DATE DEFAULT sysdate NOT NULL,
     CONSTRAINT sear_pk
         PRIMARY KEY (id),
