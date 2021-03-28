@@ -191,30 +191,3 @@ CREATE TABLE searches
         FOREIGN KEY (user_email)
         REFERENCES users(email)
 );
-
-CREATE SEQUENCE countries_seq START WITH 1;
-
-CREATE TABLE countries
-(
-    id NUMBER(3) DEFAULT countries_seq.nextval NOT NULL,
-    country_name VARCHAR(35) NOT NULL,
-    CONSTRAINT coun_pk
-        PRIMARY KEY (id)
-);
-
-CREATE SEQUENCE cities_seq START WITH 1;
-
-CREATE TABLE cities -- TODO: add trigger
-(
-    id NUMBER(6) DEFAULT cities_seq.nextval NOT NULL,
-    country_id NUMBER(3) NOT NULL,
-    city_post_code VARCHAR(10) NOT NULL,
-    city_name VARCHAR(40) NOT NULL,
-    CONSTRAINT citi_pk
-        PRIMARY KEY (id),
-    CONSTRAINT fk_citi_coun
-        FOREIGN KEY (country_id)
-        REFERENCES countries(id),
-    CONSTRAINT citi_unique
-        UNIQUE (country_id, city_post_code, city_name)
-);

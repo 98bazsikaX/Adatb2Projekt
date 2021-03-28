@@ -64,8 +64,6 @@ Vásárlási_állapot(<ins>azonosító</ins>, állapot)
 Vásárlás(<ins>azonosító</ins>, *Felhasználó.e-mail*, *Járat.járatszám*, darabszám, mikor, *állapot*)
 Jegy(<ins>azonosító</ins>, *Vásárlás.azonosító*, vezetéknév, utónév, születési_dátum)
 Keresés(<ins>azonosító</ins>, *Felhasználó.e-mail*, *indulás_ország*, *indulás_város*, *érkezés_ország*, *érkezés_város*, mettől, meddig, <ins>mikor</ins>)
-Ország(<ins>azonosító</ins>, név)
-Város(<ins>azonosító</ins>, *Ország.azonosító*, irányítószám, név)
 
 ### 4.1. 1. normálforma
 A relációséma 1NF-ben van: többértékű attribútumok nem voltak, az összetett attribútumok pedig helyettesítve lettek részattribútumaikkal.
@@ -198,22 +196,6 @@ erkezes_orszag | VARCHAR(35) | A keresett ország, ahova a járat leszáll
 erkezes_varos  | VARCHAR(35) | A keresett város, ahova a járat leszáll
 mettol         | DATE        | A járat indulási idejének kezdete (napra pontosan)
 meddig         | DATE        | A járat indulási idejének vége (napra pontosan)
-
-### 5.13. Ország
-
-Ország    | &nbsp;      | &nbsp;
---------- | ----------- | ---------------------
-azonosito | NUMBER(3)   | Az ország azonosítója
-nev       | VARCHAR(35) | Az ország neve
-
-### 5.14. Város
-
-Város            | &nbsp;      | &nbsp;
----------------- | ----------- | --------------------------------------------------
-azonosito        | NUMBER(6)   | Az város azonosítója
-orszag_azonosito | NUMBER(3)   | Az ország azonosítója, amelyhez a város "tartozik"
-irsz             | VARCHAR(10) | A város irányítószáma
-nev              | VARCHAR(40) | Az ország neve
 
 ## 6. Szerep-funkció mátrix
 [Szerep-funkció mátrix](./doc/role_function_matrix.xlsx)
