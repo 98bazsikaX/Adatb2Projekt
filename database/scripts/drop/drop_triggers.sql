@@ -1,0 +1,1 @@
+DROP TRIGGER check_num_of_seats;
