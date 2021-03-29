@@ -1,4 +1,7 @@
+-- Drop tables
 DROP TABLE searches;
+DROP TABLE packages;
+DROP TABLE package_types;
 DROP TABLE tickets;
 DROP TABLE purchases;
 DROP TABLE purchase_states;
@@ -14,7 +17,10 @@ DROP TABLE logs;
 DROP TABLE users;
 DROP TABLE roles;
 
+-- Drop sequences
 DROP SEQUENCE searches_seq;
+DROP SEQUENCE packages_seq;
+DROP SEQUENCE package_types_seq;
 DROP SEQUENCE tickets_seq;
 DROP SEQUENCE purchases_seq;
 DROP SEQUENCE discounts_seq;

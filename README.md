@@ -66,6 +66,8 @@ Kedvezmény(<ins>azonosító</ins>, *Járat.járatszám*, *típus*, mérték, me
 Vásárlási_állapot(<ins>azonosító</ins>, állapot)
 Vásárlás(<ins>azonosító</ins>, *Felhasználó.e-mail*, *Járat.járatszám*, darabszám, mikor, *állapot*)
 Jegy(<ins>azonosító</ins>, *Vásárlás.azonosító*, vezetéknév, utónév, születési_dátum)
+Csomag_típus(<ins>azonosító</ins>, *Légitársaság.azonosító*, rövidítés, leírás, magasság, szélesség, mélység, ár)
+Csomag(<ins>azonosító</ins>, *Jegy.azonosító*, *Csomag_típus.azonosító*)
 Keresés(<ins>azonosító</ins>, *Felhasználó.e-mail*, *indulás_ország*, *indulás_város*, *érkezés_ország*, *érkezés_város*, mettől, meddig, ártól, árig, <ins>mikor</ins>)
 
 ### 4.1. 1. normálforma
@@ -147,7 +149,7 @@ Járat            | &nbsp;    | &nbsp;
 ---------------- | --------- | ------------------------------------------------
 jaratszam        | NUMBER(6) | A járat egyedi azonosítója
 repulo_azonosito | NUMBER(4) | A járathoz tartozó repülő azonosítója
-jegyar           | NUMBER(6) | Egyetlen jegy ára Ft-ban
+jegyar           | NUMBER(6) | Egyetlen jegy ára (Ft)
 indulas          | DATE      | A járat indulásának időpontja
 indulas_kod      | CHAR(4)   | A repülőtér kódja, amelyről a repülőgép felszáll
 erkezes          | DATE      | A járat érkezésének időpontja
@@ -209,12 +211,33 @@ allapot   | NUMBER(1)    | A vásárlás állapota
 Jegy               | &nbsp;       | &nbsp;
 ------------------ | ------------ | --------------------------------------
 azonosito          | NUMBER(6)    | A jegy egyedi azonosítója
-vasarlas_azonosito | NUMBER(6)    | A jegyhez "tartozó vásárlás"
+vasarlas_azonosito | NUMBER(6)    | A jegyhez tartozó vásárlás
 v_nev              | VARCHAR2(30) | A jegy tulajdonosának vezetékneve
 u_nev              | VARCHAR2(30) | A jegy tulajdonosának utóneve
 szul_datum         | DATE         | A jegy tulajdonosának születési dátuma
 
-### 5.15. Keresés
+### 5.15. Csomag típus
+
+Csomag típus     | &nbsp;       | &nbsp;
+---------------- | ------------ | --------------------------------------------------------------
+azonosito        | NUMBER(3)    | A csomag típus egyedi azonosítója
+legitarsasag_kod | CHAR(3)      | A légitársaság kódja, amelyhez a csomag típus tartozik
+rovidites        | VARCHAR2(5)  | A csomag típus rövidítése
+leiras           | VARCHAR2(25) | A csomag típus leírása
+magassag         | NUMBER(4, 1) | A csomag típus által meghatározott csomag max. magassága (cm)
+szelesseg        | NUMBER(4, 1) | A csomag típus által meghatározott csomag max. szélessége (cm)
+melyseg          | NUMBER(4, 1) | A csomag típus által meghatározott csomag max. mélysége (cm)
+ar               | NUMBER(5)    | A csomag típus által meghatározott csomag ára (Ft)
+
+### 5.16. Csomag
+
+Csomag                 | &nbsp;    | &nbsp;
+---------------------- | --------- | ----------------------------------------------
+azonosito              | NUMBER(6) | A csomag egyedi azonosítója
+jegy_azonosito         | NUMBER(6) | A jegy azonosítója, amelyhez a csomag tartozik
+csomag_tipus_azonosito | NUMBER(3) | A csomag típusának azonosítója
+
+### 5.17. Keresés
 
 Keresés        | &nbsp;       | &nbsp;
 -------------- | ------------ | --------------------------------------------------
