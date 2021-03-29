@@ -106,6 +106,20 @@ CREATE TABLE flights
         REFERENCES airports(code)
 );
 
+CREATE TABLE seats
+(
+    flight_id NUMBER(6),
+    seat NUMBER(3),
+    occupied NUMBER(1) DEFAULT 0 NOT NULL,
+    CONSTRAINT seat_pk
+        PRIMARY KEY (flight_id, seat),
+    CONSTRAINT fk_seat_flig
+        FOREIGN KEY (flight_id)
+        REFERENCES flights(id),
+    CONSTRAINT check_occupied
+        CHECK (occupied IN (0, 1))
+);
+
 CREATE TABLE discount_types
 (
     discount_name VARCHAR(20),

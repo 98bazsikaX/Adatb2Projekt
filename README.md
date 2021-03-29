@@ -59,6 +59,7 @@ Légitársaság(<ins>kód</ins>, név, rövidítés, ország)
 Repülő(<ins>azonosító</ins>, repülő_azonosító, *Légitársaság.kód*, típus, férőhely)
 Repülőtér(<ins>kód</ins>, név, ország, város)
 Járat(<ins>járatszám</ins>, *Repülő.azonosító*, jegyár, indulás_idő, *indulás_repülőtér*, érkezés_idő, *érkezés_repülőtér*)
+Ülőhely(<ins>*Járat.járatszám*<ins>, <ins>szék<ins>, foglalt_e)
 Kedvezmény_típusok(<ins>név</ins>, szorzó)
 Kedvezmény(<ins>azonosító</ins>, *Járat.járatszám*, *típus*, mérték, mettől, meddig)
 Vásárlási_állapot(<ins>azonosító</ins>, állapot)
@@ -151,14 +152,22 @@ indulas_kod      | CHAR(4)   | A repülőtér kódja, amelyről a repülőgép f
 erkezes          | DATE      | A járat érkezésének időpontja
 erkezes_kod      | CHAR(4)   | A repülőtér kódja, amelyre a repülőgép leszáll
 
-### 5.8. Kedvezmény típus
+### 5.8. Ülőhely
+
+Ülőhely   | &nbsp;    | &nbsp;
+--------- | --------- | -------------------------------------------
+jaratszam | NUMBER(6) | A járat azonosítója, amelyen az ülőhely van
+szek      | NUMBER(3) | Az ülőhely száma a járaton
+foglalt   | NUMBER(1) | Foglalt a ülőhely? (0: nem, 1: igen)
+
+### 5.9. Kedvezmény típus
 
 Kedvezmény típus | &nbsp;       | &nbsp;
 ---------------- | ------------ | ---------------------------
 nev              | VARCHAR(20)  | A kedvezmény típusának neve
 szorzo           | NUMBER(3, 2) | A kedvezmény szorzója
 
-### 5.9. Kedvezmény
+### 5.10. Kedvezmény
 
 Kedvezmény | &nbsp;       | &nbsp;
 ---------- | ------------ | -----------------------------------------------
@@ -169,14 +178,14 @@ mertek     | NUMBER(6, 1) | A kedvezmény mértéke
 mettol     | DATE         | A kedvezmény kezdete
 meddig     | DATE         | A kedvezmény vége
 
-### 5.10. Vásárlás állapot
+### 5.11. Vásárlás állapot
 
 Vásárlás állapot | &nbsp;      | &nbsp;
 ---------------- | ----------- | -------------------------------
 azonosito        | NUMBER(1)   | A vásárlási állapot azonosítója
 nev              | VARCHAR(20) | A vásárlási állapot neve
 
-### 5.11. Vásárlás
+### 5.12. Vásárlás
 
 Vásárlás  | &nbsp;      | &nbsp;
 --------- | ----------- | -----------------------------------------------
@@ -187,7 +196,7 @@ darabszam | NUMBER(2)   | A vásárolt jegyek száma
 idopont   | DATE        | A jegyvásárlás időpontja
 allapot   | NUMBER(1)   | A vásárlás állapota
 
-### 5.12. Jegy
+### 5.13. Jegy
 
 Jegy               | &nbsp;      | &nbsp;
 ------------------ | ----------- | --------------------------------------
@@ -197,7 +206,7 @@ v_nev              | VARCHAR(30) | A jegy tulajdonosának vezetékneve
 u_nev              | VARCHAR(30) | A jegy tulajdonosának utóneve
 szul_datum         | DATE        | A jegy tulajdonosának születési dátuma
 
-### 5.13. Keresés
+### 5.14. Keresés
 
 Keresés        | &nbsp;      | &nbsp;
 -------------- | ----------- | --------------------------------------------------

@@ -4,6 +4,7 @@ DROP TABLE purchases;
 DROP TABLE purchase_states;
 DROP TABLE discounts;
 DROP TABLE discount_types;
+DROP TABLE seats;
 DROP TABLE flights;
 DROP TABLE airports;
 DROP TABLE airplanes;
