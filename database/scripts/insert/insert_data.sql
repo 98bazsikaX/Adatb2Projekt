@@ -5,9 +5,13 @@ INSERT ALL
     -- Insert into discount types
     INTO discount_types (discount_name, multiplier) VALUES ('exact', 1.00)
     INTO discount_types (discount_name, multiplier) VALUES ('percentage', 0.01)
+    -- Insert into seat states
+    INTO seat_states (id, state_name) VALUES (0, 'inactive')
+    INTO seat_states (id, state_name) VALUES (1, 'active')
+    INTO seat_states (id, state_name) VALUES (2, 'occupied')
     -- Insert into purchase states
-    INTO purchase_states (id, state_name) VALUES (0, 'active')
-    INTO purchase_states (id, state_name) VALUES (1, 'inactive')
+    INTO purchase_states (id, state_name) VALUES (0, 'inactive')
+    INTO purchase_states (id, state_name) VALUES (1, 'active')
     INTO purchase_states (id, state_name) VALUES (2, 'cancelled')
     INTO purchase_states (id, state_name) VALUES (3, 'noncancellable')
     -- Insert into airlines

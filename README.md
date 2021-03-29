@@ -59,7 +59,8 @@ Légitársaság(<ins>kód</ins>, név, rövidítés, ország)
 Repülő(<ins>azonosító</ins>, repülő_azonosító, *Légitársaság.kód*, típus, férőhely)
 Repülőtér(<ins>kód</ins>, név, ország, város)
 Járat(<ins>járatszám</ins>, *Repülő.azonosító*, jegyár, indulás_idő, *indulás_repülőtér*, érkezés_idő, *érkezés_repülőtér*)
-Ülőhely(<ins>*Járat.járatszám*<ins>, <ins>szék<ins>, foglalt_e)
+Ülőhely_állapot(<ins>azonosító</ins>, állapot)
+Ülőhely(<ins>*Járat.járatszám*<ins>, <ins>szék<ins>, *állapot*)
 Kedvezmény_típusok(<ins>név</ins>, szorzó)
 Kedvezmény(<ins>azonosító</ins>, *Járat.járatszám*, *típus*, mérték, mettől, meddig)
 Vásárlási_állapot(<ins>azonosító</ins>, állapot)
@@ -81,64 +82,64 @@ A relációséma 3NF-ben van: a sémák mindegyikében a másodlagos attribútum
 
 ### 5.1. Jogosultság
 
-Jogosultság | &nbsp;      | &nbsp;
------------ | ----------- | -------------------------
-azonosito   | NUMBER(1)   | A jogosultság azonosítója
-nev         | VARCHAR(20) | A jogosultság elnevezése
+Jogosultság | &nbsp;       | &nbsp;
+----------- | ------------ | -------------------------
+azonosito   | NUMBER(1)    | A jogosultság azonosítója
+nev         | VARCHAR2(20) | A jogosultság elnevezése
 
 ### 5.2. Felhasználó
 
-Felhasználó           | &nbsp;       | &nbsp;
---------------------- | ------------ | -----------------------------------------
-email                 | VARCHAR(64)  | A felhasználó egyedi e-mail címe
-jelszo                | VARCHAR(255) | A felhasználó jelszava
-telszam               | VARCHAR(18)  | A felhasználó telefonszáma
-v_nev                 | VARCHAR(30)  | A felhasználó vezetékneve
-u_nev                 | VARCHAR(30)  | A felhasználó utóneve
-szul_datum            | DATE         | A felhasználó születési dátuma
-orszag                | VARCHAR(35)  | A felhasználó lakcíme (ország)
-irsz                  | VARCHAR(10)  | A felhasználó lakcíme (irsz)
-varos                 | VARCHAR(40)  | A felhasználó lakcíme (varos)
-cim                   | VARCHAR(40)  | A felhasználó lakcíme (cim)
-jogosultsag_azonosito | NUMBER(1)    | A felhasználó jogosultsága
-regisztracio_idopont  | DATE         | A felhasználó regisztrációjának időpontja
+Felhasználó           | &nbsp;        | &nbsp;
+--------------------- | ------------- | -----------------------------------------
+email                 | VARCHAR2(64)  | A felhasználó egyedi e-mail címe
+jelszo                | VARCHAR2(255) | A felhasználó jelszava
+telszam               | VARCHAR2(18)  | A felhasználó telefonszáma
+v_nev                 | VARCHAR2(30)  | A felhasználó vezetékneve
+u_nev                 | VARCHAR2(30)  | A felhasználó utóneve
+szul_datum            | DATE          | A felhasználó születési dátuma
+orszag                | VARCHAR2(35)  | A felhasználó lakcíme (ország)
+irsz                  | VARCHAR2(10)  | A felhasználó lakcíme (irsz)
+varos                 | VARCHAR2(40)  | A felhasználó lakcíme (varos)
+cim                   | VARCHAR2(40)  | A felhasználó lakcíme (cim)
+jogosultsag_azonosito | NUMBER(1)     | A felhasználó jogosultsága
+regisztracio_idopont  | DATE          | A felhasználó regisztrációjának időpontja
 
 ### 5.3. Napló
 
-Napló     | &nbsp;      | &nbsp;
---------- | ----------- | ----------------------------------------------------
-azonosito | NUMBER(6)   | A napló bejegyzés egyedi azonosítója
-email     | VARCHAR(64) | A napló bejegyzéshez tartozó felhasználó e-mail címe
-belepes   | DATE        | A felhasználó belépési ideje
-kilepes   | DATE        | A felhasználó kilépési ideje
+Napló     | &nbsp;       | &nbsp;
+--------- | ------------ | ----------------------------------------------------
+azonosito | NUMBER(6)    | A napló bejegyzés egyedi azonosítója
+email     | VARCHAR2(64) | A napló bejegyzéshez tartozó felhasználó e-mail címe
+belepes   | DATE         | A felhasználó belépési ideje
+kilepes   | DATE         | A felhasználó kilépési ideje
 
 ### 5.4. Légitársaság
 
-Légitársaság | &nbsp;      | &nbsp;
------------- | ----------- | ---------------------------------
-kod          | CHAR(3)     | A légitársaság ICAO kódja
-nev          | VARCHAR(50) | A légitársaság teljes neve
-rovidites    | VARCHAR(20) | A légitársaság nevének rövidítése
-orszag       | VARCHAR(35) | A légitársaság székhelye
+Légitársaság | &nbsp;       | &nbsp;
+------------ | ------------ | ---------------------------------
+kod          | CHAR(3)      | A légitársaság ICAO kódja
+nev          | VARCHAR2(50) | A légitársaság teljes neve
+rovidites    | VARCHAR2(20) | A légitársaság nevének rövidítése
+orszag       | VARCHAR2(35) | A légitársaság székhelye
 
 ### 5.5. Repülő
 
-Repülő           | &nbsp;      | &nbsp;
----------------- | ----------- | ---------------------------------------------------
-azonosito        | NUMBER(6)   | A repülőgép egyedi azonosítója
-repulo_azonosito | NUMBER(4)   | A repülőgép azonosítója a légitársaságon belül
-legitarsasag_kod | CHAR(3)     | A légitársaság kódja, amelyhez a repülőgép tartozik
-tipus            | VARCHAR(20) | A repülőgép típusa
-ferohely         | NUMBER(3)   | A repülőgép maximális utasszáma
+Repülő           | &nbsp;       | &nbsp;
+---------------- | ------------ | ---------------------------------------------------
+azonosito        | NUMBER(6)    | A repülőgép egyedi azonosítója
+repulo_azonosito | NUMBER(4)    | A repülőgép azonosítója a légitársaságon belül
+legitarsasag_kod | CHAR(3)      | A légitársaság kódja, amelyhez a repülőgép tartozik
+tipus            | VARCHAR2(20) | A repülőgép típusa
+ferohely         | NUMBER(3)    | A repülőgép maximális utasszáma
 
 ### 5.6. Repülőtér
 
-Repülőtér | &nbsp;      | &nbsp;
---------- | ----------- | ---------------------------------
-kod       | CHAR(4)     | A repülőtér ICAO kódja
-nev       | VARCHAR(64) | A repülőtér neve
-orszag    | VARCHAR(35) | A repülőtérnek otthont adó ország
-varos     | VARCHAR(35) | A repülőtérnek otthont adó város
+Repülőtér | &nbsp;       | &nbsp;
+--------- | ------------ | ---------------------------------
+kod       | CHAR(4)      | A repülőtér ICAO kódja
+nev       | VARCHAR2(64) | A repülőtér neve
+orszag    | VARCHAR2(35) | A repülőtérnek otthont adó ország
+varos     | VARCHAR2(35) | A repülőtérnek otthont adó város
 
 ### 5.7. Járat
 
@@ -152,76 +153,83 @@ indulas_kod      | CHAR(4)   | A repülőtér kódja, amelyről a repülőgép f
 erkezes          | DATE      | A járat érkezésének időpontja
 erkezes_kod      | CHAR(4)   | A repülőtér kódja, amelyre a repülőgép leszáll
 
-### 5.8. Ülőhely
+### 5.8. Ülőhely állapot
+
+Ülőhely állapot | &nbsp;       | &nbsp;
+--------------- | ------------ | -------------------------------------
+azonosito       | NUMBER(1)    | Az ülőhely állapot egyedi azonosítója
+nev             | VARCHAR2(20) | Az ülőhely állapot megnevezése
+
+### 5.9. Ülőhely
 
 Ülőhely   | &nbsp;    | &nbsp;
 --------- | --------- | -------------------------------------------
 jaratszam | NUMBER(6) | A járat azonosítója, amelyen az ülőhely van
 szek      | NUMBER(3) | Az ülőhely száma a járaton
-foglalt   | NUMBER(1) | Foglalt a ülőhely? (0: nem, 1: igen)
+allapot   | NUMBER(1) | Az ülőhely állapota
 
-### 5.9. Kedvezmény típus
+### 5.10. Kedvezmény típus
 
 Kedvezmény típus | &nbsp;       | &nbsp;
 ---------------- | ------------ | ---------------------------
-nev              | VARCHAR(20)  | A kedvezmény típusának neve
+nev              | VARCHAR2(20) | A kedvezmény típusának neve
 szorzo           | NUMBER(3, 2) | A kedvezmény szorzója
 
-### 5.10. Kedvezmény
+### 5.11. Kedvezmény
 
 Kedvezmény | &nbsp;       | &nbsp;
 ---------- | ------------ | -----------------------------------------------
 azonosito  | NUMBER(6)    | A kedvezmény egyedi azonosítója
 jaratszam  | NUMBER(6)    | A járat azonosítója, amelyre a jegy(ek) szólnak
-tipus      | VARCHAR(20)  | A kedvezmény típusa
+tipus      | VARCHAR2(20) | A kedvezmény típusa
 mertek     | NUMBER(6, 1) | A kedvezmény mértéke
 mettol     | DATE         | A kedvezmény kezdete
 meddig     | DATE         | A kedvezmény vége
 
-### 5.11. Vásárlás állapot
+### 5.12. Vásárlás állapot
 
-Vásárlás állapot | &nbsp;      | &nbsp;
----------------- | ----------- | -------------------------------
-azonosito        | NUMBER(1)   | A vásárlási állapot azonosítója
-nev              | VARCHAR(20) | A vásárlási állapot neve
+Vásárlás állapot | &nbsp;       | &nbsp;
+---------------- | ------------ | --------------------------------------
+azonosito        | NUMBER(1)    | A vásárlási állapot egyedi azonosítója
+nev              | VARCHAR2(20) | A vásárlási állapot megnevezése
 
-### 5.12. Vásárlás
+### 5.13. Vásárlás
 
-Vásárlás  | &nbsp;      | &nbsp;
---------- | ----------- | -----------------------------------------------
-azonosito | NUMBER(6)   | A vásárlás egyedi azonosítója
-email     | VARCHAR(64) | A jegye(ke)t vásárló felhasználó e-mail címe
-jaratszam | NUMBER(6)   | A járat azonosítója, amelyre a jegy(ek) szólnak
-darabszam | NUMBER(2)   | A vásárolt jegyek száma
-idopont   | DATE        | A jegyvásárlás időpontja
-allapot   | NUMBER(1)   | A vásárlás állapota
+Vásárlás  | &nbsp;       | &nbsp;
+--------- | ------------ | -----------------------------------------------
+azonosito | NUMBER(6)    | A vásárlás egyedi azonosítója
+email     | VARCHAR2(64) | A jegye(ke)t vásárló felhasználó e-mail címe
+jaratszam | NUMBER(6)    | A járat azonosítója, amelyre a jegy(ek) szólnak
+darabszam | NUMBER(2)    | A vásárolt jegyek száma
+idopont   | DATE         | A jegyvásárlás időpontja
+allapot   | NUMBER(1)    | A vásárlás állapota
 
-### 5.13. Jegy
+### 5.14. Jegy
 
-Jegy               | &nbsp;      | &nbsp;
------------------- | ----------- | --------------------------------------
-azonosito          | NUMBER(6)   | A jegy egyedi azonosítója
-vasarlas_azonosito | NUMBER(6)   | A jegyhez "tartozó vásárlás"
-v_nev              | VARCHAR(30) | A jegy tulajdonosának vezetékneve
-u_nev              | VARCHAR(30) | A jegy tulajdonosának utóneve
-szul_datum         | DATE        | A jegy tulajdonosának születési dátuma
+Jegy               | &nbsp;       | &nbsp;
+------------------ | ------------ | --------------------------------------
+azonosito          | NUMBER(6)    | A jegy egyedi azonosítója
+vasarlas_azonosito | NUMBER(6)    | A jegyhez "tartozó vásárlás"
+v_nev              | VARCHAR2(30) | A jegy tulajdonosának vezetékneve
+u_nev              | VARCHAR2(30) | A jegy tulajdonosának utóneve
+szul_datum         | DATE         | A jegy tulajdonosának születési dátuma
 
-### 5.14. Keresés
+### 5.15. Keresés
 
-Keresés        | &nbsp;      | &nbsp;
--------------- | ----------- | --------------------------------------------------
-azonosito      | NUMBER(6)   | A keresés egyedi azonosítója
-email          | VARCHAR(64) | Az keresést indító felhasználó e-mail címe
-idopont        | DATE        | A keresés pontos időpontja
-indulas_orszag | VARCHAR(35) | A keresett ország, ahonnan a járat indul
-indulas_varos  | VARCHAR(35) | A keresett város, ahonnan a járat indul
-erkezes_orszag | VARCHAR(35) | A keresett ország, ahova a járat leszáll
-erkezes_varos  | VARCHAR(35) | A keresett város, ahova a járat leszáll
-mettol         | DATE        | A járat indulási idejének kezdete (napra pontosan)
-meddig         | DATE        | A járat indulási idejének vége (napra pontosan)
-artol          | NUMBER(6)   | A járat jegyárának minimuma
-arig           | NUMBER(6)   | A járat jegyárának maximuma
-idopont        | DATE        | A keresés időpontja
+Keresés        | &nbsp;       | &nbsp;
+-------------- | ------------ | --------------------------------------------------
+azonosito      | NUMBER(6)    | A keresés egyedi azonosítója
+email          | VARCHAR2(64) | Az keresést indító felhasználó e-mail címe
+idopont        | DATE         | A keresés pontos időpontja
+indulas_orszag | VARCHAR2(35) | A keresett ország, ahonnan a járat indul
+indulas_varos  | VARCHAR2(35) | A keresett város, ahonnan a járat indul
+erkezes_orszag | VARCHAR2(35) | A keresett ország, ahova a járat leszáll
+erkezes_varos  | VARCHAR2(35) | A keresett város, ahova a járat leszáll
+mettol         | DATE         | A járat indulási idejének kezdete (napra pontosan)
+meddig         | DATE         | A járat indulási idejének vége (napra pontosan)
+artol          | NUMBER(6)    | A járat jegyárának minimuma
+arig           | NUMBER(6)    | A járat jegyárának maximuma
+idopont        | DATE         | A keresés időpontja
 
 ## 6. Szerep-funkció mátrix
 [Szerep-funkció mátrix](./doc/role_function_matrix.xlsx)
