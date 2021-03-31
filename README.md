@@ -256,6 +256,7 @@ idopont        | DATE         | A keresés időpontja
 
 ## 6. Szerep-funkció mátrix
 [Szerep-funkció mátrix](./doc/role_function_matrix.xlsx)
+![role_function_pic](./doc/role_function.png)
 
 ## 7. Képernyőtervek
 ...
