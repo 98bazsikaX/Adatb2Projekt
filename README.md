@@ -30,27 +30,27 @@ A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, 
 
 ##### 3.1.1.1. 1. szint
 [1. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl1.png)
-
+![1. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl1.png)
 ##### 3.1.1.2. 2. szint
 [2. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl2.png)
-
+![2. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl2.png)
 ##### 3.1.1.3. 3. szint
 [3. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl3.png)
-
+![3. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl3.png)
 #### 3.1.2. Logikai AFD
 
 ##### 3.1.2.1. 1. szint
 [1. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl1.png)
-
+![1. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl1.png)
 ##### 3.1.2.2. 2. szint
 [2. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl2.png)
-
+![2. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl2.png)
 ##### 3.1.2.3. 3. szint
 [3. szintű fizikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl3.png)
-
+![3. szintű fizikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl3.png)
 ### 3.2. Egyed-kapcsolat diagram
 [Egyed-kapcsolat diagram](./doc/dia/entity_relationship.png)
-
+![Egyed-kapcsolat diagram](./doc/dia/entity_relationship.png)
 ## 4. EK diagram leképezése
 Jogosultság(<ins>azonosító</ins>, név)
 Felhasználó(<ins>e-mail</ins>, jelszó, telefonszám, vezetéknév, utónév, születési_dátum, ország, irányítószám, város, cím, *Jogosultság.azonosító*, regisztráció_időpont)
