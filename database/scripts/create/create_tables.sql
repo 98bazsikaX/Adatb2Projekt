@@ -210,6 +210,46 @@ CREATE TABLE tickets
         REFERENCES purchases(id)
 );
 
+CREATE SEQUENCE package_types_seq START WITH 1;
+
+CREATE TABLE package_types
+(
+    id NUMBER(3) DEFAULT package_types_seq.nextval NOT NULL,
+    airline_code CHAR(3) NOT NULL,
+    abbr VARCHAR2(5) NOT NULL,
+    description VARCHAR2(25),
+    height NUMBER(4, 1) NOT NULL,
+    width NUMBER(4, 1) NOT NULL,
+    depth NUMBER(4, 1) NOT NULL,
+    price NUMBER(5) NOT NULL,
+    CONSTRAINT pack_type_pk
+        PRIMARY KEY (id),
+    CONSTRAINT fk_pack_type_airl
+        FOREIGN KEY (airline_code)
+        REFERENCES airlines(code),
+    CONSTRAINT pack_type_unique
+        UNIQUE (airline_code, abbr)
+);
+
+CREATE SEQUENCE packages_seq START WITH 1;
+
+CREATE TABLE packages
+(
+    id NUMBER(6) DEFAULT packages_seq.nextval NOT NULL,
+    ticket_id NUMBER(6) NOT NULL,
+    package_type_id NUMBER(3) NOT NULL,
+    CONSTRAINT pack_pk
+        PRIMARY KEY (id),
+    CONSTRAINT fk_pack_tick
+        FOREIGN KEY (ticket_id)
+        REFERENCES tickets(id),
+    CONSTRAINT fk_pack_pack_type
+        FOREIGN KEY (package_type_id)
+        REFERENCES package_types(id),
+    CONSTRAINT pack_unique
+        UNIQUE (ticket_id, package_type_id)
+);
+
 CREATE SEQUENCE searches_seq START WITH 1;
 
 CREATE TABLE searches
