@@ -1,5 +1,7 @@
 <?php
 /*
+input: $path : a .env file bemeneti helye
+
 Ez a file include utan betolti a $_ENV valtozoba a .env file tartalmat
 ezaltal nem kell a scriptekben tarolni az adatbazishoz valo kapcsolodas parametereit
 a .env file gitignoralt, a .env filet mindenki maganak csinalja 
@@ -8,10 +10,7 @@ returns: boolean, az alapjan hogy sikeresen lefutott e
 */
 
 
-function load_env(){
-$path=".env"; //.env fle helye
-
-
+function load_env($path){
 
 if(!is_readable($path)){
     return false;
