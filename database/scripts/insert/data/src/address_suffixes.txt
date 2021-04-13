@@ -1,0 +1,6 @@
+körút
+köz
+liget
+tér
+út
+utca

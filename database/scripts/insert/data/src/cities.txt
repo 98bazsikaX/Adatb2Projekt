@@ -1,0 +1,46 @@
+1011,Budapest I. kerület
+1021,Budapest II. kerület
+1031,Budapest III. kerület
+1041,Budapest IV. kerület
+1051,Budapest V. kerület
+1061,Budapest VI. kerület
+1071,Budapest VII. kerület
+1081,Budapest VIII. kerület
+1091,Budapest IX. kerület
+1101,Budapest X. kerület
+1111,Budapest XI. kerület
+1121,Budapest XII. kerület
+1131,Budapest XIII. kerület
+1141,Budapest XIV. kerület
+1151,Budapest XV. kerület
+1161,Budapest XVI. kerület
+1171,Budapest XVII. kerület
+1181,Budapest XVIII. kerület
+1191,Budapest XIX. kerület
+1201,Budapest XX. kerület
+1211,Budapest XXI. kerület
+1221,Budapest XXII. kerület
+1237,Budapest XXIII. kerület
+2030,Érd
+2400,Dunaújváros
+2800,Tatabánya
+3100,Salgótarján
+3300,Eger
+3500,Miskolc
+4000,Debrecen
+4400,Nyíregyháza
+5000,Szolnok
+5600,Békéscsaba
+6000,Kecskemét
+6700,Szeged
+6800,Hódmezővásárhely
+7100,Szekszárd
+7400,Kaposvár
+7600,Pécs
+8000,Székesfehérvár
+8200,Veszprém
+8800,Nagykanizsa
+8900,Zalaegerszeg
+9000,Győr
+9400,Sopron
+9700,Szombathely
