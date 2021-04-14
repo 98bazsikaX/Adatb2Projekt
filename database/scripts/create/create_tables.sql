@@ -25,6 +25,7 @@ CREATE TABLE users
     CONSTRAINT fk_user_role
         FOREIGN KEY (role_id)
         REFERENCES roles(id)
+        ON DELETE CASCADE
 );
 
 CREATE SEQUENCE logs_seq START WITH 1;
@@ -42,6 +43,7 @@ CREATE TABLE logs
     CONSTRAINT fk_logs_user
         FOREIGN KEY (user_email)
         REFERENCES users(email)
+        ON DELETE SET NULL
 );
 
 CREATE TABLE airlines
@@ -70,6 +72,7 @@ CREATE TABLE airplanes
     CONSTRAINT fk_airpl_airl
         FOREIGN KEY (airline_code)
         REFERENCES airlines(code)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE airports
@@ -97,13 +100,16 @@ CREATE TABLE flights
         PRIMARY KEY (id),
     CONSTRAINT fk_flig_airpl
         FOREIGN KEY (airplane_id)
-        REFERENCES airplanes(id),
+        REFERENCES airplanes(id)
+        ON DELETE CASCADE,
     CONSTRAINT fk_flig_airpo_takeoff
         FOREIGN KEY (takeoff_airport_code)
-        REFERENCES airports(code),
+        REFERENCES airports(code)
+        ON DELETE CASCADE,
     CONSTRAINT fk_flig_airpo_landing
         FOREIGN KEY (landing_airport_code)
         REFERENCES airports(code)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE seat_states
@@ -127,6 +133,7 @@ CREATE TABLE seats
     CONSTRAINT fk_seat_seat_stat
         FOREIGN KEY (seat_state)
         REFERENCES seat_states(id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE discount_types
@@ -153,10 +160,12 @@ CREATE TABLE discounts
         UNIQUE (flight_id, valid_from),
     CONSTRAINT fk_disc_flig
         FOREIGN KEY (flight_id)
-        REFERENCES flights(id),
+        REFERENCES flights(id)
+        ON DELETE CASCADE,
     CONSTRAINT fk_disc_disc_type
         FOREIGN KEY (discount_type_name)
         REFERENCES discount_types(discount_name)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE purchase_states
@@ -183,13 +192,16 @@ CREATE TABLE purchases
         UNIQUE (user_email, purchase_date),
     CONSTRAINT fk_purc_user
         FOREIGN KEY (user_email)
-        REFERENCES users(email),
+        REFERENCES users(email)
+        ON DELETE CASCADE,
     CONSTRAINT fk_purc_flig
         FOREIGN KEY (flight_id)
-        REFERENCES flights(id),
+        REFERENCES flights(id)
+        ON DELETE CASCADE,
     CONSTRAINT fk_purc_purc_states
         FOREIGN KEY (purchase_state)
         REFERENCES purchase_states(id)
+        ON DELETE CASCADE
 );
 
 CREATE SEQUENCE tickets_seq START WITH 1;
@@ -208,6 +220,7 @@ CREATE TABLE tickets
     CONSTRAINT fk_tick_purc
         FOREIGN KEY (purchase_id)
         REFERENCES purchases(id)
+        ON DELETE CASCADE
 );
 
 CREATE SEQUENCE package_types_seq START WITH 1;
@@ -224,11 +237,12 @@ CREATE TABLE package_types
     price NUMBER(5) NOT NULL,
     CONSTRAINT pack_type_pk
         PRIMARY KEY (id),
+    CONSTRAINT pack_type_unique
+        UNIQUE (airline_code, abbr),
     CONSTRAINT fk_pack_type_airl
         FOREIGN KEY (airline_code)
-        REFERENCES airlines(code),
-    CONSTRAINT pack_type_unique
-        UNIQUE (airline_code, abbr)
+        REFERENCES airlines(code)
+        ON DELETE CASCADE  
 );
 
 CREATE SEQUENCE packages_seq START WITH 1;
@@ -240,14 +254,16 @@ CREATE TABLE packages
     package_type_id NUMBER(3) NOT NULL,
     CONSTRAINT pack_pk
         PRIMARY KEY (id),
+    CONSTRAINT pack_unique
+        UNIQUE (ticket_id, package_type_id),
     CONSTRAINT fk_pack_tick
         FOREIGN KEY (ticket_id)
-        REFERENCES tickets(id),
+        REFERENCES tickets(id)
+        ON DELETE CASCADE,
     CONSTRAINT fk_pack_pack_type
         FOREIGN KEY (package_type_id)
-        REFERENCES package_types(id),
-    CONSTRAINT pack_unique
-        UNIQUE (ticket_id, package_type_id)
+        REFERENCES package_types(id)
+        ON DELETE CASCADE
 );
 
 CREATE SEQUENCE searches_seq START WITH 1;
@@ -272,4 +288,5 @@ CREATE TABLE searches
     CONSTRAINT fk_sear_user
         FOREIGN KEY (user_email)
         REFERENCES users(email)
+        ON DELETE SET NULL
 );
