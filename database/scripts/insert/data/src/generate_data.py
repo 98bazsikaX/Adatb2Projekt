@@ -1,10 +1,12 @@
 import random
 import unidecode
 import datetime
+import bcrypt
 
 class User:
     email_domains = ['gmail', 'yahoo', 'hotmail', 'msn', 'live', 'outlook']
     today_year = datetime.date.today().year
+    area_codes = ['1', '20', '25', '30', '70']
 
     def __init__(self, name):
         self.name = name
@@ -12,6 +14,7 @@ class User:
         self.gen_password()
         self.gen_birth_date()
         self.gen_address()
+        self.gen_phone_num()
 
     def gen_email(self):
         prefix = unidecode.unidecode(self.name.lower().replace(' ', ''))
@@ -20,7 +23,9 @@ class User:
         self.email = prefix + '@' + domain + '.com'        
 
     def gen_password(self):
-        self.password = unidecode.unidecode(self.name.lower().replace(' ', ''))
+        pwd = unidecode.unidecode(self.name.lower().replace(' ', '')).encode('utf-8')
+        hashed_pwd = bcrypt.hashpw(pwd, bcrypt.gensalt(rounds=10))
+        self.password = hashed_pwd.encode('utf-8')
 
     def gen_birth_date(self):
         year = random.randint(1940, User.today_year - 18)
@@ -63,13 +68,39 @@ class User:
 
         self.address = address + ' ' + suffix
 
+    def gen_phone_num(self):
+        area_code = User.area_codes[random.randint(0, len(User.area_codes) - 1)]
+        number = str(random.randint(0, 999999 if area_code == '25' else 9999999))
+
+        phone_number = '+36' + area_code
+
+        for _ in range(0, 6 - len(number) if area_code == '25' else 7 - len(number)):
+            phone_number += '0'
+
+        self.phone_num = phone_number + number
+
     def __str__(self):
         s = self.name + ' (' + self.birth_date + '):\n'
         s += '\tE-mail: ' + self.email + '\n'
         s += '\tPassword: ' + self.password + '\n'
         s += '\tAddress: ' + self.post_code + ' ' + self.city + ', ' + self.address + '\n'
+        s += '\tPhone number: ' + self.phone_num + '\n'
 
         return s
+
+def read_names(f_names, l_names):
+    first_names_file = input('Keresztnevek listája (txt): ')
+    last_names_file = input('Vezetéknevek listája (txt): ')
+
+    with open('names/' + first_names_file + '.txt', 'r', encoding='utf-8') as first_names_f:
+        for l in first_names_f:
+            name = l.strip()
+            f_names.append(name)
+
+    with open('names/' + last_names_file + '.txt', 'r', encoding='utf-8') as last_names_f:
+        for l in last_names_f:
+            name = l.strip()
+            l_names.append(name)
 
 def generate_name(f_names, l_names):
     f_name = f_names[random.randint(0, len(f_names) - 1)]
@@ -78,18 +109,26 @@ def generate_name(f_names, l_names):
 
     return name
 
+def write_users(users):
+    with open('../users.txt', 'w', encoding='utf-8') as f:
+        for u in users:
+            name = u.name.split(' ')
+
+            f.write('\'' + u.email + '\',')
+            f.write('\'' + u.password + '\',')
+            f.write('\'' + u.phone_num + '\',')
+            f.write('\'' + name[0] + '\',')
+            f.write('\'' + name[1] + '\',')
+            f.write('\'' + u.birth_date + '\',')
+            f.write('Hungary,')
+            f.write('\'' + u.post_code + '\',')
+            f.write('\'' + u.city + '\',')
+            f.write('\'' + u.address + '\'\n')
+
 first_names = []
 last_names = []
 
-with open('names/first_names.txt', 'r', encoding='utf-8') as first_names_f:
-    for l in first_names_f:
-        name = l.strip()
-        first_names.append(name)
-
-with open('names/last_names.txt', 'r', encoding='utf-8') as last_names_f:
-    for l in last_names_f:
-        name = l.strip()
-        last_names.append(name)
+read_names(first_names, last_names)
 
 users = []
 
@@ -99,3 +138,5 @@ for _ in range(100):
 
 for u in users:
     print(u)
+
+write_users(users)
