@@ -134,6 +134,7 @@ INSERT ALL
     INTO airports (code, airport_name, country, city) VALUES ('EGPK', 'Glasgow International Airport', 'Scotland', 'Paisley')
     INTO airports (code, airport_name, country, city) VALUES ('EGFF', 'Cardiff Airport', 'Wales', 'Rhoose')
     -- Insert into users
+    -- A felhasználók jelszavai a végleges változatban hash-elve kerülnek majd bele az adatbázisba!
     INTO users (email, pwd, phone_num, first_name, last_name, birth_date, country, post_code, city, home_address, role_id) VALUES ('mauropasztor@yahoo.com', 'mauropasztor', '+3625181255', 'Mauró', 'Pásztor', TO_DATE('1943-03-12', 'yyyy-mm-dd'), 'Hungary', '1021', 'Budapest II. kerület', 'Zecher János utca', 0)
     INTO users (email, pwd, phone_num, first_name, last_name, birth_date, country, post_code, city, home_address, role_id) VALUES ('szergejtorok@live.com', 'szergejtorok', '+36705222408', 'Szergej', 'Török', TO_DATE('1954-11-15', 'yyyy-mm-dd'), 'Hungary', '1211', 'Budapest XXI. kerület', 'Hét vezér körút', 0)
     INTO users (email, pwd, phone_num, first_name, last_name, birth_date, country, post_code, city, home_address, role_id) VALUES ('abranfazekas@gmail.com', 'abranfazekas', '+36205281713', 'Ábrán', 'Fazekas', TO_DATE('1961-09-26', 'yyyy-mm-dd'), 'Hungary', '1081', 'Budapest VIII. kerület', 'Körösi Csoma Sándor köz', 0)
