@@ -23,9 +23,9 @@ class User:
         self.email = prefix + '@' + domain + '.com'        
 
     def gen_password(self):
-        pwd = unidecode.unidecode(self.name.lower().replace(' ', '')).encode('utf-8')
-        hashed_pwd = bcrypt.hashpw(pwd, bcrypt.gensalt(rounds=10))
-        self.password = hashed_pwd.encode('utf-8')
+        pwd = unidecode.unidecode(self.name.lower().replace(' ', ''))
+
+        self.password = pwd
 
     def gen_birth_date(self):
         year = random.randint(1940, User.today_year - 18)
@@ -114,16 +114,19 @@ def write_users(users):
         for u in users:
             name = u.name.split(' ')
 
-            f.write('\'' + u.email + '\',')
-            f.write('\'' + u.password + '\',')
-            f.write('\'' + u.phone_num + '\',')
-            f.write('\'' + name[0] + '\',')
-            f.write('\'' + name[1] + '\',')
-            f.write('\'' + u.birth_date + '\',')
-            f.write('Hungary,')
-            f.write('\'' + u.post_code + '\',')
-            f.write('\'' + u.city + '\',')
-            f.write('\'' + u.address + '\'\n')
+            f.write('INTO users (email, pwd, phone_num, first_name, last_name, birth_date, country, post_code, city, home_address, role_id) ')
+            f.write('VALUES (')
+            f.write('\'' + u.email + '\', ')
+            f.write('\'' + u.password + '\', ')
+            f.write('\'' + u.phone_num + '\', ')
+            f.write('\'' + name[0] + '\', ')
+            f.write('\'' + name[1] + '\', ')
+            f.write('TO_DATE(\'' + u.birth_date + '\', \'yyyy-mm-dd\'), ')
+            f.write('\'Hungary\', ')
+            f.write('\'' + u.post_code + '\', ')
+            f.write('\'' + u.city + '\', ')
+            f.write('\'' + u.address + '\', ')
+            f.write(str(0) + ')\n')
 
 first_names = []
 last_names = []
