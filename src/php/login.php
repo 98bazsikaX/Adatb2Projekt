@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belépés</title>
     <link rel="stylesheet" href="../stylesheets/global.css">
+    <script src="../javascript/reg_frontend.js"></script>
     <style>
         header{
             width: 100%;
@@ -37,25 +38,32 @@
     <div id="common">
         <div id="reg">
             <h2>Regisztráció</h2>
-            <label for="r_email">Email:</label>
-                <input type="email" id="r_email">
+            <form>
+                <label for="r_email">Email:</label>
+                <input type="email" id="r_email" autocomplete="on">
                 <br>
                 <label for="r_password">Jelszó:</label>
-                <input type="password" id="r_password">
+                <input type="password" id="r_password" autocomplete="on">
                 <br>
                 <label for="pwd_again">Jelszó megerősítése:</label>
-                <input type="password" id="pwd_again">
+                <input type="password" id="pwd_again" autocomplete="on">
+                <br>
+            </form>
+
+            <button onclick="register()">Nyomj ram lol</button>
                 
         </div>
         <div id="login">
             <h2>Belépés</h2>
-                <form id="login_form">
+                <form>
                     <label for="l_email">Email:</label>
-                    <input type="email" id="l_email">
+                    <input type="email" id="l_email" autocomplete="on">
                     <br>
                     <label for="l_password">Jelszó:</label>
-                    <input type="password" id="l_password">
+                    <input type="password" id="l_password" autocomplete="on">
                 </form>
+
+
         </div>    
     </div>
 </body>

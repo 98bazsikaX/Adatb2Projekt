@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET'){
     }
 } */
  /* teszt kod csak ugy,nézegetheto, kommentelheto,torolheto, JSON echo-ra */
-include '../classes/airline.php';
-$asd = new airlines("0x32","Wizzair","Europe","#123456");
-echo   $asd->jsonEncode();
-?>
+//include '../classes/airline.php';
+//$asd = new airlines("0x32","Wizzair","Europe","#123456");
+//echo   $asd->jsonEncode();
+// TODO: torolni a filet
