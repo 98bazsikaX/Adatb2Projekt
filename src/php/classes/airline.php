@@ -12,13 +12,11 @@ class airlines extends entity{
         $this->colour = $colour;
     }
 
-    function getFlights(){
+/*    function getFlights(){
         $retval = null;
-        /*
         for jarat in adatbazis where $code == code idk
-        */
         return $retval;
-    }
+    }*/
 
     public function jsonEncode(){
         $retval = parent::jsonEncode();
