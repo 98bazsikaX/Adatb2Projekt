@@ -5,7 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../stylesheets/global.css">
+    <link rel="stylesheet" href="../resources/stylesheets/global.css">
+
     <title>Járat keresése</title>
     <style>
         #wrapper{
@@ -47,15 +48,8 @@
                 </div>
                 <div id="departure_time">
                     <label for="dep_time_box">Indulás ideje:</label>
-                    <input type="date" id="dep_time_box" name="departure-date">
-                                    <script>
-                                        var today = new Date();
-                                        var y = today.getFullYear();
-                                        var m = today.getMonth()+1;
-                                        var d = today.getDate();
-                                        var datebox = document.getElementById("dep_time_box").min = y + "-" + m + "-" +d;
-                                        //TODO: megtákolni mert vmi html szarság miatt nem megy
-                                    </script>
+                    <input type="date" id="dep_time_box" name="departure-date" min="2021-04-17">
+
                 </div>
             <button>Keresés</button>
         </div>
@@ -67,3 +61,4 @@
     </div>
 </body>
 </html>
+<script src="../javascript/search_frontend.js"></script>

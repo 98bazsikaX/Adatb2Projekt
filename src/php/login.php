@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belépés</title>
-    <link rel="stylesheet" href="../stylesheets/global.css">
+    <link rel="stylesheet" href="../resources/stylesheets/global.css">
     <script src="../javascript/reg_frontend.js"></script>
     <style>
         header{
