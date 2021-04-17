@@ -4,25 +4,72 @@ include 'abstract.php';
 
 
 class airlines extends entity{
-    protected $colour; //A legitarsasag szine
 
-    function __construct($code,$name,$country,$colour="#FFFFFF")
+    function __construct($code=null,$name=null,$country=null)
     {
         parent::__construct($code,$name,$country);
-        $this->colour = $colour;
+
     }
 
-/*    function getFlights(){
-        $retval = null;
-        for jarat in adatbazis where $code == code idk
+    /**
+     * @return mixed
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param mixed $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param mixed $country
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    }
+
+    public static function byID($airline_id){
+        //TODO: implementalni hogy az adatb alapjan ID alapjan is lehessen letrehozni legitarsasagot
+        $retval = new airlines();
+        $retval.setCountry();
         return $retval;
-    }*/
+    }
 
     public function jsonEncode(){
-        $retval = parent::jsonEncode();
-        $retval['colour']=$this->colour;
-        return json_encode($retval);
+        return json_encode(parent::jsonEncode());
     }
+
 }
 
 

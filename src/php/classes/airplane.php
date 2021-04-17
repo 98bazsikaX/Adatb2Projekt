@@ -1,5 +1,6 @@
 <?php
 
+include ("airplane.php");
 
 class airplane
 {
@@ -13,15 +14,15 @@ class airplane
      * airplane constructor.
      * @param $aircraftRegistration
      * @param $airlineID
-     * @param $airLine
+     * @param $airLineCode, a legitarsasag kodja ami az adatbazisban van
      * @param $type
      * @param $nrOfSeats
      */
-    public function __construct($aircraftRegistration, $airlineID, $airLine, $type, $nrOfSeats)
+    public function __construct($aircraftRegistration, $airlineID, $airLineCode, $type, $nrOfSeats)
     {
         $this->aircraftRegistration = $aircraftRegistration;
         $this->airlineID = $airlineID;
-        $this->airLine = $airLine;
+        $this->airLine = airlines::byID($airLineCode);
         $this->type = $type;
         $this->nrOfSeats = $nrOfSeats;
     }

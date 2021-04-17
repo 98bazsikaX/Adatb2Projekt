@@ -32,9 +32,7 @@
 </head>
 <body>
     <header>Belépés</header>
-    <!--Adnám ha  akettő div egymás mellett lenne :) TODO: megcsinálni 
-    TODO: ha be van az illető jelentkezve akkor kijelentkezés only, vagy esetleg az adatainak szerkesztése
-    -->
+    <!--TODO: ha be van az illető jelentkezve akkor kijelentkezés only, vagy esetleg az adatainak szerkesztése,flex implementálása-->
     <div id="common">
         <div id="reg">
             <h2>Regisztráció</h2>
