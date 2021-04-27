@@ -1,12 +1,17 @@
 <?php
 
+
+include_once '../dotenv/dotenv.php';
+load_env('../dotenv/.env');
+
+
 if(isset($_POST['setairline'])){
     $code = $_POST['code'];
     $name = $_POST['name'];
     $abbr = ( (isset($_POST['abbr'])) ? $_POST['abbr'] : "");
     $nat = $_POST['nat'];
 
-    $connection = oci_connect("Szombati","1234","localhost:1521/XE");
+    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
 
     $query = "INSERT INTO AIRLINES(CODE,AIRLINE_NAME,AIRLINE_NAME_ABBR,COUNTRY) VALUES (:code,:nev,:abv,:nat)";
 
@@ -17,8 +22,8 @@ if(isset($_POST['setairline'])){
     oci_bind_by_name($res,":abv",$abbr);
     oci_bind_by_name($res,":nat",$nat);
     if(oci_execute($res)){
-        echo "1";
+        http_response_code(200);
     }else{
-        echo "0";
+        http_response_code(503); //csak ugy random, TODO: atirni normalisra
     }
 }

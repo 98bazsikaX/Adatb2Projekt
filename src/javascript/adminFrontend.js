@@ -1,6 +1,8 @@
 function main(){ //onload miatt, ha betoltott a <body> akkor ez meghivodik, ebben lesznek a generalo fuggvenyek
     getFilghts();
     getAirlines();
+    getAirplanes();
+    getDiscounts();
 
 }
 
@@ -8,7 +10,25 @@ function main(){ //onload miatt, ha betoltott a <body> akkor ez meghivodik, ebbe
 
 function getFilghts(){
 
-    return null;
+    var request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIgetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+    request.onreadystatechange = function(){
+        var div = document.getElementById("flightsTable");
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            div.innerHTML = this.responseText;
+        }else{
+            div.innerHTML = "ERROR , próbálja meg később";
+        }
+    }
+
+    request.send('flights=1');
+
+}
+
+function setFlights(){
+    getFilghts();
 }
 
 
@@ -36,8 +56,8 @@ function setAirline(){
 
 }
 
-function getAirlines(){
 
+function getAirlines(){
     var request = new XMLHttpRequest();
     request.open('POST','../php/API/adminAPIgetData.php');
     request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -52,8 +72,48 @@ function getAirlines(){
     };
 
     request.send('airlines=1');
-
-
-
 }
 
+
+function getAirplanes(){
+    var request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIgetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+    request.onreadystatechange = function(){
+        var div = document.getElementById("airplaneTable");
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            div.innerHTML = this.responseText;
+        }else{
+            div.innerHTML = "ERROR , próbálja meg később";
+        }
+    };
+
+    request.send('planes=1');
+}
+
+
+function addAirplane(){
+    return null;
+}
+
+function setDiscount(){
+
+}
+function getDiscounts(){
+    var request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIgetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+    request.onreadystatechange = function(){
+        var div = document.getElementById("discountTable");
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            div.innerHTML = this.responseText;
+        }else{
+            div.innerHTML = "<p>ERROR , próbálja meg később</p>";
+        }
+    };
+
+    request.send('discount=1');
+
+}
