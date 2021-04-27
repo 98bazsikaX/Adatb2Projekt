@@ -29,6 +29,9 @@
             background-color: rgb(12, 17, 24);
             flex-basis: 80%;
         }
+        option{
+            width: auto;
+        }
 
     </style>
 </head>
@@ -44,7 +47,12 @@
                 <div id="airline_option">
                     <label for="airline_select">Légitársaságok</label>
                     <select id="airline_select" name="airline_select">
+                        <?php
+                            /*TODO: par feltoltott adat utan megirni ezt*/
+                        echo "<option value='wizz'>Wizzair</option>";
+                        echo "<option value='ryan'>Ryan Air</option>";
 
+                        ?>
                     </select>
                 </div>
                 <div id="departure">
@@ -65,10 +73,13 @@
                 </div>
             <button onclick="makeRequest()">Keresés</button>
         </div>
+
+        <!---------------------------------->
         <!-- mellette lévő eredmények div -->
+        <!---------------------------------->
         <div id="results" class="flex_child">
             <p>Eredmény</p>
-            <!-- TODO: a beallitott opciok alapjan lekerdezni a dolgokat -->
+            <!-- TODO: a beallitott opciok alapjan lekerdezni a dolgokat, ezt JS-el tölti fel -->
         </div>
     </div>
 </body>
