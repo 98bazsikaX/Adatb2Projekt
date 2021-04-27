@@ -25,7 +25,7 @@ function setAirline(){
     request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 
     request.onreadystatechange = function () {
-        if(this.readyState === XMLHttpRequest.DONE && this.status===200 && this.responseText=="1"){
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
             getAirlines();
         }else{
             alert("HIBA!");
