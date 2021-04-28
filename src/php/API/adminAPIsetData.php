@@ -21,9 +21,10 @@ if(isset($_POST['setairline'])){
     oci_bind_by_name($res,":nev",$name);
     oci_bind_by_name($res,":abv",$abbr);
     oci_bind_by_name($res,":nat",$nat);
-    if(oci_execute($res)){
-        http_response_code(200);
-    }else{
-        http_response_code(503); //csak ugy random, TODO: atirni normalisra
+    if(!oci_execute($res) === false){
+        echo oci_error($res);
+        http_response_code(500);
     }
+
+
 }

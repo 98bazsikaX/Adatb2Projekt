@@ -19,7 +19,11 @@
         table,th,td{
             border-radius: 5px;
             border-color: #21031e;
+        }
 
+        #airportTable,#airlinesTable{
+            overflow-y: scroll;
+            height: 400px;
         }
     </style>
 </head>
@@ -84,6 +88,15 @@
     </div>
 </div>
 
+<div id="airports">
+    <h1>Repülőterek: </h1><br>
+    <div id="airportTable">
+
+    </div>
+    <div id="addAirport">
+
+    </div>
+</div>
 
 </body>
 </html>

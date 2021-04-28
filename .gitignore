@@ -1,2 +1,3 @@
 .dist
 .env
+/src/php/dotenv/.env

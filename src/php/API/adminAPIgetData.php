@@ -84,5 +84,26 @@ if(isset($_POST['airlines'])){
     }else{
         http_response_code(503);
     }
+}else if(isset($_POST['airport'])){
+
+    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+    if (!$connection) {
+        exit(420);
+    }
+    $query = oci_parse($connection, "SELECT * FROM AIRPORTS");
+    if(oci_execute($query)){
+        echo "<table>\n";
+        while ($row = oci_fetch_array($query, OCI_ASSOC + OCI_RETURN_NULLS)) {
+            echo "<tr>\n";
+            foreach ($row as $item) {
+                echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+            }
+            echo "</tr>\n";
+        }
+        echo "</table>\n";
+    }else{
+        http_response_code(503);
+    }
+
 }
 

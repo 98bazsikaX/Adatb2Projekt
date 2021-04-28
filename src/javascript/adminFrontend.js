@@ -3,6 +3,7 @@ function main(){ //onload miatt, ha betoltott a <body> akkor ez meghivodik, ebbe
     getAirlines();
     getAirplanes();
     getDiscounts();
+    getAirports();
 
 }
 
@@ -115,5 +116,21 @@ function getDiscounts(){
     };
 
     request.send('discount=1');
+}
 
+function getAirports(){
+    var request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIgetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+    request.onreadystatechange = function(){
+        var div = document.getElementById("airportTable");
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            div.innerHTML = this.responseText;
+        }else{
+            div.innerHTML = "<p>ERROR , próbálja meg később</p>";
+        }
+    };
+
+    request.send('airport=1');
 }
