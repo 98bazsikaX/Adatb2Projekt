@@ -38,7 +38,6 @@ function setFlights(){
     var arrTime = "arrTime="+document.getElementById("arrTime").value + "&";
     var depCode = "depCode="+document.getElementById("depId").value+"&";
     var arrCode = "arrCode="+document.getElementById("arrId").value;
-    console.log(arrTime);
 
     var request = new XMLHttpRequest();
     request.open('POST','../php/API/adminAPIsetData.php');
@@ -47,10 +46,10 @@ function setFlights(){
     request.onreadystatechange = function () {
         if(this.readyState === XMLHttpRequest.DONE && this.status===200){
            getFilghts();
-        }else{
+        }/*else{
             alert("HIBA!");
             console.log("Hiba: " + this.responseText);
-        }
+        }*/
     }
     request.send(set+airplane+price+depTime+arrTime+depCode+arrCode);
 }
