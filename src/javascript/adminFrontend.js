@@ -4,6 +4,7 @@ function main(){ //onload miatt, ha betoltott a <body> akkor ez meghivodik, ebbe
     getAirplanes();
     getDiscounts();
     getAirports();
+    getUsers();
 
 }
 
@@ -137,7 +138,7 @@ function getAirports(){
 
 function setAirport(){
     var setairport = "airport=1&";
-    var code = "code=" + document.getElementById("AirportCode").value.toUpperCase() + "&";
+    var code = "code=" + document.getElementById("AirportCode").value.toUpperCase()  + "&";
     var name = "name=" + document.getElementById("AirportName").value + "&";
     var country = "country=" + document.getElementById("AirportCountry").value + "&";
     var city = "city="+document.getElementById("AirportCity").value;
@@ -160,4 +161,41 @@ function setAirport(){
     request.send(setairport+code+name+country+city);
 
 
+}
+
+
+function getUsers(){
+    var request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIgetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+    request.onreadystatechange = function(){
+        var div = document.getElementById("userTable");
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            div.innerHTML = this.responseText;
+        }else{
+            div.innerHTML = "ERROR , próbálja meg később";
+        }
+    };
+
+    request.send('users=1');
+}
+
+function deleteUser(){
+    var delete_string = "delete_user=1&";
+    var email = "email=" + document.getElementById("deleteEmail").value.trim();
+
+    var request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIsetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+    request.onreadystatechange = function () {
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            alert("Sikeresen torolte a usert")
+            console.log("lefutott, vagyis remelem");
+            console.log(this.responseText);
+        }
+        getUsers();
+    }
+    request.send(delete_string+email);
 }

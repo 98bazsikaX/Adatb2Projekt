@@ -48,4 +48,16 @@ if(isset($_POST['setairline'])){
         http_response_code(500);
     }
 
+}else if(isset($_POST['delete_user'])){
+    $email = $_POST['email'];
+
+    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+    $query = "DELETE FROM USERS WHERE email='$email'";
+    $result = oci_parse($connection,$query);
+    if(oci_execute($result) === false){
+        echo oci_error($result);
+        http_response_code(500);
+    }else{
+        echo $email;
+    }
 }

@@ -21,7 +21,7 @@
             border-color: #21031e;
         }
 
-        #airportTable,#airlinesTable{
+        #airportTable,#airlinesTable,#userTable{
             overflow-y: scroll;
             height: 400px;
         }
@@ -94,6 +94,7 @@
 
     </div>
     <div id="addAirport">
+        <h2>Repülőtér hozzáadása: </h2><br>
         <form id="airportForm">
             <label for="AirportCode">Repülőtér kódja: </label><br>
             <input type="text" id="AirportCode" name="AirportCode"><br
@@ -106,6 +107,22 @@
         </form>
         <button onclick="setAirport()">Elküldés</button>
     </div>
+</div>
+
+<div id="users">
+    <h1>Felhasználók: </h1><br>
+    <div id="userTable">
+
+    </div>
+     <div id="deleteUser">
+         <h2>Felhasználó törlése email alapján: </h2><br>
+         <form>
+             <label for="deleteEmail">A felhasználó email címe: </label><br>
+             <input type="email" id="deleteEmail" name="deleteEmail">
+         </form>
+         <button onclick="deleteUser()">Felhasználó törlése</button>
+
+     </div>
 </div>
 
 </body>

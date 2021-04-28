@@ -105,5 +105,25 @@ if(isset($_POST['airlines'])){
         http_response_code(503);
     }
 
+}else if(isset($_POST['users'])){
+
+    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+    if (!$connection) {
+        exit(420);
+    }
+    $query = oci_parse($connection, "SELECT r.ROLE_NAME, users.EMAIL, users.FIRST_NAME , users.LAST_NAME , users.country , users.CITY FROM USERS INNER JOIN ROLES R on USERS.ROLE_ID = R.ID");
+    if(oci_execute($query)){
+        echo "<table>\n";
+        while ($row = oci_fetch_array($query, OCI_ASSOC + OCI_RETURN_NULLS)) {
+            echo "<tr>\n";
+            foreach ($row as $item) {
+                echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+            }
+            echo "</tr>\n";
+        }
+        echo "</table>\n";
+    }else{
+        http_response_code(503);
+    }
 }
 
