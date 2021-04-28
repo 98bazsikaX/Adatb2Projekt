@@ -29,3 +29,8 @@ footer{
     color: rgb(228, 222, 208);
     text-align: center;
 }
+
+table{
+    width:100%;
+    text-align: left;
+}

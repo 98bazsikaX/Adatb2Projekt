@@ -60,4 +60,30 @@ if(isset($_POST['setairline'])){
     }else{
         echo $email;
     }
+}else if(isset($_POST['flight'])){
+
+    $airplane = $_POST['airplane'];
+    $price=$_POST['price'];
+    $depTime = $_POST['depTime'];
+    $arrTime = $_POST['arrTime'];
+    $depCode = $_POST['depCode'];
+    $arrCode = $_POST['arrCode'];
+
+    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+    $query = "INSERT INTO FLIGHTS(AIRPLANE_ID,PRICE,TAKEOFF_DATE,TAKEOFF_AIRPORT_CODE,LANDING_DATE,LANDING_AIRPORT_CODE) values(:plane,:price,TO_DATE(:takeoff,'YYYY-MM-DD'),:takeoffId,TO_DATE(:landing,'YYYY-MM-DD'),:landingId)";
+    $result = oci_parse($connection,$query);
+
+    oci_bind_by_name($result,":plane",$airplane);
+    oci_bind_by_name($result,":price",$price);
+    oci_bind_by_name($result,":takeoff",   $depTime);
+    oci_bind_by_name($result,":takeoffId",$depCode);
+    oci_bind_by_name($result,":landing",$arrTime);
+    oci_bind_by_name($result,":landingId",$arrCode);
+
+    if(oci_execute($result) === false){
+        echo oci_error($result);
+        http_response_code(500);
+    }else{
+        echo $airplane;
+    }
 }

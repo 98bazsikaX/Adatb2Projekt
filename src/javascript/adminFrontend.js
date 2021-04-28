@@ -30,7 +30,29 @@ function getFilghts(){
 }
 
 function setFlights(){
-    getFilghts();
+    //getFilghts();
+    var set = "flight=1&";
+    var airplane = "airplane=" + document.getElementById("airline_select").value +"&";
+    var price = "price="+document.getElementById("price").value+"&";
+    var depTime = "depTime="+document.getElementById("depTime").value+"&";
+    var arrTime = "arrTime="+document.getElementById("arrTime").value + "&";
+    var depCode = "depCode="+document.getElementById("depId").value+"&";
+    var arrCode = "arrCode="+document.getElementById("arrId").value;
+    console.log(arrTime);
+
+    var request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIsetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+    request.onreadystatechange = function () {
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+           getFilghts();
+        }else{
+            alert("HIBA!");
+            console.log("Hiba: " + this.responseText);
+        }
+    }
+    request.send(set+airplane+price+depTime+arrTime+depCode+arrCode);
 }
 
 

@@ -36,6 +36,42 @@
     <div id="flightsTable">
 
     </div>
+    <div id="addFlight">
+        <h2>Járat hozzáadása:</h2><br>
+        <form id="addflightform">
+            <label for="airline_select">Repülő: </label>
+            <select id="airline_select" name="airline_select">
+            <?php
+            /*TODO: par feltoltott adat utan megirni ezt*/
+            /*echo "<option value='wizz'>Wizzair</option>";
+            echo "<option value='ryan'>Ryan Air</option>";*/
+
+            $query = oci_parse($connection,"SELECT AIRPLANES.AIRPLANE_TYPE ,  AIRLINES.AIRLINE_NAME , AIRPLANES.ID FROM AIRPLANES INNER JOIN AIRLINES ON AIRLINES.CODE =AIRPLANES.AIRLINE_CODE");
+            oci_execute($query);
+
+            while($row = oci_fetch_array($query,OCI_ASSOC+OCI_RETURN_NULLS)){
+                //print_r($row);
+                $code = $row['ID'];
+                $name = $row['AIRLINE_NAME'] . " - " . $row['AIRPLANE_TYPE'];
+                echo "<option class='airline_option' value='$code'>$name</option>";
+            }
+
+
+            ?>
+            </select><br>
+            <label for="price">Ár: </label>
+            <input type="number" name="price" id="price"><br>
+            <label for="depTime">Indulás ideje: </label>
+            <input type="date" id="depTime" name="depTime"><br>
+             <label for="arrTime">Érkezés ideje: </label>
+            <input type="date" id="arrTime" name="arrTime"><br>
+            <label for="depId">Indulási reptér kódja: </label>
+            <input type="text" maxlength="4" id="depId" name="depId"><br>
+            <label for="arrId">Érkezési reptér kódja: </label>
+            <input type="text" maxlength="4" id="arrId" name="arrId"><br>
+        </form>
+        <button onclick="setFlights()">Elküldés</button><br>
+    </div>
 
 </div>
 <div id="airline">
