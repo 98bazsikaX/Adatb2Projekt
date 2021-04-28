@@ -94,7 +94,17 @@
 
     </div>
     <div id="addAirport">
-
+        <form id="airportForm">
+            <label for="AirportCode">Repülőtér kódja: </label><br>
+            <input type="text" id="AirportCode" name="AirportCode"><br
+            <label for="AirportName">Repülőtér neve: </label><br>
+            <input type="text" id="AirportName" name="AirportName"><br>
+            <label for="AirportCountry">Repülőtér országa: </label><br>
+            <input type="text" id="AirportCountry" name="AirportCountry"><br>
+            <label for="AirportCity">Repülőtér városa: </label><br>
+            <input type="text" id="AirportCity" name="AirportCity"><br>
+        </form>
+        <button onclick="setAirport()">Elküldés</button>
     </div>
 </div>
 

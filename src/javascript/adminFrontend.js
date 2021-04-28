@@ -134,3 +134,30 @@ function getAirports(){
 
     request.send('airport=1');
 }
+
+function setAirport(){
+    var setairport = "airport=1&";
+    var code = "code=" + document.getElementById("AirportCode").value.toUpperCase() + "&";
+    var name = "name=" + document.getElementById("AirportName").value + "&";
+    var country = "country=" + document.getElementById("AirportCountry").value + "&";
+    var city = "city="+document.getElementById("AirportCity").value;
+
+    if(document.getElementById("AirportCode").value.length<1 || document.getElementById("AirportName").value.length<1 || document.getElementById("AirportCountry").value.length<1 || document.getElementById("AirportCity").value.length<1){
+        alert("Hibás adatok új reptér megadásánál!\n Minden mezőnek min 1 hosszónak kell lennie.");
+        return;
+    }
+
+    var request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIsetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+    request.onreadystatechange = function () {
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            console.log("lefutott, vagyis remelem");
+        }
+        getAirports();
+    }
+    request.send(setairport+code+name+country+city);
+
+
+}
