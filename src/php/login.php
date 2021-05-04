@@ -20,15 +20,15 @@
     <div id="common">
         <div id="reg">
             <h2>Regisztráció</h2>
-            <form>
+            <form method="post" action="./functions/regfunction.php">
                 <label for="r_email">Email:</label>
-                <input type="email"  id="r_email" autocomplete="on" required>
+                <input type="email" name="r_email"  id="r_email" autocomplete="on" required>
                 <br>
                 <label for="r_password">Jelszó:</label>
-                <input type="password" id="r_password" autocomplete="on" required>
+                <input type="password" name="r_password" id="r_password" autocomplete="on" required>
                 <br>
                 <label for="pwd_again">Jelszó megerősítése:</label>
-                <input type="password" id="pwd_again" autocomplete="on" required>
+                <input type="password" name="pwd_again" id="pwd_again" autocomplete="on" required>
                 <br>
                 <label for="first_name">Keresztnév: </label>
                 <input type="text" id="first_name" name="first_name" required>
@@ -45,18 +45,21 @@
                 <label for="country">Ország: </label>
                 <select id="country" name="country" required></select>
                 <br>
+                <label for="postcode">Irányítószám: </label>
+                <input type="text" name="postcode" id="postcode" required>
+                <br>
                 <label for="city">Város: </label>
                 <input type="text" name="city" id="city" required>
                 <br>
                 <label for="address">Utca/Házszám: </label>
                 <input type="text" id="address" name="address" required>
-                <input type="submit" value="Regisztráció">
+                <input type="submit" name="registration" value="Regisztráció">
             </form>
 
         </div>
         <div id="login">
             <h2>Belépés</h2>
-                <form>
+                <form method="post" action="./functions/loginfunction.php">
                     <label for="l_email">Email:</label>
                     <input type="email" id="l_email" autocomplete="on" required>
                     <br>
