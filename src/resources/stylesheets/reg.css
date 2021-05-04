@@ -1,0 +1,19 @@
+header{
+    width: 100%;
+    height: fit-content;
+}
+.common{
+    width: 80%;
+    border: 1px solid black;
+    overflow: hidden; /* will contain if #first is longer than #second */
+    display: inline-flex;
+}
+.reg{
+    width: 50%;
+    border: 1px solid red;
+}
+.login{
+    width: 50%;
+    border: 1px solid green;
+
+}
