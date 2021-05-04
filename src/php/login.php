@@ -66,22 +66,14 @@
 
         </div>
         <div id="login">
-            <h2>Belépés</h2>
-                <form method="post" action="./functions/loginfunction.php">
-                    <label for="l_email">Email:</label>
-                    <input type="email" id="l_email" name="l_email" autocomplete="on" required>
-                    <br>
-                    <label for="l_password">Jelszó:</label>
-                    <input type="password" id="l_password"  name="l_password" autocomplete="on" required><br>
-                    <input type="submit" value="Bejelentkezés" name="login">
             <h1>Belépés</h1>
-                <form>
+                <form  method="post" action="./functions/loginfunction.php">
                     <label class ="labname" for="l_email">Email:</label>
-                    <input class ="inaname" type="email" id="l_email" autocomplete="on" required>
+                    <input class ="inaname" type="email" name="l_email" id="l_email" autocomplete="on" required>
                     <br>
                     <label class ="labname" for="l_password">Jelszó:</label>
-                    <input class ="inaname" type="password" id="l_password" autocomplete="on" required><br>
-                    <input class="but" type="submit" value="Bejelentkezés">
+                    <input class ="inaname" type="password" id="l_password" name="l_password" autocomplete="on" required><br>
+                    <input class="but" type="submit" value="Bejelentkezés" name="login">
                 </form>
         </div>    
     </div>
