@@ -4,8 +4,9 @@
     $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
 
     session_start();
-    if(!isset($_SESSION['user'])){
-        header("Location:/php/login.php");
+    if(!isset($_SESSION['user'])  ||intval($_SESSION['user']['role'])!=5){
+
+        //header("Location:/php/login.php");
     }
 
 ?>
