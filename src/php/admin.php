@@ -5,8 +5,10 @@
 
     session_start();
     if(!isset($_SESSION['user'])  ||intval($_SESSION['user']['role'])!=5){
-
+        echo "<script>console.log('NEM VAGY ADMIN HE')</script>";
         //header("Location:/php/login.php");
+    }else{
+        echo "<script>console.log(' ADMIN VAGY HE')</script>";
     }
 
 ?>

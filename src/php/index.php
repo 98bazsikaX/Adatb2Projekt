@@ -7,11 +7,7 @@
     <title>SSS Tours</title>
     <link rel="stylesheet" href="../resources/stylesheets/global.css">
     <link rel="stylesheet" href="../resources/stylesheets/index.css">
-
-    <script type="text/javascript">
-        function test_api(){
-
-    </script>
+    
 </head>
 <body>
 
