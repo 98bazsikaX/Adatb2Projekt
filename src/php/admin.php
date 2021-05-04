@@ -3,6 +3,11 @@
     load_env('dotenv/.env');
     $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
 
+    session_start();
+    if(!isset($_SESSION['user'])){
+        header("Location:/php/login.php");
+    }
+
 ?>
 
 <!doctype html>

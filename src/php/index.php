@@ -13,13 +13,10 @@
         Üdvözöljük a Szlavikovics - Sárossy - Szombati utazási iroda weboldalán.
     </header>
 
-    <?php
-    session_start();
-        if(isset($_SESSION['user'])){
-            echo $_SESSION['user']['email'];
-        }
+        <?php
+        echo "<a href='login.php'>" . ((isset($_SESSION['user'])) ? "Kijelentkezés" : "Bejelentkezés") . "</a>" ;
+        ?>
 
-    ?>
     <footer>
         All rights reserved
     </footer>

@@ -25,18 +25,18 @@ $isSession = isset($_SESSION['user']);
    <div id="common">
         <div id="reg">
             <h1>Regisztráció</h1>
-            <form>
+            <form method="post" action="./functions/regfunction.php">
                 <label class ="labname" for="r_email">Email:</label>
                 <br>
-                <input  class ="inaname" type="email"  id="r_email" autocomplete="on" required>
+                <input  class ="inaname" type="email"  id="r_email" name="r_email" autocomplete="on" required>
                 <br>
                 <label  class ="labname" for="r_password">Jelszó:</label>
                 <br>
-                <input type="password" id="r_password" autocomplete="on" required>
+                <input type="password" id="r_password" name="r_password" autocomplete="on" required>
                 <br>
                 <label  class ="labname" for="pwd_again">Jelszó megerősítése:</label>
                 <br>
-                <input class ="inaname" type="password" id="pwd_again" autocomplete="on" required>
+                <input class ="inaname" type="password" name="pwd_again" id="pwd_again" autocomplete="on" required>
                 <br>
                 <label  class ="labname" for="first_name">Keresztnév: </label>
                 <br>
