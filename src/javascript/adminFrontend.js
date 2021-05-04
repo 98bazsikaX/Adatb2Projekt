@@ -36,8 +36,13 @@ function setFlights(){
     var price = "price="+document.getElementById("price").value+"&";
     var depTime = "depTime="+document.getElementById("depTime").value+"&";
     var arrTime = "arrTime="+document.getElementById("arrTime").value + "&";
-    var depCode = "depCode="+document.getElementById("depId").value+"&";
+    var depCode = "depCode="+document.getElementById("flight_airport").value+"&";
     var arrCode = "arrCode="+document.getElementById("arrId").value;
+
+    if(depCode===arrCode){
+        alert("Ugyanaz az érkezési és indulási reptér!");
+        return;
+    }
 
     var request = new XMLHttpRequest();
     request.open('POST','../php/API/adminAPIsetData.php');
@@ -146,11 +151,39 @@ function getAirports(){
     request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 
     request.onreadystatechange = function(){
-        var div = document.getElementById("airportTable");
+       // var div = document.getElementById("airportTable");
+        let apOption=document.getElementById("flight_airport");
+        let arrOption=document.getElementById("arrId");
+        let apTable = document.getElementById("airportTable");
         if(this.readyState === XMLHttpRequest.DONE && this.status===200){
-            div.innerHTML = this.responseText;
+
+            let results = JSON.parse(this.responseText);
+            apTable.innerHTML = "<tr></tr><th>Kód</th><th>Név</th><th>Ország</th><th>Város</th></tr>";
+            apOption.innerHTML="";
+            arrOption.innerHTML="";
+            results.forEach(row=>{
+
+                let row_arr = JSON.parse(row);
+                apTable.innerHTML+=`<tr>
+                                        <td>${row_arr.code}</td>
+                                        <td>${row_arr.name}</td>
+                                        <td>${row_arr.country}</td>
+                                        <td>${row_arr.city}</td> 
+                                    </tr>`;
+
+                let option = document.createElement("option");
+                option.text = row_arr.name;
+                option.value = row_arr.code;
+                apOption.add(option);
+                /*a kurva geci add vmiért evleszi az option értékét???????????????????!!!!!!!!*/
+                option = document.createElement("option");
+                option.text = row_arr.name;
+                option.value = row_arr.code;
+                arrOption.add(option);
+            });
+
         }else{
-            div.innerHTML = "<p>ERROR , próbálja meg később</p>";
+            apTable.innerHTML = "<p>ERROR , próbálja meg később</p>";
         }
     };
 

@@ -21,7 +21,7 @@
             border-color: #21031e;
         }
 
-        #airportTable,#airlinesTable,#userTable{
+        #airportTableContainer,#airlinesTable,#userTable{
             overflow-y: scroll;
             height: 400px;
         }
@@ -65,10 +65,15 @@
             <input type="date" id="depTime" name="depTime"><br>
              <label for="arrTime">Érkezés ideje: </label>
             <input type="date" id="arrTime" name="arrTime"><br>
-            <label for="depId">Indulási reptér kódja: </label>
-            <input type="text" maxlength="4" id="depId" name="depId"><br>
+            <label for="flight_airport">Indulási reptér:</label>
+            <select id="flight_airport" name="flight_airport">
+
+            </select><br>
             <label for="arrId">Érkezési reptér kódja: </label>
-            <input type="text" maxlength="4" id="arrId" name="arrId"><br>
+            <select id="arrId" name="arrId">
+
+            </select>
+            <br>
         </form>
         <button onclick="setFlights()">Elküldés</button><br>
     </div>
@@ -100,19 +105,6 @@
 
     </div>
 </div>
-<!-- learazas tipusok -->
-<!--<div id="discountTypes">
-    <h1>Leárazás típusok: </h1><br>
-    <div id="discounTypesTable">
-
-    </div>
-
-    <div id="addDiscountType">
-        <h2>Leárazás típus hozzáadása: </h2><br>
-    </div>
-
-
-</div> -->
 
 <div id="discounts">
     <h1>Leárazások:</h1><br>
@@ -126,9 +118,14 @@
 
 <div id="airports">
     <h1>Repülőterek: </h1><br>
-    <div id="airportTable">
+    <div id="airportTableContainer">
+        <table id="airportTable">
 
+        </table>
     </div>
+
+
+
     <div id="addAirport">
         <h2>Repülőtér hozzáadása: </h2><br>
         <form id="airportForm">
