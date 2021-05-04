@@ -19,13 +19,15 @@ if(isset($_POST['login'])){
         while($row = oci_fetch_array($result, OCI_ASSOC)){
             if(password_verify($password,$row['PWD'])){
                 $user = new User($row['EMAIL'],$row['COUNTRY'],$row['FIRST_NAME'],$row['LAST_NAME'],$row['ROLE_ID']);
+                $_SESSION['user'] = $user->toAssoc();
+                header("Location: /php/index.php");
             }else{
                 echo "<p>Hibás jelszó</p><br>";
             }
         }
-        $_SESSION['user'] = $user;
-        echo "Sikeres bejelentkezés<br>";
-        echo $_SESSION['user']->toString()."<br>";
+
+       // echo "Sikeres bejelentkezés<br>";
+       // echo $_SESSION['user']->toString()."<br>";
     }else{
         echo "Hiba";
         session_abort();

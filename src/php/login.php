@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+$isSession = isset($_SESSION['user']);
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -61,7 +66,13 @@
                 <br>
                 <input class ="inaname" type="text" id="address" name="address" required>
                 <br>
-                <input  class="but" type="submit" value="Regisztráció">
+                <input  class="but" type="submit" value="Regisztráció"
+                    <?php
+                    if($isSession){
+                        echo "disabled";
+                    }
+                    ?>
+                >
             </form>
 
         </div>
@@ -73,9 +84,23 @@
                     <br>
                     <label class ="labname" for="l_password">Jelszó:</label>
                     <input class ="inaname" type="password" id="l_password" name="l_password" autocomplete="on" required><br>
-                    <input class="but" type="submit" value="Bejelentkezés" name="login">
+                    <input class="but" type="submit" value="Bejelentkezés" name="login"
+                        <?php
+                            if($isSession){
+                                echo "disabled";
+                            }
+                        ?>
+                    >
+                    <?php
+                    if($isSession){
+                        echo'<div id="logout"><a href="functions/logout.php">Kilépés</a></div>';
+                    }
+                    ?>
                 </form>
-        </div>    
+
+        </div>
+
     </div>
+
 </body>
 </html>

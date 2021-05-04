@@ -7,16 +7,19 @@
     <title>SSS Tours</title>
     <link rel="stylesheet" href="../resources/stylesheets/global.css">
 
-    <script type="text/javascript">
-        function test_api(){
-
-    </script>
 </head>
 <body>
     <header>
         Üdvözöljük a Szlavikovics - Sárossy - Szombati utazási iroda weboldalán.
     </header>
-  <!--   <button type="button" onclick="test_api()">TEST API</button> Valamiert nem megy a gomb wtf, test_api() funkcio meghivhato chrome consolebol -->
+
+    <?php
+    session_start();
+        if(isset($_SESSION['user'])){
+            echo $_SESSION['user']['email'];
+        }
+
+    ?>
     <footer>
         All rights reserved
     </footer>
