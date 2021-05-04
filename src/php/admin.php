@@ -5,12 +5,8 @@
 
     session_start();
     if(!isset($_SESSION['user'])  ||intval($_SESSION['user']['role'])!=5){
-        echo "<script>console.log('NEM VAGY ADMIN HE')</script>";
-        //header("Location:/php/login.php");
-    }else{
-        echo "<script>console.log(' ADMIN VAGY HE')</script>";
+        header("Location:/php/login.php");
     }
-
 ?>
 
 <!doctype html>
@@ -36,7 +32,6 @@
     </style>
 </head>
 <body onload="main()">
-<!-- TODO: megoldani hogy tényleg csak admin lephessen be xd -->
 
 <div id="addFlight">
     <h1>Járatok: </h1><br>
@@ -50,10 +45,6 @@
             <label for="airline_select">Repülő: </label>
             <select id="airline_select" name="airline_select">
             <?php
-            /*TODO: par feltoltott adat utan megirni ezt*/
-            /*echo "<option value='wizz'>Wizzair</option>";
-            echo "<option value='ryan'>Ryan Air</option>";*/
-
             $query = oci_parse($connection,"SELECT AIRPLANES.AIRPLANE_TYPE ,  AIRLINES.AIRLINE_NAME , AIRPLANES.ID FROM AIRPLANES INNER JOIN AIRLINES ON AIRLINES.CODE =AIRPLANES.AIRLINE_CODE");
             oci_execute($query);
 
@@ -63,8 +54,6 @@
                 $name = $row['AIRLINE_NAME'] . " - " . $row['AIRPLANE_TYPE'];
                 echo "<option class='airline_option' value='$code'>$name</option>";
             }
-
-
             ?>
             </select><br>
             <label for="price">Ár: </label>
@@ -89,8 +78,8 @@
 </div>
 <div id="airline">
     <h1>Légitársaságok: </h1><br>
-    <div id="airlinesTable">
-    </div>
+    <table id="airlinesTable">
+    </table>
     <!-- Mező airline beillesztésére -->
     <div id="addAirline">
         <h2>Légitársaság hozzáadása: </h2><br>

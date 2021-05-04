@@ -91,9 +91,21 @@ function getAirlines(){
     request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 
     request.onreadystatechange = function(){
-        var div = document.getElementById("airlinesTable");
+        let div = document.getElementById("airlinesTable");
         if(this.readyState === XMLHttpRequest.DONE && this.status===200){
-            div.innerHTML = this.responseText;
+            let results = JSON.parse(this.responseText);
+            div.innerHTML = "<tr></tr><th>Kód</th><th>Név</th><th>Ország</th><th>Rövidítés</th></tr>";
+
+            results.forEach(row=>{
+                let row_arr = JSON.parse(row);
+                console.log(row_arr.abbr);
+                div.innerHTML+=`<tr>
+                                        <td>${row_arr.code}</td>
+                                        <td>${row_arr.name}</td>
+                                        <td>${row_arr.country}</td>
+                                        <td>${(row_arr.abbr)==null ? "" : row_arr.abbr}</td> 
+                                    </tr>`;
+            });
         }else{
             div.innerHTML = "ERROR , próbálja meg később";
         }

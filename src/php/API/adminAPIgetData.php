@@ -4,39 +4,28 @@
 include_once '../dotenv/dotenv.php';
 load_env('../dotenv/.env');
 
-
 if(isset($_POST['airlines'])){
-    //echo "<p>mukodik lol</p>";
     $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
     if(!$connection){
         exit(420);
     }
     $query = oci_parse($connection,"SELECT * FROM AIRLINES");
-    oci_execute($query);
 
-    echo "<table>\n";
-    $header = false;
-    while ($row = oci_fetch_array($query, OCI_ASSOC+OCI_RETURN_NULLS)) {
-        if ($header == false) {
-            // this is the first iteration of the while loop so output the header.
-            echo '<thead><tr>';
-            foreach (array_keys($row) as $key) {
-                print '<th>'.($key !== null ? htmlentities($key, ENT_QUOTES) :
-                        '').'</th>';
-            }
-            echo '</tr></thead>';
+    include_once '../classes/airline.php';
+    $toEcho = [];
 
-            $header = true; // make sure we don't output the header again.
+    if(oci_execute($query)){
+        while($row = oci_fetch_array($query, OCI_ASSOC + OCI_RETURN_NULLS)){
+            $code = $row['CODE'];
+            $name = $row['AIRLINE_NAME'];
+            $country = $row['COUNTRY'];
+            $abbr = $row['AIRLINE_NAME_ABBR']==null?"":$row['AIRLINE_NAME_ABBR'];
+            $ap = new airlines($code,$name,$country,$abbr);
+            array_push($toEcho,$ap->jsonEncode());
         }
-
-
-        echo "<tr>\n";
-        foreach ($row as $item) {
-            echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
-        }
-        echo "</tr>\n";
     }
-    echo "</table>\n";
+    echo json_encode($toEcho);
+
 }else if(isset($_POST['flights'])){
 
     $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
@@ -146,7 +135,7 @@ if(isset($_POST['airlines'])){
     $toEcho = [];
     if(oci_execute($query)){
         while($row = oci_fetch_array($query, OCI_ASSOC + OCI_RETURN_NULLS)){
-            //var_dump($row);
+
             $code = $row['CODE'];
             $name = $row['AIRPORT_NAME'];
             $country = $row['COUNTRY'];
@@ -156,31 +145,6 @@ if(isset($_POST['airlines'])){
         }
     }
     echo json_encode($toEcho);
-//    if(oci_execute($query)){
-//        echo "<table>\n";
-//        $header = false;
-//        while ($row = oci_fetch_array($query, OCI_ASSOC + OCI_RETURN_NULLS)) {
-//            if ($header == false) {
-//                // this is the first iteration of the while loop so output the header.
-//                echo '<thead><tr>';
-//                foreach (array_keys($row) as $key) {
-//                    print '<th>'.($key !== null ? htmlentities($key, ENT_QUOTES) :
-//                            '').'</th>';
-//                }
-//                echo '</tr></thead>';
-//
-//                $header = true; // make sure we don't output the header again.
-//            }
-//            echo "<tr>\n";
-//            foreach ($row as $item) {
-//                echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
-//            }
-//            echo "</tr>\n";
-//        }
-//        echo "</table>\n";
-//    }else{
-//        http_response_code(503);
-//    }
 
 }else if(isset($_POST['users'])){
 
