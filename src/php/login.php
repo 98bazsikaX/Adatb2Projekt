@@ -17,43 +17,51 @@
 <body onload="main()">
     <header>Belépés</header>
     <!--TODO: ha be van az illető jelentkezve akkor kijelentkezés only, vagy esetleg az adatainak szerkesztése,flex implementálása,aka session-->
-    <div id="common">
+   <div id="common">
         <div id="reg">
-            <h2>Regisztráció</h2>
-            <form method="post" action="./functions/regfunction.php">
-                <label for="r_email">Email:</label>
-                <input type="email" name="r_email"  id="r_email" autocomplete="on" required>
+            <h1>Regisztráció</h1>
+            <form>
+                <label class ="labname" for="r_email">Email:</label>
                 <br>
-                <label for="r_password">Jelszó:</label>
-                <input type="password" name="r_password" id="r_password" autocomplete="on" required>
+                <input  class ="inaname" type="email"  id="r_email" autocomplete="on" required>
                 <br>
-                <label for="pwd_again">Jelszó megerősítése:</label>
-                <input type="password" name="pwd_again" id="pwd_again" autocomplete="on" required>
+                <label  class ="labname" for="r_password">Jelszó:</label>
                 <br>
-                <label for="first_name">Keresztnév: </label>
-                <input type="text" id="first_name" name="first_name" required>
+                <input type="password" id="r_password" autocomplete="on" required>
                 <br>
-                <label for="last_name">Vezetéknév: </label>
-                <input type="text" id="last_name" name="last_name" required>
+                <label  class ="labname" for="pwd_again">Jelszó megerősítése:</label>
                 <br>
-                <label for="phonenum">Telefonszám: </label>
-                <input type="tel" id="phonenum" name="phonenum" required>
+                <input class ="inaname" type="password" id="pwd_again" autocomplete="on" required>
                 <br>
-                <label for="bday">Születés dátuma: </label>
-                <input type="date" id="bday" name="bday" required>
+                <label  class ="labname" for="first_name">Keresztnév: </label>
                 <br>
-                <label for="country">Ország: </label>
-                <select id="country" name="country" required></select>
+                <input class ="inaname" type="text" id="first_name" name="first_name" required>
                 <br>
-                <label for="postcode">Irányítószám: </label>
-                <input type="text" name="postcode" id="postcode" required>
+                <label  class ="labname" for="last_name">Vezetéknév: </label>
                 <br>
-                <label for="city">Város: </label>
-                <input type="text" name="city" id="city" required>
+                <input class ="inaname" type="text" id="last_name" name="last_name" required>
                 <br>
-                <label for="address">Utca/Házszám: </label>
-                <input type="text" id="address" name="address" required>
-                <input type="submit" name="registration" value="Regisztráció">
+                <label  class ="labname" for="phonenum">Telefonszám: </label>
+                <br>
+                <input class ="inaname"class ="inaname" type="tel" id="phonenum" name="phonenum" required>
+                <br>
+                <label  class ="labname" for="bday">Születés dátuma: </label>
+                <br>
+                <input class ="inaname" type="date" id="bday" name="bday" required>
+                <br>
+                <label  class ="labname" for="country">Ország: </label>
+                <br>
+                <select class ="inaname" id="country" name="country" required></select>
+                <br>
+                <label  class ="labname" for="city">Város: </label>
+                <br>
+                <input class ="inaname" type="text" name="city" id="city" required>
+                <br>
+                <label  class ="labname" for="address">Utca/Házszám: </label>
+                <br>
+                <input class ="inaname" type="text" id="address" name="address" required>
+                <br>
+                <input  class="but" type="submit" value="Regisztráció">
             </form>
 
         </div>
@@ -66,6 +74,14 @@
                     <label for="l_password">Jelszó:</label>
                     <input type="password" id="l_password"  name="l_password" autocomplete="on" required><br>
                     <input type="submit" value="Bejelentkezés" name="login">
+            <h1>Belépés</h1>
+                <form>
+                    <label class ="labname" for="l_email">Email:</label>
+                    <input class ="inaname" type="email" id="l_email" autocomplete="on" required>
+                    <br>
+                    <label class ="labname" for="l_password">Jelszó:</label>
+                    <input class ="inaname" type="password" id="l_password" autocomplete="on" required><br>
+                    <input class="but" type="submit" value="Bejelentkezés">
                 </form>
         </div>    
     </div>
