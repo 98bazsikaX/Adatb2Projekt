@@ -61,11 +61,11 @@
             <h2>Belépés</h2>
                 <form method="post" action="./functions/loginfunction.php">
                     <label for="l_email">Email:</label>
-                    <input type="email" id="l_email" autocomplete="on" required>
+                    <input type="email" id="l_email" name="l_email" autocomplete="on" required>
                     <br>
                     <label for="l_password">Jelszó:</label>
-                    <input type="password" id="l_password" autocomplete="on" required><br>
-                    <input type="submit" value="Bejelentkezés">
+                    <input type="password" id="l_password"  name="l_password" autocomplete="on" required><br>
+                    <input type="submit" value="Bejelentkezés" name="login">
                 </form>
         </div>    
     </div>

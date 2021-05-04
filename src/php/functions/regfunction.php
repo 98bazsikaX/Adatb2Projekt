@@ -2,6 +2,10 @@
 include_once '../dotenv/dotenv.php';
 load_env('../dotenv/.env');
 
+/*TODO: hibás adatok ellenőrzése
+ *TODO: forwarding, vagy vmi hogy most lépjé be
+ * */
+
 if(isset($_POST['registration'])){
     $email = $_POST['r_email'];
     $password = $_POST['r_password'];
@@ -17,7 +21,7 @@ if(isset($_POST['registration'])){
     $role = 0;
 
     if($password!=$passwordAgain){
-        echo "nem ugyanaz a ket jelszo"; //todo: jobb implementalas
+        echo "nem ugyanaz a ket jelszo";
         return;
     }
 
