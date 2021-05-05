@@ -4,6 +4,8 @@ if(!isset($_SESSION['user']) || $_GET['id']!=$_SESSION['user']['email']){
     header('Location: login.php');
     return;
 }
+$session_id = $_SESSION['user']['email'];
+echo "<input type='hidden' id='SessionEmail' value='$session_id'>";
 ?>
 
 <!doctype html>
@@ -13,6 +15,7 @@ if(!isset($_SESSION['user']) || $_GET['id']!=$_SESSION['user']['email']){
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../javascript/userinfo.js"></script>
     <title>Profil</title>
 </head>
 <body>
@@ -30,6 +33,7 @@ if(!isset($_SESSION['user']) || $_GET['id']!=$_SESSION['user']['email']){
         <th>Leszállás ideje</th>
         <th>Indulás</th>
         <th>Érkezés</th>
+        <th>Törlés</th>
     </tr>
 <?php
 include_once './dotenv/dotenv.php';
@@ -65,6 +69,7 @@ oci_bind_by_name($parsed,":email",$_SESSION['user']['email']);
 
 if(oci_execute($parsed)){
     while($row = oci_fetch_array($parsed)){
+        $id = $row['ID'];
         echo "<tr>";
         echo "<td>".$row['ID']."</td>";
         echo "<td>".$row['QUANTITY']."</td>";
@@ -76,7 +81,7 @@ if(oci_execute($parsed)){
         echo "<td>".$row['LANDING_DATE']."</td>";
         echo "<td>".$row['AIRPORT_DEP']."</td>";
         echo "<td>".$row['AIRPORT_ARR']."</td>";
-        
+        echo "<td><button onclick='delete_order($id)'>Törlés</button></td>";
         echo "</tr>";
     }
 }
