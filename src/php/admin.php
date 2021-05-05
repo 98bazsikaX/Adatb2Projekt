@@ -151,7 +151,27 @@
              <input type="email" id="deleteEmail" name="deleteEmail">
          </form>
          <button onclick="deleteUser()">Felhasználó törlése</button>
+         <br>
+         <br>
+         <br>
+         <form>
+             <label for="roleEmail">Email címe: </label><br>
+             <input type="email" id="roleEmail"><br>
+             <label for="setRole">Új role: </label><br>
+             <select id="setRole" required>
+                 <?php
+                 $query = oci_parse($connection,"SELECT * FROM ROLES");
+                 oci_execute($query);
+                 while($row = oci_fetch_array($query)){
+                     $value = $row['ID'];
+                     $name = $row['ROLE_NAME'];
+                     echo "<option value='$value'>$name</option>";
+                 }
+                 ?>
+             </select><br>
 
+         </form>
+         <button onclick="newRoleStuff()">Beállítás</button>
      </div>
 </div>
 

@@ -62,11 +62,15 @@ $isSession = isset($_SESSION['user']);
                 <br>
                 <input class ="inaname" type="text" name="city" id="city" required>
                 <br>
+                <label for="postcode">Postcode:</label>
+                <br>
+                <input type="text" name="postcode" id="postcode" class="inaname">
+                <br>
                 <label  class ="labname" for="address">Utca/Házszám: </label>
                 <br>
                 <input class ="inaname" type="text" id="address" name="address" required>
                 <br>
-                <input  class="but" type="submit" value="Regisztráció"
+                <input  class="but" name="registration" type="submit" value="Regisztráció"
                     <?php
                     if($isSession){
                         echo "disabled";
@@ -78,7 +82,7 @@ $isSession = isset($_SESSION['user']);
         </div>
         <div id="login">
             <h1>Belépés</h1>
-                <form  method="post" action="./functions/loginfunction.php">
+                    <form  method="post" action="./functions/loginfunction.php">
                     <label class ="labname" for="l_email">Email:</label>
                     <input class ="inaname" type="email" name="l_email" id="l_email" autocomplete="on" required>
                     <br>

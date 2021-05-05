@@ -98,7 +98,6 @@ function getAirlines(){
 
             results.forEach(row=>{
                 let row_arr = JSON.parse(row);
-                console.log(row_arr.abbr);
                 div.innerHTML+=`<tr>
                                         <td>${row_arr.code}</td>
                                         <td>${row_arr.name}</td>
@@ -264,4 +263,25 @@ function deleteUser(){
         getUsers();
     }
     request.send(delete_string+email);
+}
+
+
+function newRoleStuff(){
+    if(!window.confirm("Biztos")){
+        return;
+    }
+    let roletype = "setRole=1&type="+ document.getElementById("setRole").value + "&";
+    let email = "email="+document.getElementById("roleEmail").value;
+
+    var request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIsetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    request.onreadystatechange = function () {
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            alert("Sikeresen megváltoztatta a felhasználó típusát");
+        }
+        getUsers();
+    }
+    request.send(roletype+email);
+
 }

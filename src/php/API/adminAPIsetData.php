@@ -52,8 +52,9 @@ if(isset($_POST['setairline'])){
     $email = $_POST['email'];
 
     $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
-    $query = "DELETE FROM USERS WHERE email='$email'";
+    $query = "DELETE FROM USERS WHERE email=:add";
     $result = oci_parse($connection,$query);
+    oci_bind_by_name($result,":add",$email);
     if(oci_execute($result) === false){
         echo oci_error($result);
         http_response_code(500);
@@ -86,4 +87,20 @@ if(isset($_POST['setairline'])){
     }else{
         echo $airplane;
     }
+}else if(isset($_POST['setRole'])){
+    $email = $_POST['email'];
+    $role = $_POST['type'];
+
+    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+    $query = "UPDATE USERS SET ROLE_ID=:role WHERE EMAIL=:mail";
+    $result = oci_parse($connection,$query);
+    oci_bind_by_name($result,":mail",$email);
+    oci_bind_by_name($result,":role",$role);
+    if(oci_execute($result) === false){
+        echo oci_error($result);
+        http_response_code(500);
+    }else{
+        echo $email;
+    }
+
 }
