@@ -5,9 +5,11 @@ include 'abstract.php';
 
 class airlines extends entity{
 
-    function __construct($code=null,$name=null,$country=null)
+    private $abbr;
+    function __construct($code,$name,$country,$abbr)
     {
         parent::__construct($code,$name,$country);
+        $this->$abbr = $abbr;
 
     }
 
@@ -59,15 +61,30 @@ class airlines extends entity{
         $this->country = $country;
     }
 
-    public static function byID($airline_id){
-        //TODO: implementalni hogy az adatb alapjan ID alapjan is lehessen letrehozni legitarsasagot
-        $retval = new airlines();
-        $retval.setCountry();
-        return $retval;
+    /**
+     * @return mixed
+     */
+    public function getAbbr()
+    {
+        return $this->abbr;
     }
 
+    /**
+     * @param mixed $abbr
+     */
+    public function setAbbr($abbr)
+    {
+        $this->abbr = $abbr;
+    }
+
+
+
     public function jsonEncode(){
-        return json_encode(parent::jsonEncode());
+        $rtv = array('code' => $this->code,
+            'name'=> $this->name,
+            'country'=>$this->country,
+            'abbr'=>$this->abbr);
+        return json_encode($rtv);
     }
 
 }

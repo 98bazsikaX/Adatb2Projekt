@@ -1,11 +1,26 @@
 <?php
+
+spl_autoload_register(function ($class_name) {
+    include $class_name . '.php';
+});
 class User
 {
+
     private $email;
     private $country;
     private $firstName;
     private $lastName;
     private $role;
+
+    public function __toString()
+    {
+        return "név: $this->lastName $this->firstName , email: $this->email , role: $this->role";
+    }
+
+    public function toAssoc(){
+        return array("email"=>$this->email,"country"=>$this->country,"first_name"=>$this->firstName,"last_name"=>$this->lastName,"role"=>$this->role);
+    }
+
 
     /**
      * User constructor.
