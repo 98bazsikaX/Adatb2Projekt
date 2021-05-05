@@ -1,0 +1,24 @@
+.labname{
+    padding-left: 27%;
+    float:left;
+
+}
+.inaname{
+    width:44%;
+}
+#main{
+    text-align:center;
+    margin-right: 40%;
+    margin-left: 40%;
+    width: 20%;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    border: 10px solid darkslategray;
+    border-radius: 20px;
+    box-shadow: 5px 5px #071a1a;
+}
+.but{
+    font-size: 13px;
+    margin: 3px;
+    font-weight: bold ;
+}
