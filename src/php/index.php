@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +22,12 @@
             <a href="search.php">keresés</a>
             <a href="buying.php">jegy vásárlás</a>
             <a href="us.php">rólunk</a>
+            <?php
+            if(isset($_SESSION['user'])){
+                $id = $_SESSION['user']['email'];
+                echo "<a href='userinfo.php?id=$id'>Profilom</a>";
+            }
+            ?>
 
         </div>
 
