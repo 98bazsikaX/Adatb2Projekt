@@ -33,6 +33,9 @@
     <h2>Mérnökinformatikus BSc_N</h2>
     <img src="img/Bence.jpg" alt="Bence" width="300" height="400">
     <h4 class="p">Bence egy igazán színes egyéniség és rendkívűl élvezi az online oktatás gyönyöreit. </h4>
+
+
+
 </div>
 </div>
 </body>
