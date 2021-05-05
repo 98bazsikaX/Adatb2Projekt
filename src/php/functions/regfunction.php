@@ -47,6 +47,7 @@ if(isset($_POST['registration'])){
     if(oci_execute($result)===false){
         var_dump(oci_error($result));
     }else{
-        echo "Sikeres regisztrácio :D";
+        echo "<p>Sikeres regisztrácio</p> <br>";
+        echo "<a href='/php/index.php'>Főoldal</a>";
     }
 }
