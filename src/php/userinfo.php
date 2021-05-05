@@ -16,6 +16,7 @@ echo "<input type='hidden' id='SessionEmail' value='$session_id'>";
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="../javascript/userinfo.js"></script>
+    <link rel="stylesheet" href="../resources/stylesheets/global.css">
     <title>Profil</title>
 </head>
 <body>

@@ -52,11 +52,11 @@ if(isset($_POST['setairline'])){
     $email = $_POST['email'];
 
     $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
-    $query = "DELETE FROM USERS WHERE email=:add";
+    $query = "DELETE FROM USERS WHERE email=:del_email";
     $result = oci_parse($connection,$query);
-    oci_bind_by_name($result,":add",$email);
+    oci_bind_by_name($result,":del_email",$email);
     if(oci_execute($result) === false){
-        echo oci_error($result);
+       var_dump(oci_error($result));
         http_response_code(500);
     }else{
         echo $email;

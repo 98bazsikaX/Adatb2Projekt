@@ -9,7 +9,9 @@ if(isset($_SESSION['user']) && isset($_GET['id']) && isset($_GET['session']) && 
         return;
     }
 
-    $query = oci_parse($connection,"DELETE FROM PURCHASES WHERE USER_EMAIL=:email AND ID=:id AND PURCHASE_STATE!=:forbidden_state");
+    $query = oci_parse($connection,"UPDATE PURCHASES SET PURCHASE_STATE=:deleted WHERE USER_EMAIL=:email AND ID=:id AND PURCHASE_STATE!=:forbidden_state");
+    $deleted_state=2;
+    oci_bind_by_name($query,":deleted",$deleted_state);
     oci_bind_by_name($query,":email",$_GET['session']);
     oci_bind_by_name($query,":id",$_GET['id']);
     $forbiddenState = 3;
