@@ -4,12 +4,19 @@ load_env('dotenv/.env');
 $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
 
 session_start();
+
 if(!isset($_SESSION['user']) || $_GET['id']!=$_SESSION['user']['email']){
     header('Location: login.php');
     return;
 }
 $session_id = $_SESSION['user']['email'];
 echo "<input type='hidden' id='SessionEmail' value='$session_id'>";
+
+if(!isset($_SESSION['user'])  ||intval($_SESSION['user']['role'])!=5){
+    header("Location:/php/login.php");
+	return;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="hu">

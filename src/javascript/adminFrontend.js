@@ -115,14 +115,32 @@ function getAirlines(){
 
 
 function getAirplanes(){
-    var request = new XMLHttpRequest();
+    let request = new XMLHttpRequest();
     request.open('POST','../php/API/adminAPIgetData.php');
     request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 
     request.onreadystatechange = function(){
-        var div = document.getElementById("airplaneTable");
+        let div = document.getElementById("airplaneTable");
+        let optionstuff = document.getElementById("airline_select");
         if(this.readyState === XMLHttpRequest.DONE && this.status===200){
-            div.innerHTML = this.responseText;
+            div.innerHTML=" <tr><th>Légitársaságon belüli kódja</th><th>Típusa</th><th>Férőhelyek száma</th><th>Légitársaság neve</th><th>Lajstromjel</th></tr>";
+            let planes = JSON.parse(this.responseText);
+            planes.forEach(row=>{
+
+                let row_arr = JSON.parse(row);
+                div.innerHTML+=`<tr>
+                                    <td>${row_arr.airplane_id}</td>
+                                    <td>${row_arr.type}
+                                    <td>${row_arr.capacity}</td>
+                                    <td>${row_arr.airline_name}</td>
+                                    <td>${row_arr.airline_code}</td>
+                                    </tr>`;
+
+                let toAdd = document.createElement("option");
+                toAdd.value = row_arr.id;
+                toAdd.text = row_arr.airline_name + "  " + row_arr.type;
+                optionstuff.add(toAdd);
+            });
         }else{
             div.innerHTML = "ERROR , próbálja meg később";
         }

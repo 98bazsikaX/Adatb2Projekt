@@ -44,17 +44,7 @@
         <form id="addflightform">
             <label for="airline_select">Repülő: </label>
             <select id="airline_select" name="airline_select">
-            <?php
-            $query = oci_parse($connection,"SELECT AIRPLANES.AIRPLANE_TYPE ,  AIRLINES.AIRLINE_NAME , AIRPLANES.ID FROM AIRPLANES INNER JOIN AIRLINES ON AIRLINES.CODE =AIRPLANES.AIRLINE_CODE");
-            oci_execute($query);
 
-            while($row = oci_fetch_array($query,OCI_ASSOC+OCI_RETURN_NULLS)){
-                //print_r($row);
-                $code = $row['ID'];
-                $name = $row['AIRLINE_NAME'] . " - " . $row['AIRPLANE_TYPE'];
-                echo "<option class='airline_option' value='$code'>$name</option>";
-            }
-            ?>
             </select><br>
             <label for="price">Ár: </label>
             <input type="number" name="price" id="price"><br>
@@ -98,7 +88,10 @@
 </div>
 <div id="addAirPlane">
     <h1>Repülőgépek: </h1><br>
-    <div id="airplaneTable">
+    <table id="airplaneTable">
+
+    </table>
+    <div id="addAirplane">
 
     </div>
 </div>

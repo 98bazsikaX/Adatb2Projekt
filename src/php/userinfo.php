@@ -49,6 +49,7 @@ $query = "SELECT
     purchases.id,
     purchases.quantity,
     purchases.purchase_date,
+    purchases.PURCHASE_STATE,
     purchase_states.state_name,
     flights.price,
     flights.takeoff_date,
@@ -63,10 +64,10 @@ FROM
     INNER JOIN purchase_states ON purchases.purchase_state = purchase_states.id
     INNER JOIN airplanes ON flights.airplane_id = airplanes.id
     INNER JOIN airlines ON airplanes.airline_code = airlines.code
-    INNER JOIN airports airports1 ON flights.landing_airport_code = airports1.code WHERE PURCHASES.USER_EMAIL=:email";
+    INNER JOIN airports airports1 ON flights.landing_airport_code = airports1.code WHERE PURCHASES.USER_EMAIL=:mail ORDER BY PURCHASE_DATE desc";
 
 $parsed = oci_parse($connection,$query);
-oci_bind_by_name($parsed,":email",$_SESSION['user']['email']);
+oci_bind_by_name($parsed,":mail",$_SESSION['user']['email']);
 
 if(oci_execute($parsed)){
     while($row = oci_fetch_array($parsed)){
@@ -82,13 +83,68 @@ if(oci_execute($parsed)){
         echo "<td>".$row['LANDING_DATE']."</td>";
         echo "<td>".$row['AIRPORT_DEP']."</td>";
         echo "<td>".$row['AIRPORT_ARR']."</td>";
-        echo "<td><button onclick='delete_order($id)'>Törlés</button></td>";
+        if($row['PURCHASE_STATE'] != '2' && $row['PURCHASE_STATE'] != '3'){
+            echo "<td><button onclick='delete_order($id)'>Törlés</button></td>";
+        }
         echo "</tr>";
     }
+    //TODO: JEGYEK, inner joinolások mert hogy csak olyan ami nem törölve
 }
 
 
 ?>
 </table>
+
+<h2>Az ön adatai</h2>
+<form method="post" action="functions/changeUserData.php">
+    <?php
+
+        $query = "SELECT * FROM USERS WHERE EMAIL=:mail";
+        $parsed = oci_parse($connection,$query);
+        oci_bind_by_name($parsed,":mail",$_SESSION['user']['email']);
+        if(oci_execute($parsed)){
+            while($row = oci_fetch_array($parsed)){
+                $email = $row['EMAIL'];
+                $first = $row['FIRST_NAME'];
+                $last = $row['LAST_NAME'];
+                $birth = $row['BIRTH_DATE'];
+
+                $phone = $row['PHONE_NUM'];
+                $country = $row['COUNTRY'];
+                $postcode = $row['POST_CODE'];
+                $city = $row['CITY'];
+                $address = $row['HOME_ADDRESS'];
+
+                echo '<label for="mail">Email</label>';
+                echo "<input type='text' id='mail' disabled value='$email'><br>"; //ezeknek nincs neve mert disabled input
+                echo '<label for="fistname">Keresztnév</label>';
+                echo "<input type='text' id='firstname' value='$first' disabled ><br>";
+                echo '<label for="lastname">Vezetéknév</label>';
+                echo "<input type='text' id='lastname' value='$last' disabled ><br>";
+                echo  '<label for="bdate">Születésnap</label>';
+                echo "<input type='text' id='bdate' value='$birth' disabled><br>";
+
+                echo ' <label for="country">Ország </label>';
+                echo "<input type='text' id='country' value='$country' disabled><br>";
+
+                echo '<label for="postcode">Irányítószám</label>';
+                echo  "<input type='text' id='postcode' name='postcode' value='$postcode' required><br>";
+
+                echo '<label for="city">Város</label>';
+                echo "<input type='text' name='city' id='city'  value='$city' required> <br>";
+
+                echo '<label for="address">Utca Házszám:</label>';
+                echo "<input type='text' id='address' name='address'  value='$address' required> <br>";
+
+                echo '<label for="phonenum">Telefonszám</label>';
+                echo "<input type='tel' name='phonenum' id='phonenum' value='$phone' required> <br>";
+                echo "<input type='hidden'  name='user_email' value='$email'>";
+            }
+        }
+
+    ?>
+    <input type='submit' name="changeuser" value="Adatok módosítása">
+
+</form>
 </body>
 </html>
