@@ -4,6 +4,7 @@ include_once '../dotenv/dotenv.php';
 load_env('../dotenv/.env');
 
 if(isset($_POST['search'])){
+    //TODO: jobb lekerdezes+json api-ra attervezes
     $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
     if(!$connection){
         exit(420);
