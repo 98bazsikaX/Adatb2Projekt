@@ -15,17 +15,16 @@ session_start();
 <body>
 
         <div class="topnav">
-
             <a href="login.php">regisztráció/bejelentkezés</a>
             <a href="admin.php">admin</a>
             <a href="info.php">infók</a>
             <a href="search.php">keresés</a>
-            <a href="buying.php">jegy vásárlás</a>
             <a href="us.php">rólunk</a>
             <?php
             if(isset($_SESSION['user'])){
                 $id = $_SESSION['user']['email'];
                 echo "<a href='userinfo.php?id=$id'>Profilom</a>";
+                echo "<a href='buying.php?id=$id'>jegy vásárlás</a>";
             }
             ?>
 

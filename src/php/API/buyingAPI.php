@@ -8,11 +8,12 @@ if(isset($_POST['buying'])){
 $r_email = $_POST['r_mail'];
 $quantity = $_POST['person'];
 $f_number = $_POST['fnumber'];
-$date=$_POST['date'];
-$state=2;
+$dates=$_POST['date'];
+$state=1;
+$purchase_state=1;
 $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
 
-$query = "INSERT INTO purchases (id,user_email,flight_id,quantity,purchase_date,purchase_state)VALUES(1,user_email,flight_id,quantity,purchase_date,purchase_state)";
+$query = "INSERT INTO PURCHASES (ID,USER_EMAIL,FLIGHT_ID,QUANTITY,PURCHASE_DATE,PURCHASE_STATE)VALUES(:state,:user_email,:flight_id,:quantity,:dates,:purchase_state)";
 
       $rec = oci_parse($connection,$query);
 
@@ -28,4 +29,4 @@ $query = "INSERT INTO purchases (id,user_email,flight_id,quantity,purchase_date,
     }
 
   }
-?>
+

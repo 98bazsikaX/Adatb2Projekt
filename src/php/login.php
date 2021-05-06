@@ -20,7 +20,22 @@ $isSession = isset($_SESSION['user']);
 
 </head>
 <body onload="main()">
-    <header>Belépés</header>
+<div class="topnav">
+    <a href="login.php">regisztráció/bejelentkezés</a>
+    <a href="admin.php">admin</a>
+    <a href="info.php">infók</a>
+    <a href="search.php">keresés</a>
+    <a href="us.php">rólunk</a>
+    <?php
+    if(isset($_SESSION['user'])){
+        $id = $_SESSION['user']['email'];
+        echo "<a href='userinfo.php?id=$id'>Profilom</a>";
+        echo "<a href='buying.php?id=$id'>jegy vásárlás</a>";
+    }
+    ?>
+
+</div>
+
     <!--TODO: ha be van az illető jelentkezve akkor kijelentkezés only, vagy esetleg az adatainak szerkesztése,flex implementálása,aka session-->
    <div id="common">
         <div id="reg">
@@ -32,7 +47,7 @@ $isSession = isset($_SESSION['user']);
                 <br>
                 <label  class ="labname" for="r_password">Jelszó:</label>
                 <br>
-                <input type="password" id="r_password" name="r_password" autocomplete="on" required>
+                <input  class ="inaname" type="password" id="r_password" name="r_password" autocomplete="on" required>
                 <br>
                 <label  class ="labname" for="pwd_again">Jelszó megerősítése:</label>
                 <br>

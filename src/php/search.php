@@ -14,37 +14,29 @@ $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../resources/stylesheets/global.css">
+    <link rel="stylesheet" href="../resources/stylesheets/search.css">
     <script src="../javascript/search_frontend.js"></script>
 
     <title>Járat keresése</title>
-    <style>
-        #wrapper{
-            width: 100%;
-            display: flex;
-        }
-        .flex_child{
-            flex: 1;
-           /* border: 2px solid yellow;
-            border-radius: 20%;*/
-        }
-        #options{
-            height: available;
-            width: 20%;
-            background-color: rgb(50, 58, 65);
-            flex-basis: 20%;
-        }
-        #results{
-            width: 80%;
-            background-color: rgb(12, 17, 24);
-            flex-basis: 80%;
-        }
-        option{
-            width: auto;
-        }
 
-    </style>
 </head>
 <body onload="main()">
+
+<div class="topnav">
+    <a href="login.php">regisztráció/bejelentkezés</a>
+    <a href="admin.php">admin</a>
+    <a href="info.php">infók</a>
+    <a href="search.php">keresés</a>
+    <a href="us.php">rólunk</a>
+    <?php
+    if(isset($_SESSION['user'])){
+        $id = $_SESSION['user']['email'];
+        echo "<a href='userinfo.php?id=$id'>Profilom</a>";
+        echo "<a href='buying.php?id=$id'>jegy vásárlás</a>";
+    }
+    ?>
+
+</div>
     <header>Járatok keresése</header>
     <br>
     <div id="wrapper">
@@ -52,10 +44,10 @@ $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],
         <div id="options" class="flex_child">
             <p>Opciók</p>
             <!-- TODO: implementalni a lekerdezest ugy hogy unique adatokat kerjen le , kell egy lekerdezes az alap adatokhoz, es egy ami a kereses-->
-            <button onclick="makeRequest()">Keresés</button>
+            <button class ="but" onclick="makeRequest()">Keresés</button>
                 <div id="airline_option">
                     <label for="airline_select">Légitársaságok</label>
-                    <select id="airline_select" name="airline_select">
+                    <select class ="inaname" id="airline_select" name="airline_select">
                         <?php
                             /*TODO: par feltoltott adat utan megirni ezt*/
                         /*echo "<option value='wizz'>Wizzair</option>";
@@ -76,7 +68,7 @@ $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],
                 </div>
                 <div id="departure">
                     <label for="departure_select">Indulás helye</label>
-                    <select id="departure_select" name="departure_select">
+                    <select class ="inaname" id="departure_select" name="departure_select">
                         <?php
                         $query = oci_parse($connection,"SELECT CODE , AIRPORT_NAME FROM AIRPORTS ");
                         oci_execute($query);
@@ -91,7 +83,7 @@ $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],
                 </div>
                 <div id="arrival">
                     <label for="arrival_select">Érkezés helye</label>
-                    <select id="arrival_select" name="arrival_select">
+                    <select class ="inaname" id="arrival_select" name="arrival_select">
                         <?php
                         $query = oci_parse($connection,"SELECT CODE , AIRPORT_NAME FROM AIRPORTS ");
                         oci_execute($query);
@@ -107,10 +99,10 @@ $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],
                 </div>
                 <div id="departure_time">
                     <label for="dep_time_box">Indulás ideje:</label>
-                    <input type="date" id="dep_time_box" name="departure-date" >
+                    <input class ="inaname" type="date" id="dep_time_box" name="departure-date" >
 
                 </div>
-            <button onclick="makeRequest()">Keresés</button>
+            <button class ="but" onclick="makeRequest()">Keresés</button>
         </div>
 
         <!---------------------------------->

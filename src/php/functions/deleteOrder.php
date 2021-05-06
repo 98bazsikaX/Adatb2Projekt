@@ -2,7 +2,7 @@
 session_start();
 if(isset($_SESSION['user']) && isset($_GET['id']) && isset($_GET['session']) && $_SESSION['user']['email'] == $_GET['session']){
     include_once '../dotenv/dotenv.php';
-    load_env('../dotenv/.env');
+    load_env('../dotenv/file.env');
     $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
     if(!$connection){
         header('Location: /php/userinfo.php');

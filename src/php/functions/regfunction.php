@@ -1,6 +1,6 @@
 <?php
 include_once '../dotenv/dotenv.php';
-load_env('../dotenv/.env');
+load_env('../dotenv/file.env');
 
 /*TODO: hibás adatok ellenőrzése
  *TODO: forwarding, vagy vmi hogy most lépjé be
