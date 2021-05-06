@@ -49,6 +49,7 @@ $query = "SELECT
     purchases.id,
     purchases.quantity,
     purchases.purchase_date,
+    purchases.PURCHASE_STATE,
     purchase_states.state_name,
     flights.price,
     flights.takeoff_date,
@@ -82,7 +83,9 @@ if(oci_execute($parsed)){
         echo "<td>".$row['LANDING_DATE']."</td>";
         echo "<td>".$row['AIRPORT_DEP']."</td>";
         echo "<td>".$row['AIRPORT_ARR']."</td>";
-        echo "<td><button onclick='delete_order($id)'>Törlés</button></td>";
+        if($row['PURCHASE_STATE'] != '2' && $row['PURCHASE_STATE'] != '3'){
+            echo "<td><button onclick='delete_order($id)'>Törlés</button></td>";
+        }
         echo "</tr>";
     }
     //TODO: JEGYEK, inner joinolások mert hogy csak olyan ami nem törölve
@@ -94,13 +97,6 @@ if(oci_execute($parsed)){
 
 <h2>Az ön adatai</h2>
 <form method="post" action="functions/changeUserData.php">
-
-
-
-
-
-
-
     <?php
 
         $query = "SELECT * FROM USERS WHERE EMAIL=:mail";
