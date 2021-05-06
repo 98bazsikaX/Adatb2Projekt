@@ -32,7 +32,7 @@ $isSession = isset($_SESSION['user']);
                 <br>
                 <label  class ="labname" for="r_password">Jelszó:</label>
                 <br>
-                <input type="password" id="r_password" name="r_password" autocomplete="on" required>
+                <input  class ="inaname" type="password" id="r_password" name="r_password" autocomplete="on" required>
                 <br>
                 <label  class ="labname" for="pwd_again">Jelszó megerősítése:</label>
                 <br>

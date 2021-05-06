@@ -1,3 +1,13 @@
+<?php
+include_once 'dotenv/dotenv.php';
+load_env('dotenv/.env');
+$connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+
+session_start();
+if(!isset($_SESSION['user'])  ||intval($_SESSION['user']['role'])!=5){
+    header("Location:/php/login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
