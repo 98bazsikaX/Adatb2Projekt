@@ -2,6 +2,7 @@
 
 /*
  * megnezni hogy application/json-e a request a biztonsag kedveert
+ * TODO: delete this file
  */
 
 if($_SERVER['CONTENT_TYPE'] != 'application/json'){
