@@ -103,4 +103,35 @@ if(isset($_POST['setairline'])){
         echo $email;
     }
 
+}else if(isset($_POST['airplaneSetter'])){
+    $airline = $_POST['airlineForPlane'];
+    $type=$_POST['type'];
+    $cap = $_POST['cap'];
+    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+    $query="INSERT INTO AIRPLANES(AIRPLANE_ID, AIRLINE_CODE, AIRPLANE_TYPE, CAPACITY) VALUES (NVL((SELECT MAX(AIRPLANE_ID)+1 FROM AIRPLANES WHERE AIRLINE_CODE=:airlineCode),0) ,:airlineCode,:type,:cap)";
+    $result = oci_parse($connection,$query);
+    oci_bind_by_name($result,":airlineCode",$airline);
+    oci_bind_by_name($result,":type",$type);
+    oci_bind_by_name($result,":cap",$cap);
+    if(oci_execute($result) === false){
+        echo oci_error($result);
+        http_response_code(500);
+    }else{
+        echo $airline.";".$type;
+    }
+}else if(isset($_POST['delAirplane'])){
+    $airline = $_POST['toDelAirline'];
+    $code = $_POST['toDelCode'];
+
+    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+    $result = oci_parse($connection,"DELETE FROM AIRPLANES WHERE AIRLINE_CODE=:code AND AIRPLANE_ID=:apid");
+    oci_bind_by_name($result,":code",$airline);
+    oci_bind_by_name($result,":apid",$code);
+    if(oci_execute($result) === false){
+        echo oci_error($result);
+        http_response_code(500);
+    }else{
+        echo $airline.";".$code;
+    }
+
 }

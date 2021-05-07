@@ -66,7 +66,7 @@ if(isset($_POST['airlines'])){
     if (!$connection) {
         exit(420);
     }
-    $query = oci_parse($connection, "SELECT airplanes.airplane_id , airplanes.airplane_type ,airplanes.capacity , airlines.airline_name,AIRLINE_CODE,ID  FROM AIRPLANES INNER JOIN AIRLINES ON airplanes.airline_code=airlines.code");
+    $query = oci_parse($connection, "SELECT airplanes.airplane_id , airplanes.airplane_type ,airplanes.capacity , airlines.airline_name,AIRLINE_CODE,ID  FROM AIRPLANES INNER JOIN AIRLINES ON airplanes.airline_code=airlines.code ORDER BY AIRLINE_NAME desc,airplanes.airplane_id");
     $toEcho = [];
     if(oci_execute($query)){
         while($row = oci_fetch_array($query)){

@@ -92,6 +92,26 @@
 
     </table>
     <div id="addAirplane">
+        <h2>Gép hozzáadása</h2>
+        <label for="airlineForAirplane">Légitársaság</label><br>
+        <select id="airlineForAirplane">
+
+        </select><br>
+        <label for="airplaneType">Típusa: </label><br>
+        <input type="text" maxlength="20" id="airplaneType"><br>
+        <label for="airplaneCap">Férőhelyek:</label><br>
+        <input type="number" maxlength="3" id="airplaneCap"><br>
+        <button onclick="setAirplane()">Küldés</button>
+    </div>
+    <div id="delAirplane">
+        <h2>Gép Törlése</h2>
+        <label for="delAirlineForAirplane">Légitársaság</label><br>
+        <select id="delAirlineForAirplane">
+
+        </select><br>
+        <label for="delAirplaneCode">Légitársaságon belüli kódja:</label><br>
+        <input type="number" maxlength="4" id="delAirplaneCode"><br>
+        <button onclick="delAirplane()">Törlés</button><br>
 
     </div>
 </div>
