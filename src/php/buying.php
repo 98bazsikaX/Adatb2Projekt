@@ -1,20 +1,26 @@
 <?php
+
 include_once 'dotenv/dotenv.php';
-load_env('dotenv/.env');
-$connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+//probálgatás miatt bent hagytam itt is az inclludeot
+include '../php/functions/userdataForBuying.php';
+include_once './dotenv/dotenv.php';
+load_env('./dotenv/.env');
+$Fid = $_GET['id'];
+if(isset($_POST['search'])){
+    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+    $arr = $_POST['arr'];
+    $dep = $_POST['dep'];
+    $query = oci_parse($connection,"SELECT * FROM FLIGHTS WHERE TAKEOFF_AIRPORT_CODE = '$dep' AND LANDING_AIRPORT_CODE='$arr'");
+    $parsed = oci_parse($connection,$query);
 
-session_start();
+    if(oci_execute($parsed)){
+        while($row = oci_fetch_array($parsed)) {
 
-if(!isset($_SESSION['user']) || $_GET['id']!=$_SESSION['user']['email']){
-    header('Location: login.php');
-    return;
-}
-$session_id = $_SESSION['user']['email'];
-echo "<input type='hidden' id='SessionEmail' value='$session_id'>";
+            $takeoff = $row['TAKEOFF_AIRPORT_CODE'];
+            $land = $row['LANDING_AIRPORT_CODE'];
 
-if(!isset($_SESSION['user'])  ||intval($_SESSION['user']['role'])!=5){
-    header("Location:/php/login.php");
-	return;
+        }
+    }
 }
 
 ?>
@@ -37,49 +43,20 @@ if(!isset($_SESSION['user'])  ||intval($_SESSION['user']['role'])!=5){
 
 </head>
 <body onload="main()">
-<div class="topnav">
-    <a href="login.php">regisztráció/bejelentkezés</a>
-    <a href="admin.php">admin</a>
-    <a href="info.php">infók</a>
-    <a href="search.php">keresés</a>
-    <a href="us.php">rólunk</a>
-    <?php
-    if(isset($_SESSION['user'])){
-        $id = $_SESSION['user']['email'];
-        echo "<a href='userinfo.php?id=$id'>Profilom</a>";
-        echo "<a href='buying.php?id=$id'>jegy vásárlás</a>";
-    }
-    ?>
-
-</div>
 <div id="main">
-    <select class ="inaname" id="flight" name="flight">
-        <?php
-        $query = oci_parse($connection,"SELECT CODE , AIRLINE_NAME FROM  ");
-        oci_execute($query);
-
-        while($row = oci_fetch_array($query,OCI_ASSOC+OCI_RETURN_NULLS)){
-            $code = $row[''];
-            $name = $row['AIRLINE_NAME'];
-            echo "<option class='airline_option' value='$code'>$name</option>";
-        }
+    <form method="post" action="API/buyingAPI.php">
+<?php
 
 
-        ?>
-    </select>
-  stz <label class ='labname' id="fnumber"><?php echo $_POST['fnumber']; ?> járat </label>"
-   <br>
-  <label class ="labname" for="r_email">Email:</label>
-  <br>
-   <input  class ="inaname" type="email"  id="r_email" autocomplete="on" required>
-  <br>
+?>
    <label class ="labname" >fő: </label>
  <br>
  <input class ="inaname" type="number" name="person" id="person" required>
    <br>
-   <button class ="but"onclick="makeTicket()" value="Vásárlás">Vásárlás</button>
-  </div>
 
+   <input type="submit" class ="but" value="Vásárlás">
+  </div>
+</form>
  </div>
 
 </body>

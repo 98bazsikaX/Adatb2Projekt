@@ -33,6 +33,8 @@ if(isset($_POST['search'])){
         foreach ($row as $item) {
             echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
         }
+        $id =$row['ID'];
+        echo "    <td> <a href='buying.php?id=$id'>jegy vásárlás</a> </td>\n";
         echo "</tr>\n";
     }
     echo "</table>\n";
