@@ -11,7 +11,7 @@
 <?php
 include_once  '../classes/User.php';
 include_once '../dotenv/dotenv.php';
-load_env('../dotenv/file.env');
+load_env('../dotenv/.env');
 session_start();
 if(isset($_POST['login'])){
     $email = $_POST['l_email'];
