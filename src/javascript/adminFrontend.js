@@ -92,6 +92,8 @@ function getAirlines(){
 
     request.onreadystatechange = function(){
         let div = document.getElementById("airlinesTable");
+        let options = document.getElementById("airlineForAirplane");
+        let delOption = document.getElementById("delAirlineForAirplane");
         if(this.readyState === XMLHttpRequest.DONE && this.status===200){
             let results = JSON.parse(this.responseText);
             div.innerHTML = "<tr></tr><th>Kód</th><th>Név</th><th>Ország</th><th>Rövidítés</th></tr>";
@@ -104,6 +106,16 @@ function getAirlines(){
                                         <td>${row_arr.country}</td>
                                         <td>${(row_arr.abbr)==null ? "" : row_arr.abbr}</td> 
                                     </tr>`;
+
+                let optionstuff = document.createElement("option");
+                optionstuff.value = row_arr.code;
+                optionstuff.text = row_arr.name;
+                options.add(optionstuff);
+                optionstuff = document.createElement("option");
+                optionstuff.value = row_arr.code;
+                optionstuff.text = row_arr.name;
+                delOption.add(optionstuff);
+
             });
         }else{
             div.innerHTML = "ERROR , próbálja meg később";
@@ -122,8 +134,9 @@ function getAirplanes(){
     request.onreadystatechange = function(){
         let div = document.getElementById("airplaneTable");
         let optionstuff = document.getElementById("airline_select");
+
         if(this.readyState === XMLHttpRequest.DONE && this.status===200){
-            div.innerHTML=" <tr><th>Légitársaságon belüli kódja</th><th>Típusa</th><th>Férőhelyek száma</th><th>Légitársaság neve</th><th>Lajstromjel</th></tr>";
+            div.innerHTML=" <tr><th>Légitársaságon belüli kódja</th><th>Típusa</th><th>Férőhelyek száma</th><th>Légitársaság neve</th></tr>";
             let planes = JSON.parse(this.responseText);
             planes.forEach(row=>{
 
@@ -133,13 +146,13 @@ function getAirplanes(){
                                     <td>${row_arr.type}
                                     <td>${row_arr.capacity}</td>
                                     <td>${row_arr.airline_name}</td>
-                                    <td>${row_arr.airline_code}</td>
                                     </tr>`;
 
                 let toAdd = document.createElement("option");
                 toAdd.value = row_arr.id;
                 toAdd.text = row_arr.airline_name + "  " + row_arr.type;
                 optionstuff.add(toAdd);
+
             });
         }else{
             div.innerHTML = "ERROR , próbálja meg később";
@@ -302,4 +315,49 @@ function newRoleStuff(){
     }
     request.send(roletype+email);
 
+}
+
+
+function setAirplane(){
+    let setter = "airplaneSetter=1&";
+    let airline = "airlineForPlane="+document.getElementById("airlineForAirplane").value+"&";
+    let type = "type="+document.getElementById("airplaneType").value +"&";
+    let cap = "cap="+document.getElementById("airplaneCap").value ;
+    if(parseInt(cap)<=0){
+        alert("Kicsi a repülő te$$");
+        return;
+    }
+    let request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIsetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    request.onreadystatechange = function () {
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            //alert("Sikeresen megváltoztatta a felhasználó típusát");
+            alert("Sikeresen hozzáadta a gépet!");
+        }
+        getAirplanes();
+    }
+    request.send(setter+airline+type+cap);
+
+}
+
+function delAirplane(){
+    if(!window.confirm("Biztos törli a gépet?")){
+        return;
+    }
+    let r = "delAirplane=1&";
+    let airline = "toDelAirline="+document.getElementById("delAirlineForAirplane").value+"&";
+    let code = "toDelCode="+document.getElementById("delAirplaneCode").value;
+
+    let request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIsetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    request.onreadystatechange = function () {
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            //alert("Sikeresen megváltoztatta a felhasználó típusát");
+            alert("Sikeresen törölte a gépet!");
+        }
+        getAirplanes();
+    }
+    request.send(r + airline + code);
 }
