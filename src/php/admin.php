@@ -66,6 +66,42 @@
     </div>
 
 </div>
+<div id="discounts">
+    <h1>Leárazások:</h1><br>
+    <div id="discountTable">
+
+    </div>
+    <div id="addDiscount">
+        <h2>Leárazás hozzáadása: </h2>
+        <label for="discountFlight">Járat azonosítója: </label><br>
+        <input type="number" id="discountFlight"><br>
+        <label for="discountAmount">Leárazás mértéke: </label><br>
+        <input type="number" id="discountAmount"><br>
+        <label for="discountType">Típusa: </label><br>
+        <select id="discountType">
+        <?php
+        $query = oci_parse($connection,"SELECT * FROM DISCOUNT_TYPES");
+        oci_execute($query);
+        while($row = oci_fetch_array($query)){
+            $name = $row['DISCOUNT_NAME'];
+            echo "<option value='$name'>$name</option>";
+        }
+        ?>
+        </select>
+        <label for="discountFrom">Kezdet: </label><br>
+        <input type="date" id="discountFrom"><br>
+        <label for="discountTo">Vége: </label>
+        <input type="date" id="discountTo"><br>
+        <button onclick="createDiscount()">Küldés</button>
+    </div>
+    <h2>Leárazás törlése</h2>
+    <div id="delDiscount">
+        <label for="delDiscountID">Leárazás ID-je</label><br>
+        <input type="number" id="delDiscountID"><br>
+        <button onclick="deleteDiscount()">Törlés</button>
+    </div>
+</div>
+
 <div id="airline">
     <h1>Légitársaságok: </h1><br>
     <table id="airlinesTable">
@@ -116,15 +152,6 @@
     </div>
 </div>
 
-<div id="discounts">
-    <h1>Leárazások:</h1><br>
-    <div id="discountTable">
-
-    </div>
-    <div id="addDiscount">
-        <h2>Leárazás hozzáadása: </h2>
-    </div>
-</div>
 
 <div id="airports">
     <h1>Repülőterek: </h1><br>

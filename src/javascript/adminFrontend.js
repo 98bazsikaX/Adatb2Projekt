@@ -361,3 +361,46 @@ function delAirplane(){
     }
     request.send(r + airline + code);
 }
+
+
+function createDiscount(){
+
+
+    let id="createDiscount=1&id="+document.getElementById("discountFlight").value+"&";
+    let amount="amount="+document.getElementById("discountAmount").value+"&";
+    let type="type="+document.getElementById("discountType").value+"&";
+    let from = "from="+document.getElementById("discountFrom").value+"&";
+    let to = "to="+document.getElementById("discountTo").value;
+
+    let request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIsetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    request.onreadystatechange = function () {
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            alert("Sikeresen hozzáadta a leárazást");
+        }
+        getDiscounts();
+    }
+
+    request.send(id+amount+type+from+to);
+
+}
+
+function deleteDiscount(){
+    // if(!window.confirm("Biztos törli a leárazást?")){
+    //     return;
+    // }
+    let id="delDiscount=1&id="+document.getElementById("delDiscountID").value;
+    let request = new XMLHttpRequest();
+    request.open('POST','../php/API/adminAPIsetData.php');
+    request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    request.onreadystatechange = function () {
+        if(this.readyState === XMLHttpRequest.DONE && this.status===200){
+            alert("Sikeresen törölte a leárazást");
+            console.log(this.responseText);
+        }
+        getDiscounts();
+    };
+
+    request.send(id);
+}

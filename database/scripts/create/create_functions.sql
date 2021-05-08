@@ -5,7 +5,7 @@ return number IS retval number;
         helper number;
     BEGIN
         SELECT PRICE INTO retval FROM FLIGHTS WHERE ID=flight;
-        SELECT COUNT(*) INTO helper FROM DISCOUNTS WHERE FLIGHT_ID=flight;
+        SELECT COUNT(*) INTO helper FROM DISCOUNTS WHERE FLIGHT_ID=flight AND (SYSDATE BETWEEN VALID_FROM AND VALID_TO); --not tested TODO: test
         IF helper=0 THEN             
              return retval;
         END IF;

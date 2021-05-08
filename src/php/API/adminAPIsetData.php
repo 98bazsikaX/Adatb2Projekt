@@ -134,4 +134,28 @@ if(isset($_POST['setairline'])){
         echo $airline.";".$code;
     }
 
+}else if(isset($_POST['createDiscount'])){
+    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+    $result = oci_parse($connection,"INSERT INTO DISCOUNTS(FLIGHT_ID, DISCOUNT_TYPE_NAME, AMOUNT, VALID_FROM,VALID_TO)  VALUES(:fid,:dtype,:damount,TO_DATE(:vfrom,'YYYY-MM-DD'),TO_DATE(:vto,'YYYY-MM-DD'))");
+    oci_bind_by_name($result,":fid",$_POST['id']);
+    oci_bind_by_name($result,":dtype",$_POST['type']);
+    oci_bind_by_name($result,":damount",$_POST['amount']);
+    oci_bind_by_name($result,":vfrom",$_POST['from']);
+    oci_bind_by_name($result,"vto",$_POST['to']);
+    if(oci_execute($result)==false){
+        //echo oci_error($result);
+        http_response_code(500);
+    }else{
+        echo $_POST['id'];
+    }
+}else if(isset($_POST['delDiscount'])){
+    $id = $_POST['id'];
+    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+    $result = oci_parse($connection,"DELETE FROM DISCOUNTS WHERE ID=:azon");
+    oci_bind_by_name($result,":azon",$id);
+    if(oci_execute($result)==false){
+        http_response_code(500);
+    }else{
+        echo $id;
+    }
 }
