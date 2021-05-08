@@ -144,6 +144,36 @@ if(oci_execute($parsed)){
 
     ?>
     <input type='submit' name="changeuser" value="Adatok módosítása">
+    <h2>Az ön keresései</h2>
+    <table>
+        <tr>
+            <th>Repterek</th>
+            <th>Dátum</th>
+            <th>Ár</th>
+            <th>Keresés ideje</th>
+        </tr>
+    <?php
+
+    $query = "SELECT * FROM SEARCHES WHERE USER_EMAIL=:mail";
+    $parsed = oci_parse($connection,$query);
+    oci_bind_by_name($parsed,":mail",$_SESSION['user']['email']);
+    oci_execute($parsed);
+    while($row = oci_fetch_array($parsed)){
+        echo "<tr>";
+        $dep = $row['TAKEOFF_COUNTRY'] . "  " . $row['TAKEOFF_CITY'];
+        $arr = $row['LANDING_COUNTRY'] . "  " . $row['LANDING_CITY'];
+        $dates = $row['FROM_DATE'] . " => " . $row['TO_DATE'];
+        $price =  $row['FROM_PRICE']. " =>" . $row['TO_PRICE'];
+        $date = $row['SEARCH_DATE'];
+        echo "<td>$dep => $arr</td>";
+        echo "<td>$dates</td>";
+        echo "<td>$price</td>";
+        echo "<td>$date</td>";
+        echo "<tr>";
+    }
+    ?>
+    </table>
+   <a href="functions/deleteSearches.php">Keresési előzmények törlése (eskü töröljük, nem mint a google)</a>
 
 </form>
 </body>

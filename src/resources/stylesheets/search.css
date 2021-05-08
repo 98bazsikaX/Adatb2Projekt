@@ -23,7 +23,7 @@
     margin-right: 40%;
     text-align: justify;
     display: table-row;
-    flex-basis: 40%; background-color: #071a1a;
+    flex-basis: 40%; background-color: #082929;
 }
 #wrapper{
 
@@ -41,6 +41,13 @@
     width: 16%;
     text-align: center;
     font-weight: bold ;
+}
+
+tr:nth-child(even) {background-color: #182330;}
+
+tr:hover{
+    background: #000000;
+
 }
 
 
