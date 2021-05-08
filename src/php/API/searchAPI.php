@@ -14,7 +14,7 @@ if(isset($_POST['search'])){
 
     $query = oci_parse($connection,"SELECT
     flights.id,
-    flights.price,
+    CALC_DISCOUNT(flights.id) AS PRICE,
     flights.takeoff_date,
     flights.landing_date,
     airlines.airline_name,
@@ -56,7 +56,7 @@ if(isset($_POST['search'])){
 }else if(isset($_POST['ALL'])){
     $query = oci_parse($connection,"SELECT
     flights.id,
-    flights.price,
+    CALC_DISCOUNT(flights.id) AS PRICE,
     flights.takeoff_date,
     flights.landing_date,
     airlines.airline_name,
