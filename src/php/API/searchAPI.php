@@ -27,16 +27,16 @@ if(isset($_POST['search'])){
     INNER JOIN airlines ON airplanes.airline_code = airlines.code
     INNER JOIN airports ON flights.takeoff_airport_code = airports.code
     INNER JOIN airports airports1 ON flights.landing_airport_code = airports1.code
-    WHERE TAKEOFF_AIRPORT_CODE =:dep AND LANDING_AIRPORT_CODE=:arr AND (PRICE BETWEEN :min_price AND :max_price) AND (TAKEOFF_DATE BETWEEN TO_DATE(:fromDate,'YYYY-MM-DD') AND TO_DATE(:toDate,'YYYY-MM-DD'))
+    WHERE TAKEOFF_AIRPORT_CODE =:dep AND LANDING_AIRPORT_CODE=:arr AND (PRICE BETWEEN :min_price AND :max_price)  AND (TAKEOFF_DATE BETWEEN TO_DATE(:fromDate,'YYYY-MM-DD') AND TO_DATE(:toDate,'YYYY-MM-DD'))
     ORDER BY PRICE 
-    ");
+    "); //AND (PRICE BETWEEN :min_price AND :max_price)
 
     oci_bind_by_name($query,":dep",$_POST['dep']);
     oci_bind_by_name($query,":arr",$_POST['arr']);
-    oci_bind_by_name($query,":max_price",$_POST['max_rice']);
+    oci_bind_by_name($query,":max_price",$_POST['max_price']);
     oci_bind_by_name($query,":min_price",$_POST['min_price']);
     oci_bind_by_name($query,":fromDate",$_POST['time']);
-    oci_bind_by_name($query,":fromDate",$_POST['time_max']);
+    oci_bind_by_name($query,":toDate",$_POST['time_max']);
 
     oci_execute($query);
 
@@ -45,11 +45,12 @@ if(isset($_POST['search'])){
         array_push($toEcho,json_encode($row));
     }
 
+    echo json_encode($toEcho);
+
+
     if(isset($_SESSION['user']) && isset($_SESSION['user']['email'])){
         insertSearch();
     }
-
-    echo json_encode($toEcho);
 
 
 }else if(isset($_POST['ALL'])){

@@ -93,9 +93,9 @@ $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],
                     $min= $row['MIN(PRICE)'];
                     $max = $row['MAX(PRICE)'];
                     echo "<label for='min_price'>Minimum ár</label>";
-                    echo "<input type='number' id='min_price' min='$min' value='$min' max='$max' required><br>";
+                    echo "<input type='number' id='min_price'  value='$min' max='$max' required><br>";
                     echo "<label for='max_price'>Maximum ár</label>";
-                    echo "<input type='number' id='max_price' min='$min' value='$max' max='$max' required><br>";
+                    echo "<input type='number' id='max_price'  value='$max' max='$max' required><br>";
 
                 }
                 ?>
