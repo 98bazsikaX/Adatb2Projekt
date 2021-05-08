@@ -1,27 +1,9 @@
 <?php
 
 include_once 'dotenv/dotenv.php';
-//probálgatás miatt bent hagytam itt is az inclludeot
 include '../php/functions/userdataForBuying.php';
-include_once './dotenv/dotenv.php';
+include '../php/functions/flightdataforbuying.php';
 load_env('./dotenv/.env');
-$Fid = $_GET['id'];
-if(isset($_POST['search'])){
-    $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
-    $arr = $_POST['arr'];
-    $dep = $_POST['dep'];
-    $query = oci_parse($connection,"SELECT * FROM FLIGHTS WHERE TAKEOFF_AIRPORT_CODE = '$dep' AND LANDING_AIRPORT_CODE='$arr'");
-    $parsed = oci_parse($connection,$query);
-
-    if(oci_execute($parsed)){
-        while($row = oci_fetch_array($parsed)) {
-
-            $takeoff = $row['TAKEOFF_AIRPORT_CODE'];
-            $land = $row['LANDING_AIRPORT_CODE'];
-
-        }
-    }
-}
 
 ?>
 <!DOCTYPE html>
@@ -46,12 +28,20 @@ if(isset($_POST['search'])){
 <div id="main">
     <form method="post" action="API/buyingAPI.php">
 <?php
+//echo "<label class ='labname' > Számújárat </label>";
+$takeoff=$_SESSION['landig'] ;
+   echo $takeoff;
+echo "<br>";
+var_dump($_SESSION);
+
+echo "<br>";
+
 
 
 ?>
    <label class ="labname" >fő: </label>
  <br>
- <input class ="inaname" type="number" name="person" id="person" required>
+ <input class ="inaname" type="number" name="quantity" id="quantity" min="1" value="1" required>
    <br>
 
    <input type="submit" class ="but" value="Vásárlás">

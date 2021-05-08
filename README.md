@@ -19,7 +19,6 @@ A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, 
 - Visszamondás/csere
 
 ### 2.3. Nem-funkcionális követelmények
-
 - Letisztult UI, használata intuitív
 
 ## 3. Diagramok
@@ -31,26 +30,33 @@ A látogatók böngészni, keresni tudnak járatokat igényeiknek megfelelően, 
 ##### 3.1.1.1. 1. szint
 [1. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl1.png)
 ![1. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl1.png)
+
 ##### 3.1.1.2. 2. szint
 [2. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl2.png)
 ![2. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl2.png)
+
 ##### 3.1.1.3. 3. szint
 [3. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl3.png)
 ![3. szintű fizikai adatfolyam diagram](./doc/dia/afd/fizikai/img/lvl3.png)
+
 #### 3.1.2. Logikai AFD
 
 ##### 3.1.2.1. 1. szint
 [1. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl1.png)
 ![1. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl1.png)
+
 ##### 3.1.2.2. 2. szint
 [2. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl2.png)
 ![2. szintű logikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl2.png)
+
 ##### 3.1.2.3. 3. szint
 [3. szintű fizikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl3.png)
 ![3. szintű fizikai adatfolyam diagram](./doc/dia/afd/logikai/img/lvl3.png)
+
 ### 3.2. Egyed-kapcsolat diagram
 [Egyed-kapcsolat diagram](./doc/dia/entity_relationship.png)
 ![Egyed-kapcsolat diagram](./doc/dia/entity_relationship.png)
+
 ## 4. EK diagram leképezése
 Jogosultság(<ins>azonosító</ins>, név)  
 Felhasználó(<ins>e-mail</ins>, jelszó, telefonszám, vezetéknév, utónév, születési-dátum, ország, irányítószám, város, cím, *Jogosultság.azonosító*, regisztráció-időpont)  
@@ -60,7 +66,7 @@ Repülő(<ins>azonosító</ins>, repülő-azonosító, *Légitársaság.kód*, t
 Repülőtér(<ins>kód</ins>, név, ország, város)  
 Járat(<ins>járatszám</ins>, *Repülő.azonosító*, jegyár, indulás-idő, *indulás-repülőtér*, érkezés-idő, *érkezés-repülőtér*)  
 Ülőhely-állapot(<ins>azonosító</ins>, állapot)  
-Ülőhely(<ins>*Járat.járatszám*</ins>, <ins>szék</ins>, *állapot*)  
+Ülőhely(<ins>azonosító</ins>, *Járat.járatszám*, szék, *állapot*)  
 Kedvezmény-típusok(<ins>név</ins>, szorzó)  
 Kedvezmény(<ins>azonosító</ins>, *Járat.járatszám*, *típus*, mérték, mettől, meddig)  
 Vásárlási-állapot(<ins>azonosító</ins>, állapot)  
@@ -166,6 +172,7 @@ nev             | VARCHAR2(20) | Az ülőhely állapot megnevezése
 
 Ülőhely   | &nbsp;    | &nbsp;
 --------- | --------- | -------------------------------------------
+azonosito | NUMBER(6) | Az ülőhely egyedi azonosítója
 jaratszam | NUMBER(6) | A járat azonosítója, amelyen az ülőhely van
 szek      | NUMBER(3) | Az ülőhely száma a járaton
 allapot   | NUMBER(1) | Az ülőhely állapota

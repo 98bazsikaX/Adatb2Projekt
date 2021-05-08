@@ -24,7 +24,7 @@ session_start();
             if(isset($_SESSION['user'])){
                 $id = $_SESSION['user']['email'];
                 echo "<a href='userinfo.php?id=$id'>Profilom</a>";
-                echo "<a href='buying.php?id=$id'>jegy vásárlás</a>";
+
             }
             ?>
 

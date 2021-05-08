@@ -1,8 +1,11 @@
 <?php
 session_start();
+
+//ebbe a playerét
+
 include_once './dotenv/dotenv.php';
 load_env('./dotenv/.env');
-if(!isset($_SESSION['user']) || $_GET['id']!=$_SESSION['user']['email']){
+if(!isset($_SESSION['user'])){
     header('Location: login.php');
     return;
 }
@@ -21,4 +24,5 @@ if(oci_execute($parsed)){
         $birth = $row['BIRTH_DATE'];
     }
 }
+
 

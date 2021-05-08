@@ -122,11 +122,12 @@ CREATE TABLE seat_states
 
 CREATE TABLE seats
 (
+    seat_id NUMBER(6),
     flight_id NUMBER(6),
     seat NUMBER(3),
     seat_state NUMBER(1) NOT NULL,
     CONSTRAINT seat_pk
-        PRIMARY KEY (flight_id, seat),
+        PRIMARY KEY (seat_id),
     CONSTRAINT fk_seat_flig
         FOREIGN KEY (flight_id)
         REFERENCES flights(id),
