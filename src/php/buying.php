@@ -27,18 +27,6 @@ load_env('./dotenv/.env');
 <body onload="main()">
 <div id="main">
     <form method="post" action="API/buyingAPI.php">
-<?php
-//echo "<label class ='labname' > Számújárat </label>";
-$takeoff=$_SESSION['landig'] ;
-   echo $takeoff;
-echo "<br>";
-var_dump($_SESSION);
-
-echo "<br>";
-
-
-
-?>
    <label class ="labname" >fő: </label>
  <br>
  <input class ="inaname" type="number" name="quantity" id="quantity" min="1" value="1" required>
