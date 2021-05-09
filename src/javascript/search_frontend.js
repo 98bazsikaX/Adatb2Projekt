@@ -46,11 +46,11 @@ function makeRequest(){
         alert("Ugyanaz az erkezesi es indulasi hely!");
         return;
     }
-    if(minPrice==="" || minPrice==null){
-        minPrice="0";
+    if(document.getElementById("min_price").value==null || document.getElementById("min_price").value.length === 0){
+        minPrice = "min_price=0&";
     }
-    if(maxPrice==="" || maxPrice==null){
-        maxPrice = "999999";
+    if(document.getElementById("max_price").value==null || document.getElementById("max_price").value.length === 0){
+        maxPrice = "max_price=999999";
     }
 
     var request = new XMLHttpRequest();
