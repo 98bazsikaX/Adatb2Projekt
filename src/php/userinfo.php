@@ -94,6 +94,8 @@ if(oci_execute($parsed)){
 
 ?>
 </table>
+<h2>Az ön jegyei</h2
+<h2>TODO: megcsinálni</h2>
 
 <h2>Az ön adatai</h2>
 <form method="post" action="functions/changeUserData.php">
