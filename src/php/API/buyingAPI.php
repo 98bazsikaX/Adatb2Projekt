@@ -15,19 +15,35 @@ load_env('../dotenv/.env');
 
 
     $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
-    $query = oci_parse($connection,"BEGIN CALL PADD(:email,:fid,:quantity); CALL TADD(:email,:first,:last,:birth); CALL SADD(:fid,:quantity); END;");
+    $query = oci_parse($connection,'BEGIN PADD(:mail,:fid,:quant);END;');
 
-    oci_bind_by_name($query,":email",$email);
-    oci_bind_by_name($query,":quantity",$quantity);
-    oci_bind_by_name($query,":first",$first);
-    oci_bind_by_name($query,":last",$last);
-    oci_bind_by_name($query,":birth",$birth);
+    oci_bind_by_name($query,":mail",$email);
     oci_bind_by_name($query,":fid",$fid);
+    oci_bind_by_name($query,":quant",$quantity);
 
     if(oci_execute($query) === false){
-        echo oci_error($query);
+        var_dump(oci_error($query));
         http_response_code(500);
     }
+    $query = oci_parse($connection,'BEGIN TADD(:mail,:fir,:las,:birthd);END;');
+    oci_bind_by_name($query,":mail",$email);
+    oci_bind_by_name($query,":fir",$first);
+    oci_bind_by_name($query,":las",$last);
+    oci_bind_by_name($query,":birthd",$birth);
+    if(oci_execute($query) === false){
+        var_dump(oci_error($query));
+        http_response_code(500);
+    }
+//
+
+    $query = oci_parse($connection,'BEGIN SADD(:fid,:quant);END;');
+    oci_bind_by_name($query,":fid",$fid);
+    oci_bind_by_name($query,":quant",$quantity);
+    if(oci_execute($query) === false){
+        var_dump(oci_error($query));
+        http_response_code(500);
+    }
+
 
 
 
