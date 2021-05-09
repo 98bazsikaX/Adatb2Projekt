@@ -1,0 +1,32 @@
+
+.results2{
+    margin-top: 1%;
+    border: 10px solid darkslategray;
+    border-radius: 20px;
+    box-shadow: 5px 5px #071a1a;
+    flex-basis: 20%;
+    text-align: justify;
+    background-color: #082929;
+    padding:5px;
+    width: 80%;
+    margin-left:7% ;
+
+
+}
+.results3{
+    margin-left:35% ;
+    margin-top: 1%;
+    border: 10px solid darkslategray;
+    border-radius: 20px;
+    box-shadow: 5px 5px #071a1a;
+    flex-basis: 20%;
+    text-align: justify;
+    background-color: #082929;
+    padding:5px;
+    width:25%;
+}
+body::-webkit-scrollbar {
+    display: none;}
+h1{
+    text-align:center;
+}

@@ -18,6 +18,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="../javascript/adminFrontend.js"></script>
     <link rel="stylesheet" href="../resources/stylesheets/global.css">
+    <link rel="stylesheet" href="../resources/stylesheets/admin.css">
     <title>Admin</title>
     <style>
         table,th,td{
@@ -33,30 +34,30 @@
 </head>
 <body onload="main()">
 
-<div id="addFlight">
-    <h1>Járatok: </h1><br>
+<div id="addFlight" ><div class="results2">
+    <h1>Járatok: </h1>
     <!-- List flights -->
-    <div id="flightsTable">
-
-    </div>
-    <div id="addFlight">
+    <div id="flightsTable" >
+        <h1>Járatok: </h1><br>
+    </div></div>
+    <div id="addFlight" class="results3" >
         <h2>Járat hozzáadása:</h2><br>
         <form id="addflightform">
-            <label for="airline_select">Repülő: </label>
-            <select id="airline_select" name="airline_select">
+            <label for="airline_select">Repülő: </label><br>
+            <select id="airline_select" name="airline_select"><br>
 
             </select><br>
-            <label for="price">Ár: </label>
+            <label for="price">Ár: </label><br>
             <input type="number" name="price" id="price"><br>
-            <label for="depTime">Indulás ideje: </label>
+            <label for="depTime">Indulás ideje: </label><br>
             <input type="date" id="depTime" name="depTime"><br>
-             <label for="arrTime">Érkezés ideje: </label>
+             <label for="arrTime">Érkezés ideje: </label><br>
             <input type="date" id="arrTime" name="arrTime"><br>
-            <label for="flight_airport">Indulási reptér:</label>
+            <label for="flight_airport">Indulási reptér:</label><br>
             <select id="flight_airport" name="flight_airport">
 
             </select><br>
-            <label for="arrId">Érkezési reptér kódja: </label>
+            <label for="arrId">Érkezési reptér kódja: </label><br>
             <select id="arrId" name="arrId">
 
             </select>
@@ -66,12 +67,11 @@
     </div>
 
 </div>
-<div id="discounts">
-    <h1>Leárazások:</h1><br>
+<div id="discounts" class="results3">
+    <h1>Leárazások:</h1>
     <div id="discountTable">
-
     </div>
-    <div id="addDiscount">
+    <div id="addDiscount" >
         <h2>Leárazás hozzáadása: </h2>
         <label for="discountFlight">Járat azonosítója: </label><br>
         <input type="number" id="discountFlight"><br>
@@ -94,8 +94,9 @@
         <input type="date" id="discountTo"><br>
         <button onclick="createDiscount()">Küldés</button>
     </div>
-    <h2>Leárazás törlése</h2>
+
     <div id="delDiscount">
+        <h2>Leárazás törlése</h2>
         <label for="delDiscountID">Leárazás ID-je</label><br>
         <input type="number" id="delDiscountID"><br>
         <button onclick="deleteDiscount()">Törlés</button>
@@ -103,13 +104,15 @@
 </div>
 
 <div id="airline">
+    <div class="results2">
     <h1>Légitársaságok: </h1><br>
-    <table id="airlinesTable">
+    <table id="airlinesTable" >
     </table>
+    </div>
     <!-- Mező airline beillesztésére -->
-    <div id="addAirline">
+    <div id="addAirline" class="results3">
         <h2>Légitársaság hozzáadása: </h2><br>
-        <form id="airlineForm">
+        <form id="airlineForm" >
             <label for="AirlineCode">Légitársaság kódja: </label><br>
             <input type="text" id="AirlineCode" name="AirlineCode"><br>
             <label for="name">Légitársaság neve: </label><br>
@@ -122,12 +125,16 @@
         <button onclick="setAirline()">Elküldés</button>
     </div>
 </div>
+
+
 <div id="addAirPlane">
-    <h1>Repülőgépek: </h1><br>
-    <table id="airplaneTable">
+    <div class="results2">
+    <h1>Repülőgépek: </h1>
+    <table id="airplaneTable" >
 
     </table>
-    <div id="addAirplane">
+</div>
+    <div id="addAirplane" class="results3">
         <h2>Gép hozzáadása</h2>
         <label for="airlineForAirplane">Légitársaság</label><br>
         <select id="airlineForAirplane">
@@ -139,7 +146,7 @@
         <input type="number" maxlength="3" id="airplaneCap"><br>
         <button onclick="setAirplane()">Küldés</button>
     </div>
-    <div id="delAirplane">
+    <div id="delAirplane" class="results3">
         <h2>Gép Törlése</h2>
         <label for="delAirlineForAirplane">Légitársaság</label><br>
         <select id="delAirlineForAirplane">
@@ -153,17 +160,18 @@
 </div>
 
 
-<div id="airports">
+<div id="airports" >
+    <div class="results2">
     <h1>Repülőterek: </h1><br>
     <div id="airportTableContainer">
-        <table id="airportTable">
+        <table id="airportTable" >
 
         </table>
     </div>
+    </div>
 
 
-
-    <div id="addAirport">
+    <div id="addAirport" class="results3">
         <h2>Repülőtér hozzáadása: </h2><br>
         <form id="airportForm">
             <label for="AirportCode">Repülőtér kódja: </label><br>
@@ -180,11 +188,13 @@
 </div>
 
 <div id="users">
-    <h1>Felhasználók: </h1><br>
-    <div id="userTable">
+    <div class="results2">
+    <h1>Felhasználók: </h1>
+    <div id="userTable" >
 
     </div>
-     <div id="deleteUser">
+    </div>
+     <div id="deleteUser" class="results3">
          <h2>Felhasználó törlése email alapján: </h2><br>
          <form>
              <label for="deleteEmail">A felhasználó email címe: </label><br>
