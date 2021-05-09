@@ -105,7 +105,6 @@ if(oci_execute($parsed)){
         }
         echo "</tr>";
     }
-    //TODO: JEGYEK, inner joinolások mert hogy csak olyan ami nem törölve
 }
 
 
@@ -113,8 +112,37 @@ if(oci_execute($parsed)){
 </table>
 </div>
 <div class="results2">
-<h2>Az ön jegyei</h2
-<h2>TODO: megcsinálni</h2>
+<h2>Az ön jegyei</h2>
+    <table>
+        <tr>
+            <th>Járat</th>
+            <th>Név</th>
+            <th>Születési Dátum</th>
+        </tr>
+        <?php
+        $query = "SELECT
+    airports.airport_name,
+    airports1.airport_name AS airport_name1,
+    tickets.first_name,
+    tickets.last_name,
+    tickets.birth_date
+    FROM flights
+    INNER JOIN airports ON flights.takeoff_airport_code = airports.code
+    INNER JOIN airports airports1 ON flights.landing_airport_code = airports1.code
+    INNER JOIN purchases ON purchases.flight_id = flights.id
+    INNER JOIN tickets ON tickets.purchase_id = purchases.id";
+        $parsed = oci_parse($connection,$query);
+        if(oci_execute($parsed)){
+            while($row = oci_fetch_array($parsed)){
+                echo "<tr>";
+                echo "<td>". $row['AIRPORT_NAME'] . " -> " . $row['AIRPORT_NAME1']  ."</td>";
+                echo "<td>".$row['FIRST_NAME'] ." ".$row['LAST_NAME'] ."</td>";
+                echo "<td>".$row['BIRTH_DATE']."</td>";
+                echo "</tr>";
+            }
+        }
+        ?>
+    </table>
 </div>
 <div class="results3" >
 <h2>Az ön adatai</h2>
