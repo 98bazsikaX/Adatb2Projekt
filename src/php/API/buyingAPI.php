@@ -13,6 +13,7 @@ load_env('../dotenv/.env');
 ;
 
 
+
     $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
     $query = oci_parse($connection,"BEGIN CALL PADD(:email,:fid,:quantity); CALL TADD(:email,:first,:last,:birth); CALL SADD(:fid,:quantity); END;");
 
