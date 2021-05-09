@@ -1,39 +1,34 @@
 <?php
 session_start();
 include_once '../dotenv/dotenv.php';
-include '../php/functions/userdataForBuying.php';
 load_env('../dotenv/.env');
 
-$fid=$_GET['id'];
-
-if(isset($_POST['buying'])){
-    $quantity=$_POST['quantity'];
-    $email=$_SESSION['email'];
-    $first=$_SESSION['first'];
-    $last=$_SESSION['last'];
+    $quantity=$_GET['quantity'];
+    $email=$_SESSION['user']['email'];
+    $first=$_SESSION['user']['first_name'];
+    $last=$_SESSION['user']['last_name'];
     $birth=$_SESSION['birth'];
-    $fid=$_SESSION['flight_ID'];
+    $fid=$_SESSION['fid'];
+
+;
 
 
     $connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+    $query = oci_parse($connection,"BEGIN CALL PADD(:email,:fid,:quantity); CALL TADD(:email,:first,:last,:birth); CALL SADD(:fid,:quantity); END;");
 
-    $query = "CALL PADD(:email,:fid,:quantity); CALL TADD(:email,:first,:last,:birth); CALL SADD(:fid,:quantity);";
+    oci_bind_by_name($query,":email",$email);
+    oci_bind_by_name($query,":quantity",$quantity);
+    oci_bind_by_name($query,":first",$first);
+    oci_bind_by_name($query,":last",$last);
+    oci_bind_by_name($query,":birth",$birth);
+    oci_bind_by_name($query,":fid",$fid);
 
-    $rec = oci_parse($connection,$query);
-
-
-    oci_bind_by_name($rec,":email",$email);
-    oci_bind_by_name($rec,":quantity",$quantity);
-    oci_bind_by_name($rec,":first",$first);
-    oci_bind_by_name($rec,":last",$last);
-    oci_bind_by_name($rec,":birth",$birth);
-    oci_bind_by_name($rec,":fid",$fid);
-
-
-    if(oci_execute($rec) === false){
-        echo oci_error($rec);
+    if(oci_execute($query) === false){
+        echo oci_error($query);
         http_response_code(500);
     }
 
-}
+
+
+
 

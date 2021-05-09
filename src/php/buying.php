@@ -1,9 +1,21 @@
 <?php
-
+session_start();
 include_once 'dotenv/dotenv.php';
-include '../php/functions/userdataForBuying.php';
-
 load_env('./dotenv/.env');
+$fid=$_GET['id'];
+$_SESSION['fid']=$fid;
+$mail=$_SESSION['user']['email'];
+
+
+
+$connection = oci_connect($_ENV['DATABASE_USERNAME'],$_ENV['DATABASE_PASSWORD'],$_ENV['DATABASE_LOCATION']);
+$query = oci_parse($connection,"SELECT USERS.birth_date FROM USERS WHERE USERS.email=:mail");
+oci_bind_by_name($query,":mail",$mail);
+
+oci_execute($query);
+while($row = oci_fetch_array($query)){
+    $_SESSION['birth']=$row['BIRTH_DATE'];
+}
 
 ?>
 <!DOCTYPE html>
@@ -26,7 +38,7 @@ load_env('./dotenv/.env');
 </head>
 <body onload="main()">
 <div id="main">
-    <form method="post" action="API/buyingAPI.php">
+    <form method="get" action="API/buyingAPI.php">
    <label class ="labname" >fő: </label>
  <br>
  <input class ="inaname" type="number" name="quantity" id="quantity" min="1" value="1" required>
