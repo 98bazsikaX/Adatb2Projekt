@@ -11,6 +11,21 @@
 
 </head>
 <body>
+<div class="topnav">
+    <a href="login.php">regisztráció/bejelentkezés</a>
+    <a href="admin.php">admin</a>
+    <a href="info.php">infók</a>
+    <a href="search.php">keresés</a>
+    <a href="us.php">rólunk</a>
+    <?php
+    if(isset($_SESSION['user'])){
+        $id = $_SESSION['user']['email'];
+        echo "<a href='userinfo.php?id=$id'>Profilom</a>";
+
+    }
+    ?>
+
+</div>
 <div class="Row">
 <div class="Column" >
     <h1> Szlavikovics Máté</h1>

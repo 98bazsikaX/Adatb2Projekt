@@ -17,10 +17,27 @@ echo "<input type='hidden' id='SessionEmail' value='$session_id'>";
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="../javascript/userinfo.js"></script>
     <link rel="stylesheet" href="../resources/stylesheets/global.css">
+    <link rel="stylesheet" href="../resources/stylesheets/user.css">
     <title>Profil</title>
 </head>
 <body>
+<div class="topnav">
+    <a href="login.php">regisztráció/bejelentkezés</a>
+    <a href="admin.php">admin</a>
+    <a href="info.php">infók</a>
+    <a href="search.php">keresés</a>
+    <a href="us.php">rólunk</a>
+    <?php
+    if(isset($_SESSION['user'])){
+        $id = $_SESSION['user']['email'];
+        echo "<a href='userinfo.php?id=$id'>Profilom</a>";
+
+    }
+    ?>
+
+</div>
 <h1>Heló</h1>
+<div class="results2">
 <h2>Az ön rendelései</h2>
 <table>
     <tr>
@@ -94,9 +111,12 @@ if(oci_execute($parsed)){
 
 ?>
 </table>
+</div>
+<div class="results2">
 <h2>Az ön jegyei</h2
 <h2>TODO: megcsinálni</h2>
-
+</div>
+<div class="results3" >
 <h2>Az ön adatai</h2>
 <form method="post" action="functions/changeUserData.php">
     <?php
@@ -117,28 +137,28 @@ if(oci_execute($parsed)){
                 $city = $row['CITY'];
                 $address = $row['HOME_ADDRESS'];
 
-                echo '<label for="mail">Email</label>';
+                echo '<label for="mail">Email</label><br>';
                 echo "<input type='text' id='mail' disabled value='$email'><br>"; //ezeknek nincs neve mert disabled input
-                echo '<label for="fistname">Keresztnév</label>';
+                echo '<label for="fistname">Keresztnév</label><br>';
                 echo "<input type='text' id='firstname' value='$first' disabled ><br>";
-                echo '<label for="lastname">Vezetéknév</label>';
+                echo '<label for="lastname">Vezetéknév</label><br>';
                 echo "<input type='text' id='lastname' value='$last' disabled ><br>";
-                echo  '<label for="bdate">Születésnap</label>';
+                echo  '<label for="bdate">Születésnap</label><br>';
                 echo "<input type='text' id='bdate' value='$birth' disabled><br>";
 
-                echo ' <label for="country">Ország </label>';
+                echo ' <label for="country">Ország </label><br>';
                 echo "<input type='text' id='country' value='$country' disabled><br>";
 
-                echo '<label for="postcode">Irányítószám</label>';
+                echo '<label for="postcode">Irányítószám</label><br>';
                 echo  "<input type='text' id='postcode' name='postcode' value='$postcode' required><br>";
 
-                echo '<label for="city">Város</label>';
+                echo '<label for="city">Város</label><br>';
                 echo "<input type='text' name='city' id='city'  value='$city' required> <br>";
 
-                echo '<label for="address">Utca Házszám:</label>';
+                echo '<label for="address">Utca Házszám:</label><br>';
                 echo "<input type='text' id='address' name='address'  value='$address' required> <br>";
 
-                echo '<label for="phonenum">Telefonszám</label>';
+                echo '<label for="phonenum">Telefonszám</label><br>';
                 echo "<input type='tel' name='phonenum' id='phonenum' value='$phone' required> <br>";
                 echo "<input type='hidden'  name='user_email' value='$email'>";
             }
@@ -146,6 +166,8 @@ if(oci_execute($parsed)){
 
     ?>
     <input type='submit' name="changeuser" value="Adatok módosítása">
+</div>
+<div class="results2">
     <h2>Az ön keresései</h2>
     <table>
         <tr>
@@ -176,7 +198,7 @@ if(oci_execute($parsed)){
     ?>
     </table>
    <a href="functions/deleteSearches.php">Keresési előzmények törlése (eskü töröljük, nem mint a google)</a>
-
+</div>
 </form>
 </body>
 </html>
